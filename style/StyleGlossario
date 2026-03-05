@@ -1,0 +1,166 @@
+/* =========================================================
+   TAXpedia — Glossario
+   Stile istituzionale moderno (OECD/IMF-like)
+   Obiettivi: scansionabilità, A–Z sticky, mobile-first
+   Dipende dalle variabili già definite in styleIndex.css:
+   --brand --accent --ink --muted --line --card --shadow
+   ========================================================= */
+
+/* Intro */
+.glossario-intro{ margin: 2.25rem 0 1.25rem; }
+.glossario-intro h1{ color: var(--brand); text-align:center; }
+.glossario-intro .subtitle{
+  max-width: 78ch;
+  margin: .65rem auto 0;
+  text-align:center;
+  color: var(--muted);
+}
+
+/* Search + meta */
+.glossario-tools{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.9rem 1rem;
+  align-items:flex-end;
+  justify-content:space-between;
+  max-width: 900px;
+  margin: 1.25rem auto 1rem;
+}
+.glossario-search{ flex: 1 1 360px; }
+.glossario-search label{
+  display:block;
+  font-weight:800;
+  color: var(--brand);
+  margin: 0 0 .35rem;
+}
+.glossario-search input{
+  width:100%;
+  min-height: 48px;
+  padding: .65rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  font: inherit;
+  background: #fff;
+}
+.glossario-search input::placeholder{ color: rgba(71,85,105,.8); }
+.glossario-search input:focus-visible{
+  outline: 3px solid rgba(255,204,0,.35);
+  outline-offset: 2px;
+  border-color: rgba(0,51,153,.35);
+}
+.glossario-meta{
+  color: var(--muted);
+  font-size: .98rem;
+}
+
+/* A–Z sticky */
+.glossario-az{
+  position: sticky;
+  top: 78px; /* header sticky */
+  z-index: 3;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: .55rem .75rem;
+  box-shadow: var(--shadow);
+  max-width: 900px;
+  margin: 0 auto 1rem;
+}
+.glossario-az ul{
+  display:flex;
+  flex-wrap:wrap;
+  gap: .35rem;
+  list-style:none;
+  margin:0;
+  padding:0;
+  justify-content:center;
+}
+.glossario-az a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width: 36px;
+  height: 36px;
+  border-radius: .75rem;
+  text-decoration:none;
+  font-weight: 800;
+  color: var(--brand);
+  border: 1px solid transparent;
+}
+.glossario-az a:hover{
+  background: rgba(0,51,153,.06);
+  border-color: rgba(0,51,153,.18);
+}
+.glossario-az a:focus-visible{
+  outline: 3px solid rgba(255,204,0,.35);
+  outline-offset: 2px;
+}
+
+/* Sezioni e voci */
+.glossario-section{
+  max-width: 900px;
+  margin: 0 auto 1rem;
+}
+.glossario-letter{
+  margin: 1.5rem 0 .6rem;
+  color: var(--brand);
+  text-align:left;
+}
+
+/* Glossary list */
+.glossary{ margin:0; padding:0; }
+
+/* Card voce */
+.glossary-item{
+  background: linear-gradient(180deg,#f7f9ff,#fff);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+  margin-bottom: .75rem;
+  scroll-margin-top: 140px; /* anchor con header sticky */
+}
+
+/* Header voce (term + permalink) */
+.glossary-head{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+  margin: 0;
+}
+.glossary-term{
+  font-family:"Merriweather", Georgia, "Times New Roman", serif;
+  font-weight: 900;
+  color: var(--brand);
+  font-size: 1.05rem;
+}
+.glossary-link{
+  font-weight: 800;
+  color: var(--muted);
+  text-decoration:none;
+  border-radius: .6rem;
+  padding: .15rem .45rem;
+}
+.glossary-link:hover{
+  background: rgba(0,51,153,.06);
+  color: var(--brand);
+}
+.glossary-link:focus-visible{
+  outline: 3px solid rgba(255,204,0,.35);
+  outline-offset: 2px;
+}
+
+/* Definizione */
+.glossary-def{
+  margin: .4rem 0 0;
+  color: var(--ink);
+}
+
+/* Mobile */
+@media (max-width: 600px){
+  .glossario-az{ top: 68px; }
+  .glossary-head{ align-items:flex-start; }
+}
+html { scroll-behavior: smooth; }

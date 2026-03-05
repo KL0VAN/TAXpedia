@@ -1,0 +1,153 @@
+/* ===================== Component: Calcolatori per Nazione ===================== */
+/* Coerente con TAXpedia (usa variabili globali da styleIndex.css) */
+
+.countries-head{ margin: 1.25rem 0 .9rem; }
+.countries-title{
+  margin:0;
+  color:var(--brand);
+  font-family:"Merriweather", Georgia, serif;
+  line-height:1.15;
+}
+.countries-sub{ margin:.35rem 0 0; color:var(--muted); }
+
+.country-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr)); /* 3 card per riga */
+  gap:1.2rem;
+}
+
+/* 2 colonne su schermi medi */
+@media (max-width: 900px){
+  .country-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 1 colonna su mobile stretto */
+@media (max-width: 600px){
+  .country-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Card singola nazione */
+.nation-card{
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  text-decoration:none;
+  color:inherit;
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  height:100%;
+}
+.nation-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(2,6,23,.12);
+  border-color:rgba(0,0,0,.06);
+}
+.nation-card:focus-visible{
+  outline:2px solid rgba(255,204,0,.6);
+  outline-offset:3px;
+}
+
+/* BLOCCO BANDIERA – occupa la parte alta del riquadro */
+.nation-flag{
+  width:100%;
+  /* card più alte: aumenta qui se la vuoi ancora più grande */
+  height:180px;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  flex-shrink:0;
+  transition:transform .3s cubic-bezier(.2,.6,.2,1);
+}
+.nation-card:hover .nation-flag{
+  transform:scale(1.03);
+}
+
+/* Testi FUORI dalla bandiera: nella parte bianca sotto */
+.nation-header{
+  padding:.7rem .9rem .25rem;
+}
+.nation-name{
+  font-weight:800;
+  color:var(--brand);
+  font-family:"Merriweather", Georgia, serif;
+}
+
+/* Descrizione sotto il titolo, sempre su bianco */
+.nation-foot{
+  padding:0 .9rem .8rem;
+  font-weight:600;
+  color:var(--muted);
+}
+
+.flag-italy{
+  background-image:url("italia/flagitaly.png"); 
+}
+
+.flag-france{
+  background-image:url("france/flagfrance.png");
+}
+
+.flag-germany{
+  background-image:url("germany/flaggermany.png");
+}
+
+.flag-spain{
+  background-image:url("spain/flagspain.png");
+}
+
+.flag-belgium{
+  background-image:url("belgium/flagbelgium.png");
+}
+
+.flag-netherlands{
+  background-image:url("netherlands/flagnetherlands.png");
+}
+
+.flag-luxembourg{
+  background-image:url("luxembourg/flagluxembourg.png");
+}
+
+.flag-austria{
+  background-image:url("austria/flagaustria.png");
+}
+
+.flag-croatia{
+  background-image:url("croatia/flagcroatia.png");
+}
+
+.flag-poland{
+  background-image:url("poland/flagpoland.png");
+}
+
+.flag-portugal{
+  background-image:url("portugal/flagportugal.png");
+}
+
+.flag-slovenia{
+  background-image:url("slovenia/flagslovenia.png");
+}
+
+/* Stati */
+.nation-card.is-active .nation-foot{ color:var(--brand); }
+.nation-card.is-soon{ background:linear-gradient(180deg,#f8fafc,#fff); border-style:dashed; opacity:.92; }
+.nation-card.is-soon .nation-name{ color:#334155; }
+.nation-card.is-soon .nation-foot{ color:#64748b; }
+
+/* Motion respect */
+@media (prefers-reduced-motion: reduce){
+  .nation-card, .nation-flag{ transition:none; }
+  .nation-flag{ transform:none; }
+}
+
+/* Sticky footer (in caso di contenuti corti) */
+html, body{ height:100%; }
+body{ display:flex; flex-direction:column; min-height:100vh; }
+main{ flex:1 0 auto; }
+.site-footer{ margin-top:auto; }

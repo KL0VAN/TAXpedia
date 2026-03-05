@@ -1,0 +1,332 @@
+<?php require_once __DIR__ . '/../i18n/i18n.php';?>
+
+<!-- Switch lingua (UNA SOLA VOLTA, uguale su tutte le pagine) -->
+<div class="tp-lang-switch" aria-label="<?php echo e('lang_label'); ?>">
+  <a class="tp-lang-pill <?php echo (tp_lang() === 'it') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('it'); ?>" hreflang="it" lang="it">IT</a>
+  <a class="tp-lang-pill <?php echo (tp_lang() === 'en') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('en'); ?>" hreflang="en" lang="en">EN</a>
+</div>
+
+  <button id="menuButton" class="hamburger" aria-label="Apri menu" aria-controls="drawer" aria-expanded="false">
+    <span class="hamburger__box"><span class="hamburger__inner"></span></span>
+  </button>
+
+  <aside id="drawer" class="drawer" aria-hidden="true">
+    <nav aria-label="Menu principale">
+      <ul id="drawerList" class="drawer__list"></ul>
+    </nav>
+  </aside>
+
+  <div id="drawerBackdrop" class="drawer__backdrop" hidden></div>
+  <header class="site-header site-header--eu">
+    <div class="container nav-wrap">
+      <a class="logo-text" href="/index.php" aria-label="Homepage TAXpedia">TAXpedia</a>
+      <nav class="main-nav" aria-label="Menu principale">
+        <ul>
+          <li><a href="/index.php"><?php echo e('nav_home'); ?></a></li>
+          <li><a href="/calculator/menu.php"><?php echo e('nav_calculator'); ?></a></li>
+          <li><a href="/article/articoli.php"><?php echo e('nav_article'); ?></a></li>
+          <li><a href="/glossary/glossario.php"><?php echo e('nav_glossary'); ?></a></li>
+          <li><a href="/aboutus/aboutus.php"><?php echo e('nav_about'); ?></a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<script>
+<script>
+<script>
+/* TP Lang Switch — FIX definitivo IT/EN
+   - Cookie tp_lang settato SEMPRE (anche se IT non ha ?lang=it)
+   - Rimuove ?lang=... dopo il load (replaceState)
+   - Preserva input + risultato calcolatori (sessionStorage) e rilancia calcolo
+   - Corregge pill attiva su tutte le pagine
+   - Forza la lingua corrente su link interni PHP (fix link hardcoded ?lang=en)
+*/
+(function(){
+  var SUPPORTED = ['it','en'];
+  var COOKIE_NAME = 'tp_lang';
+  var FORM_KEY_PREFIX = 'tp_form_state:';
+  var META_KEY_PREFIX = 'tp_form_meta:';
+
+  function normLang(v){
+    v = (v || '').toString().toLowerCase().trim();
+    return (SUPPORTED.indexOf(v) !== -1) ? v : '';
+  }
+
+  function getCookieLang(){
+    var m = document.cookie.match(/(?:^|;\s*)tp_lang=([^;]+)/);
+    if (m && m[1]) return normLang(decodeURIComponent(m[1]));
+    return '';
+  }
+
+  function setLangCookie(lang){
+    lang = normLang(lang);
+    if (!lang) return;
+    var maxAge = 31536000; // 1 anno
+    var c = COOKIE_NAME + '=' + encodeURIComponent(lang) + '; Max-Age=' + maxAge + '; Path=/; SameSite=Lax';
+    if (location.protocol === 'https:') c += '; Secure';
+    document.cookie = c;
+  }
+
+  function getHtmlLang(){
+    var l = (document.documentElement && document.documentElement.lang) ? document.documentElement.lang : '';
+    return normLang(l);
+  }
+
+  function getCurrentLang(){
+    return getCookieLang() || getHtmlLang() || 'it';
+  }
+
+  function onReady(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  function canonicalKey(){
+    try{
+      var u = new URL(location.href);
+      u.searchParams.delete('lang');
+      return u.pathname + (u.search ? u.search : '');
+    }catch(e){
+      return location.pathname + location.search;
+    }
+  }
+
+  function findCalculatorForm(){
+    return document.getElementById('calc-form') || document.querySelector('form.calc-form') || null;
+  }
+
+  function isResultsVisible(){
+    var r = document.getElementById('risultati');
+    if (!r) return false;
+    if (typeof r.hidden === 'boolean') return (r.hidden === false);
+    return !!r.offsetParent;
+  }
+
+  function cssEscapeSafe(s){
+    if (window.CSS && typeof window.CSS.escape === 'function') return window.CSS.escape(s);
+    return String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"');
+  }
+
+  function serializeForm(form){
+    var data = {};
+    var els = form.querySelectorAll('input, select, textarea');
+    for (var i=0;i<els.length;i++){
+      var el = els[i];
+      if (!el || el.disabled) continue;
+
+      var key = el.name || el.id;
+      if (!key) continue;
+
+      var tag = (el.tagName || '').toLowerCase();
+      var type = (el.type || '').toLowerCase();
+
+      if (tag === 'select') {
+        data[key] = { kind:'select', value: el.value };
+      } else if (tag === 'textarea') {
+        data[key] = { kind:'value', value: el.value };
+      } else if (type === 'checkbox') {
+        data[key] = { kind:'checkbox', checked: !!el.checked };
+      } else if (type === 'radio') {
+        if (el.checked) data[key] = { kind:'radio', value: el.value };
+      } else {
+        data[key] = { kind:'value', value: el.value };
+      }
+    }
+    return data;
+  }
+
+  function restoreForm(form, data){
+    if (!data) return;
+    Object.keys(data).forEach(function(key){
+      var info = data[key];
+      if (!info) return;
+
+      var nodes = form.querySelectorAll('[name="' + cssEscapeSafe(key) + '"]');
+      var els = (nodes && nodes.length) ? Array.prototype.slice.call(nodes) : [];
+
+      if (!els.length) {
+        var byId = document.getElementById(key);
+        if (byId && form.contains(byId)) els = [byId];
+      }
+      if (!els.length) return;
+
+      for (var i=0;i<els.length;i++){
+        var el = els[i];
+        var tag = (el.tagName || '').toLowerCase();
+        var type = (el.type || '').toLowerCase();
+
+        if (info.kind === 'select' && tag === 'select') el.value = info.value;
+        else if (info.kind === 'checkbox' && type === 'checkbox') el.checked = !!info.checked;
+        else if (info.kind === 'radio' && type === 'radio') el.checked = (el.value === info.value);
+        else if (info.kind === 'value') el.value = info.value;
+      }
+    });
+  }
+
+  function saveCalcState(){
+    var form = findCalculatorForm();
+    if (!form) return;
+
+    var key = canonicalKey();
+    try { sessionStorage.setItem(FORM_KEY_PREFIX + key, JSON.stringify({ fields: serializeForm(form) })); } catch(e){}
+    try { sessionStorage.setItem(META_KEY_PREFIX + key, JSON.stringify({
+      autoRun: isResultsVisible(),
+      scrollY: (typeof window.scrollY === 'number') ? window.scrollY : 0
+    })); } catch(e){}
+  }
+
+  function restoreCalcStateAndMaybeRun(){
+    var key = canonicalKey();
+    var rawFields = null, rawMeta = null;
+
+    try { rawFields = sessionStorage.getItem(FORM_KEY_PREFIX + key); } catch(e){}
+    try { rawMeta   = sessionStorage.getItem(META_KEY_PREFIX + key); } catch(e){}
+
+    if (!rawFields && !rawMeta) return;
+
+    var fieldsPayload = null, metaPayload = null;
+    try { fieldsPayload = rawFields ? JSON.parse(rawFields) : null; } catch(e){}
+    try { metaPayload   = rawMeta ? JSON.parse(rawMeta) : null; } catch(e){}
+
+    var form = findCalculatorForm();
+    if (form && fieldsPayload && fieldsPayload.fields) restoreForm(form, fieldsPayload.fields);
+
+    try { sessionStorage.removeItem(FORM_KEY_PREFIX + key); } catch(e){}
+    try { sessionStorage.removeItem(META_KEY_PREFIX + key); } catch(e){}
+
+    if (metaPayload && typeof metaPayload.scrollY === 'number') {
+      try { window.scrollTo(0, metaPayload.scrollY); } catch(e){}
+    }
+
+    if (metaPayload && metaPayload.autoRun === true) {
+      var tries = 60;
+      (function waitRun(){
+        if (typeof window.calcolaTasse === 'function') {
+          try { window.calcolaTasse(); } catch(e){}
+          return;
+        }
+        tries--;
+        if (tries <= 0) return;
+        setTimeout(waitRun, 50);
+      })();
+    }
+  }
+
+  function getPillTargetLang(a){
+    var l = '';
+    try{
+      var u = new URL(a.href, location.origin);
+      l = u.searchParams.get('lang') || '';
+    }catch(e){}
+    l = normLang(l) ||
+        normLang(a.getAttribute('data-lang')) ||
+        normLang(a.getAttribute('lang')) ||
+        normLang(a.getAttribute('hreflang')) ||
+        normLang(a.textContent);
+    return l;
+  }
+
+  function markActivePills(){
+    var current = getCurrentLang();
+    var pills = document.querySelectorAll('.tp-lang-pill');
+    for (var i=0;i<pills.length;i++){
+      var a = pills[i];
+      var target = getPillTargetLang(a);
+      if (!target) continue;
+      if (target === current) a.classList.add('is-active');
+      else a.classList.remove('is-active');
+    }
+  }
+
+  function isInternalPhpLink(a){
+    if (!a) return false;
+    if (a.classList && a.classList.contains('tp-lang-pill')) return false;
+
+    var href = a.getAttribute('href');
+    if (!href || href[0] === '#') return false;
+    if (/^(mailto:|tel:|javascript:)/i.test(href)) return false;
+
+    var u;
+    try { u = new URL(a.href, location.origin); } catch(e){ return false; }
+    if (u.origin !== location.origin) return false;
+
+    var last = (u.pathname.split('/').pop() || '');
+    if (last.indexOf('.') !== -1 && !/\.php$/i.test(last)) return false;
+
+    return true;
+  }
+
+  function enforceLangOnLinks(){
+    var current = getCurrentLang();
+    var links = document.querySelectorAll('a[href]');
+    for (var i=0;i<links.length;i++){
+      var a = links[i];
+      if (!isInternalPhpLink(a)) continue;
+      try{
+        var u = new URL(a.href, location.origin);
+        u.searchParams.set('lang', current);
+        a.href = u.pathname + (u.search ? u.search : '') + u.hash;
+      }catch(e){}
+    }
+  }
+
+  // A) Se arrivo con ?lang=..., set cookie e pulisco l’URL
+  try{
+    var url = new URL(location.href);
+    var q = normLang(url.searchParams.get('lang'));
+    if (q) {
+      setLangCookie(q);
+      url.searchParams.delete('lang');
+      history.replaceState({}, '', url.pathname + (url.search ? url.search : '') + url.hash);
+    }
+  }catch(e){}
+
+  // B) Se cookie manca, inizializzalo dalla lingua dell’HTML (così IT vale quanto EN)
+  if (!getCookieLang()) {
+    var init = getHtmlLang();
+    if (init) setLangCookie(init);
+  }
+
+  onReady(function(){
+    // C) Ripristina stato calcolatore (se presente)
+    restoreCalcStateAndMaybeRun();
+
+    // D) Pill + link sempre coerenti
+    markActivePills();
+    enforceLangOnLinks();
+
+    // E) Click pill: set cookie SEMPRE + salva stato; garantisci anche ?lang=...
+    var pills = document.querySelectorAll('.tp-lang-pill');
+    for (var i=0;i<pills.length;i++){
+      (function(a){
+        a.addEventListener('click', function(e){
+          var target = getPillTargetLang(a);
+          if (!target) return;
+
+          var current = getCurrentLang();
+
+          // se clicchi la lingua già attiva: NO refresh
+          if (target === current) {
+            e.preventDefault();
+            return;
+          }
+
+          setLangCookie(target);
+          saveCalcState();
+
+          // forza anche ?lang=target per pagine che danno priorità al GET
+          try{
+            var u = new URL(a.href, location.origin);
+            u.searchParams.set('lang', target);
+            e.preventDefault();
+            location.href = u.pathname + (u.search ? u.search : '') + u.hash;
+          }catch(err){
+            // fallback: lascia navigazione default
+          }
+        }, false);
+      })(pills[i]);
+    }
+  });
+})();
+</script>

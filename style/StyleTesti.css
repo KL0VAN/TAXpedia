@@ -1,0 +1,504 @@
+/* StyleTesti.css
+   Stili specifici per le sezioni informative (Testi) e la sidebar
+   Palette e tipografia coerenti con la HomePage TAXpedia.
+*/
+
+/* ================= PALETTE E TIPOGRAFIA (coerente con homepage) ================ */
+:root{
+  --eu-blue: #003399;
+  --eu-gold: #FFCC00;
+
+  --brand: var(--eu-blue);
+  --accent: var(--eu-gold);
+
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --card: #ffffff;
+  --shadow: 0 10px 30px rgba(2,6,23,.12);
+
+  --radius: 14px;
+  --maxw: 1100px;
+}
+
+/* Reset/box sizing */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);background:#fff;line-height:1.6;
+}
+
+/* Titoli / logo (serif per richiamare identità) */
+h1,h2,h3,.logo-text{font-family:"Merriweather", Georgia, "Times New Roman", serif}
+
+/* Container coerente */
+.container{max-width:var(--maxw);margin-inline:auto;padding-inline:1.25rem}
+
+/* Section testi (usare class="sector") */
+.sector{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem 1.25rem;
+  box-shadow:var(--shadow);
+  margin-bottom:1rem;
+}
+
+/* Header della sezione */
+.sector .section-head{margin-bottom:.6rem}
+.sector h2{font-size:1.25rem;margin:0 0 .25rem;color:var(--brand)}
+.sector .section-sub{color:var(--muted);margin:0 0 .6rem}
+
+/* Corpo testo */
+.sector .sector-body p{margin:0 0 .75rem;color:var(--ink)}
+.sector .sector-body ul{margin:0 0 .75rem;padding-left:1.25rem;color:var(--ink)}
+.sector .sector-body li{margin:0.35rem 0}
+
+/* .muted helper */
+.muted{color:var(--muted);font-size:.95rem}
+
+/* Link styling coerente */
+.sector a{color:var(--brand);text-decoration:underline}
+.sector a:hover,.sector a:focus{color:var(--accent);text-decoration:none;outline:2px solid rgba(255,204,0,.2);outline-offset:3px}
+
+/* Sidebar / canvas wrap (dove c'è canvas + legenda) */
+.canvas-wrap{
+  flex:1 1 320px;
+  min-width:280px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+}
+
+/* Explanation box sotto grafico */
+.explanation{
+  margin-top:.4rem;
+  color:var(--muted);
+  background:#f7fafc;
+  border:1px dashed var(--line);
+  border-radius:.6rem;
+  padding:.6rem .7rem;
+  font-size:.95rem;
+}
+
+/* Legenda testuale (creata dinamicamente) */
+.legend-wrap{margin-top:.6rem}
+.legend-wrap ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.legend-wrap li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:.45rem .5rem;
+  border-radius:.6rem;
+  transition:background .12s ease, transform .06s ease;
+}
+.legend-wrap li:hover{background:rgba(0,51,153,.04);transform:translateY(-1px);cursor:pointer}
+.legend-label{font-weight:600;color:var(--ink)}
+.legend-value{font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums}
+
+/* color swatch nella legenda (small square) */
+.legend-swatch{width:14px;height:14px;border-radius:3px;display:inline-block}
+
+/* Stato loading sui bottoni (se aggiungi .is-loading) */
+.btn.is-loading{opacity:.9;pointer-events:none}
+.btn.is-loading::after{
+  content:"";
+  display:inline-block;
+  width:14px;height:14px;margin-left:.6rem;border-radius:50%;
+  border:2px solid currentColor;border-right-color:transparent;animation:spin .9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Accessibility helper */
+.form-error{color:#b91c1c;margin-top:.5rem}
+
+/* Responsive: se usi layout con grafico+testo */
+.chart-row{display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap}
+@media (max-width: 920px){
+  .chart-row{flex-direction:column}
+}
+
+/* Raffinamenti per info-panel (card look identico all'homepage) */
+#info-panel {
+  background: linear-gradient(180deg,#f7f9ff,#fff);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  min-width: 280px;
+}
+#info-panel h2{ color: var(--brand); margin-top:0 }
+#info-panel a{ color: var(--brand); font-weight:700 }
+/* Raffinamenti per apparire esattamente come le card dell'homepage */
+.sector{
+  background: linear-gradient(180deg,#f7f9ff,#fff);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
+  margin: 1rem 0;
+}
+.sector .section-head{ text-align:left; }
+.sector h2{ color: var(--brand); font-weight:800; margin:0 0 .4rem; }
+.sector .section-sub{ max-width:48ch; color:var(--muted) }
+
+/* StyleTesti.css (aggiornamento: shadow box per i testi)
+   Mantiene tutto il precedente e aggiunge .shadow-box per uniformare il look.
+*/
+
+/* ================= PALETTE E TIPOGRAFIA (coerente con homepage) ================ */
+:root{
+  --eu-blue: #003399;
+  --eu-gold: #FFCC00;
+
+  --brand: var(--eu-blue);
+  --accent: var(--eu-gold);
+
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --card: #ffffff;
+  --shadow: 0 10px 30px rgba(2,6,23,.12);
+
+  --radius: 14px;
+  --maxw: 1100px;
+}
+
+/* Reset/box sizing */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);background:#fff;line-height:1.6;
+}
+
+/* Titoli / logo (serif per richiamare identità) */
+h1,h2,h3,.logo-text{font-family:"Merriweather", Georgia, "Times New Roman", serif}
+
+/* Container coerente */
+.container{max-width:var(--maxw);margin-inline:auto;padding-inline:1.25rem}
+
+/* Section testi (usare class="sector") */
+.sector{
+  background:transparent; /* lascia trasparente: il box reale è la shadow-box */
+  border-radius:var(--radius);
+  margin-bottom:1rem;
+}
+
+/* Header della sezione */
+.sector .section-head{margin-bottom:.6rem}
+.sector h2{font-size:1.25rem;margin:0 0 .25rem;color:var(--brand)}
+.sector .section-sub{color:var(--muted);margin:0 0 .6rem}
+
+/* Corpo testo */
+.sector .sector-body p{margin:0 0 .75rem;color:var(--ink)}
+.sector .sector-body ul{margin:0 0 .75rem;padding-left:1.25rem;color:var(--ink)}
+.sector .sector-body li{margin:0.35rem 0}
+
+/* .muted helper */
+.muted{color:var(--muted);font-size:.95rem}
+
+/* Link styling coerente */
+.sector a{color:var(--brand);text-decoration:underline}
+.sector a:hover,.sector a:focus{color:var(--accent);text-decoration:none;outline:2px solid rgba(255,204,0,.2);outline-offset:3px}
+
+/* SHADOW BOX: applicare alla div che contiene il testo per avere l’aspetto card */
+.shadow-box{
+  background: linear-gradient(180deg,#f7f9ff,#fff);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+/* Sidebar / canvas wrap (dove c'è canvas + legenda) - mantenuto */
+.canvas-wrap{
+  flex:1 1 320px;
+  min-width:280px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+}
+
+/* Explanation box sotto grafico */
+.explanation{
+  margin-top:.4rem;
+  color:var(--muted);
+  background:#f7fafc;
+  border:1px dashed var(--line);
+  border-radius:.6rem;
+  padding:.6rem .7rem;
+  font-size:.95rem;
+}
+
+/* Legenda testuale (creata dinamicamente) */
+.legend-wrap{margin-top:.6rem}
+.legend-wrap ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.legend-wrap li{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:.45rem .5rem;
+  border-radius:.6rem;
+  transition:background .12s ease, transform .06s ease;
+}
+.legend-wrap li:hover{background:rgba(0,51,153,.04);transform:translateY(-1px);cursor:pointer}
+.legend-label{font-weight:600;color:var(--ink)}
+.legend-value{font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums}
+
+/* color swatch nella legenda (small square) */
+.legend-swatch{width:14px;height:14px;border-radius:3px;display:inline-block}
+
+/* Stato loading sui bottoni (se aggiungi .is-loading) */
+.btn.is-loading{opacity:.9;pointer-events:none}
+.btn.is-loading::after{
+  content:"";
+  display:inline-block;
+  width:14px;height:14px;margin-left:.6rem;border-radius:50%;
+  border:2px solid currentColor;border-right-color:transparent;animation:spin .9s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Accessibility helper */
+.form-error{color:#b91c1c;margin-top:.5rem}
+
+/* Responsive: se usi layout con grafico+testo */
+.chart-row{display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap}
+@media (max-width: 920px){
+  .chart-row{flex-direction:column}
+}
+
+/* Footer refinements */
+.site-footer .footer-logo{color:var(--accent)}
+
+/* -----------------------------
+   Feature / Card styles (home-like)
+   Riusa look .feature dalla Home per i testi lunghi
+   ----------------------------- */
+
+/* Card base (uguale look a .feature dell'homepage) */
+.feature {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+  display: block;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+/* Titolo all'interno della card (coerente con home) */
+.feature h3,
+.feature h2 {
+  margin: 0 0 .5rem;
+  color: var(--brand);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+/* Sottotitolo / summary */
+.feature .section-sub,
+.feature .summary {
+  color: var(--muted);
+  margin-bottom: .75rem;
+}
+
+/* Testo corpo */
+.feature p { margin: 0 0 0.9rem; color:var(--ink); }
+.feature ul { margin: 0 0 .9rem; padding-left: 1.25rem; }
+.feature li { margin: .35rem 0; }
+
+/* Variante per testi lunghi: più padding, max-width per leggibilità */
+.feature--large {
+  padding: 1.25rem 1.35rem;
+  max-width: 54ch; /* migliora la leggibilità limitando la riga */
+}
+
+/* Variante full-width per schede informative (se vuoi togliere max-width) */
+.feature--full { max-width: none; }
+
+/* Piccoli aggiustamenti di responsive */
+@media (max-width: 920px) {
+  .feature--large { max-width: 100%; }
+}
+
+/* Se vuoi mantenere anche .shadow-box (compatibilità) -> fa lo stesso lavoro */
+.shadow-box.feature { padding: 1.25rem 1.35rem; }
+
+/* immagini */
+.media img {
+  display: block;        /* rimuove lo spazietto sotto l'immagine inline */
+  width: 100%;           /* riempie il contenitore */
+  height: auto;          /* mantiene il rapporto 880x520 */
+}
+
+.media figcaption {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #555;
+  margin-top: .5rem;
+  text-align: center;
+}
+
+/* ===================== GLOSSARIO (istituzionale, A–Z, mobile-first) ===================== */
+
+.glossario-intro{ margin: 2.25rem 0 1.25rem; }
+.glossario-intro h1{ color: var(--brand); text-align:center; }
+.glossario-intro .subtitle{
+  max-width: 78ch;
+  margin: .65rem auto 0;
+  text-align:center;
+}
+
+/* Search + meta */
+.glossario-tools{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.9rem 1rem;
+  align-items:flex-end;
+  justify-content:space-between;
+  max-width: 900px;
+  margin: 1.25rem auto 1rem;
+}
+.glossario-search{ flex: 1 1 360px; }
+.glossario-search label{
+  display:block;
+  font-weight:800;
+  color: var(--brand);
+  margin: 0 0 .35rem;
+}
+.glossario-search input{
+  width:100%;
+  min-height: 48px;
+  padding: .65rem .9rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  font: inherit;
+}
+.glossario-search input:focus-visible{
+  outline: 3px solid rgba(255,204,0,.35);
+  outline-offset: 2px;
+  border-color: rgba(0,51,153,.35);
+}
+.glossario-meta{
+  color: var(--muted);
+  font-size: .98rem;
+}
+
+/* A–Z sticky (leggibile e “tool-like”) */
+.glossario-az{
+  position: sticky;
+  top: 78px; /* header sticky */
+  z-index: 3;
+  background: rgba(255,255,255,.92);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: .55rem .75rem;
+  box-shadow: var(--shadow);
+  max-width: 900px;
+  margin: 0 auto 1rem;
+}
+.glossario-az ul{
+  display:flex;
+  flex-wrap:wrap;
+  gap: .35rem;
+  list-style:none;
+  margin:0;
+  padding:0;
+  justify-content:center;
+}
+.glossario-az a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width: 36px;
+  height: 36px;
+  border-radius: .75rem;
+  text-decoration:none;
+  font-weight: 800;
+  color: var(--brand);
+  border: 1px solid transparent;
+}
+.glossario-az a:hover{
+  background: rgba(0,51,153,.06);
+  border-color: rgba(0,51,153,.18);
+}
+.glossario-az a:focus-visible{
+  outline: 3px solid rgba(255,204,0,.35);
+  outline-offset: 2px;
+}
+
+/* Sezioni e voci */
+.glossario-section{
+  max-width: 900px;
+  margin: 0 auto 1rem;
+}
+.glossario-letter{
+  margin: 1.5rem 0 .6rem;
+  color: var(--brand);
+  text-align:left;
+}
+.glossary{ margin:0; padding:0; }
+
+.glossary-item{
+  background: linear-gradient(180deg,#f7f9ff,#fff);
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem 1.1rem;
+  box-shadow: var(--shadow);
+  margin-bottom: .75rem;
+  scroll-margin-top: 140px; /* per anchor con header sticky */
+}
+.glossary-head{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .75rem;
+  margin: 0;
+}
+.glossary-term{
+  font-family:"Merriweather", Georgia, "Times New Roman", serif;
+  font-weight: 900;
+  color: var(--brand);
+  font-size: 1.05rem;
+}
+.glossary-link{
+  font-weight: 800;
+  color: var(--muted);
+  text-decoration:none;
+  border-radius: .6rem;
+  padding: .15rem .45rem;
+}
+.glossary-link:hover{
+  background: rgba(0,51,153,.06);
+  color: var(--brand);
+}
+.glossary-link:focus-visible{
+  outline: 3px solid rgba(255,204,0,.35);
+  outline-offset: 2px;
+}
+.glossary-def{
+  margin: .4rem 0 0;
+  color: var(--ink);
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px){
+  .glossario-az{ top: 68px; }
+  .glossary-head{ align-items:flex-start; }
+}

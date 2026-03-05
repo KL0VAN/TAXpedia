@@ -1,0 +1,95 @@
+:root{
+  --bg: #ffffff;
+  --ink: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+
+  --region-base: #d9dee7;
+  --region-stroke: #ffffff;
+
+  --region-hover: #8b1e2d;   /* rosso istituzionale */
+  --region-active: #6f1420;
+
+  --shadow: 0 10px 30px rgba(2, 6, 23, .10);
+}
+
+*{ box-sizing: border-box; }
+html,body{ margin:0; padding:0; background: var(--bg); color: var(--ink); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+.page{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.page__header{ margin-bottom: 14px; }
+.page__title{ font-size: 22px; margin: 0 0 6px; }
+.page__subtitle{ margin: 0; color: var(--muted); }
+
+.map-card{
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 14px;
+  background: #fff;
+  position: relative;
+}
+
+.map-wrap{
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.tp-map{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tp-region{
+  fill: var(--region-fill, var(--region-base));
+  stroke: var(--region-stroke);
+  stroke-width: .6;
+  cursor: pointer;
+  transition: fill .18s ease, filter .18s ease;
+  outline: none;
+}
+
+.tp-region:hover{
+  fill: var(--region-hover);
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.16));
+}
+
+.tp-region.is-active{
+  fill: var(--region-active);
+}
+
+.tp-region:focus-visible{
+  fill: var(--region-hover);
+  stroke: #111827;
+  stroke-width: 1.2;
+}
+
+.map-tooltip{
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-9999px, -9999px);
+  transition: opacity .12s ease;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, .92);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.2;
+  box-shadow: 0 10px 24px rgba(2, 6, 23, .18);
+  border: 1px solid rgba(255,255,255,.12);
+  max-width: 260px;
+  white-space: nowrap;
+}
+
+.map-tooltip.is-visible{
+  opacity: 1;
+}

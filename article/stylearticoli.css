@@ -1,0 +1,324 @@
+/* ===================== ARTICOLI: CARD CLICCABILI + FOTO (v3) ===================== */
+
+/*
+  Obiettivi v3:
+  1) Forzare rimozione sottolineature anche con regole globali aggressive (underline + !important).
+  2) Rendere le immagini affidabili con fallback e overlay.
+
+  Come impostare la thumbnail per ogni card:
+    <div class="post-thumb" style="--thumb:url('/imm/articoli/thumb-ponte.jpg')" aria-hidden="true"></div>
+
+  Suggerimento anti-cache:
+    <link rel="stylesheet" href="/style/stylearticoli_cards.css?v=3">
+*/
+
+:root{
+  --tp-card-radius: 18px;
+  --tp-card-border: rgba(15, 23, 42, .10);
+  --tp-card-shadow: 0 12px 28px rgba(2, 6, 23, .12);
+  --tp-card-shadow-hover: 0 18px 40px rgba(2, 6, 23, .16);
+  --tp-ink: #0f172a;
+  --tp-muted: #475569;
+  --tp-accent: #003399;
+}
+
+/* Grid */
+.posts-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+/* Card come link */
+.posts-grid a.post-card-link{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: var(--ink, var(--tp-ink));
+  background: var(--card, #fff);
+  border: 1px solid var(--line, var(--tp-card-border));
+  border-radius: var(--tp-card-radius);
+  overflow: hidden;
+  box-shadow: var(--tp-card-shadow);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.posts-grid a.post-card-link:hover{
+  transform: translateY(-4px);
+  box-shadow: var(--tp-card-shadow-hover);
+  border-color: rgba(0, 51, 153, .35);
+}
+
+.posts-grid a.post-card-link:active{ transform: translateY(-2px); }
+
+.posts-grid a.post-card-link:focus-visible{
+  outline: 3px solid rgba(0, 51, 153, .35);
+  outline-offset: 3px;
+}
+
+/*
+  ANTI-SOTTOLINEATURA (super-robusto)
+  - Se nel tuo CSS globale c'è qualcosa tipo:
+      a, a * { text-decoration: underline !important; }
+    questa sezione lo neutralizza *solo* dentro le card.
+*/
+.posts-grid a.post-card-link,
+.posts-grid a.post-card-link *{
+  text-decoration: none !important;
+  text-decoration-line: none !important;
+}
+
+/* Thumbnail: immagine (se presente) + overlay gradient SEMPRE */
+.posts-grid .post-thumb{
+  --thumb: none; /* fallback */
+  position: relative;
+  height: 160px;
+  background-color: #0b1220;
+  background-image: var(--thumb, none);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.posts-grid .post-thumb::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(0, 51, 153, .60), rgba(149, 0, 38, .25));
+}
+
+/* Contenuto */
+.posts-grid .post-body{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px 18px;
+}
+
+.posts-grid .post-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.posts-grid .post-date{
+  font-size: .85rem;
+  color: var(--muted, var(--tp-muted));
+  white-space: nowrap;
+}
+
+.posts-grid .post-tag{
+  width: fit-content;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, .06);
+  border: 1px solid rgba(15, 23, 42, .10);
+  margin: 0;
+}
+
+.posts-grid .post-country{
+  width: fit-content;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, .06);
+  border: 1px solid rgba(15, 23, 42, .10);
+  margin: 0;
+}
+
+.posts-grid .post-title{
+  font-family: "Merriweather", serif;
+  font-size: 1.15rem;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.posts-grid .post-excerpt{
+  margin: 0;
+  color: var(--muted, var(--tp-muted));
+}
+
+.posts-grid .post-open{
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--brand, var(--tp-accent));
+}
+
+/* Se nel file resta qualche vecchio bottone, lo nascondiamo */
+.post-card .post-link{ display: none !important; }
+
+@media (max-width: 560px){
+  .posts-grid .post-thumb{ height: 140px; }
+  .posts-grid{ gap: 14px; }
+}
+
+/* ===================== CONTROLLI: RICERCA + FILTRI TAG ===================== */
+:root{
+  --tp-burgundy: #950026;
+}
+
+.posts-controls{
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 14px;
+}
+
+.posts-search{
+  position: relative;
+  max-width: 520px;
+}
+
+.posts-search input[type="search"]{
+  width: 100%;
+  padding: 12px 44px 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, .14);
+  background: #fff;
+  color: var(--ink, var(--tp-ink));
+  box-shadow: 0 10px 24px rgba(2, 6, 23, .06);
+  outline: none;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.posts-search input[type="search"]:focus{
+  border-color: rgba(0, 51, 153, .45);
+  box-shadow: 0 0 0 4px rgba(0, 51, 153, .12);
+}
+
+.search-clear{
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, .06);
+  color: var(--ink, var(--tp-ink));
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.search-clear:hover{
+  background: rgba(15, 23, 42, .10);
+}
+
+.posts-filters{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-chip{
+  appearance: none;
+  border: 1px solid rgba(15, 23, 42, .14);
+  background: rgba(15, 23, 42, .04);
+  color: var(--ink, var(--tp-ink));
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: .86rem;
+  cursor: pointer;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease, box-shadow .12s ease;
+}
+
+.tag-chip:hover{
+  transform: translateY(-1px);
+  border-color: rgba(0, 51, 153, .30);
+}
+
+.tag-chip:focus-visible{
+  outline: 3px solid rgba(0, 51, 153, .35);
+  outline-offset: 2px;
+}
+
+.tag-chip.is-active{
+  background: rgba(0, 51, 153, .12);
+  border-color: rgba(0, 51, 153, .40);
+  color: var(--brand, var(--tp-accent));
+  box-shadow: 0 10px 22px rgba(2, 6, 23, .08);
+}
+
+.posts-count{
+  margin: 0;
+  color: var(--muted, var(--tp-muted));
+  font-size: .92rem;
+}
+
+.posts-empty{
+  margin: 10px 0 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(149, 0, 38, .06);
+  border: 1px solid rgba(149, 0, 38, .18);
+  color: var(--ink, var(--tp-ink));
+}
+
+/* helper: testo solo per screen reader */
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ===================== CONTROLLI v4: SEARCH + SELECT (TAG + PAESE) ===================== */
+/* Manteniamo i tuoi stili di base, ma mettiamo tutto su una riga (con wrap su mobile). */
+
+.posts-controls-row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.posts-search{
+  max-width: none;           /* override v3 */
+  flex: 1 1 360px;
+  min-width: 220px;
+}
+
+.posts-select{
+  flex: 0 1 220px;
+  min-width: 170px;
+}
+
+.posts-select select{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, .14);
+  background: #fff;
+  color: var(--ink, var(--tp-ink));
+  box-shadow: 0 10px 24px rgba(2, 6, 23, .06);
+  outline: none;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.posts-select select:focus{
+  border-color: rgba(0, 51, 153, .45);
+  box-shadow: 0 0 0 4px rgba(0, 51, 153, .12);
+}
+
+@media (max-width: 760px){
+  .posts-select{
+    flex: 1 1 220px;
+  }
+}
