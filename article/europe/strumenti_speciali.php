@@ -46,17 +46,17 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE â€” TAXpedia',
+    'title' => 'Bilancio UE — TAXpedia',
     'h2' => 'Strumenti Speciali',
-    'p1' => 'La spesa nel 2025 per gli strumenti speciali dell\'Unione Europea ammonta a 6,7 mld. Nello specifico la cifra Ã¨ impiegata in aiuti all\'Ucraina per 4,3 mld, nella riserva di solidarietÃ  europea per 1,1 mld, in aiuti d\'emergenza per 0,6 mld, nel fondo di adeguamento alla brexit per 0.6 mld e il restante in altri fondi minori.',
+    'p1' => 'La spesa nel 2025 per gli strumenti speciali dell\'Unione Europea ammonta a 6,7 mld. Nello specifico la cifra è impiegata in aiuti all\'Ucraina per 4,3 mld, nella riserva di solidarietà europea per 1,1 mld, in aiuti d\'emergenza per 0,6 mld, nel fondo di adeguamento alla brexit per 0.6 mld e il restante in altri fondi minori.',
     'sources_label' => 'Fonti:',
     'sources_detail' => 'Bilancio 2025 concordato tra Consiglio Europeo e Parlamento Europeo.',
   ),
 
   'en' => array(
-    'title' => 'EU Budget â€” TAXpedia',
+    'title' => 'EU Budget — TAXpedia',
     'h2' => 'Special Instruments',
-    'p1' => 'In 2025, spending on the European Unionâ€™s special instruments amounts to â‚¬6.7bn. Specifically, â‚¬4.3bn for support to Ukraine, â‚¬1.1bn for the European Solidarity Reserve, â‚¬0.6bn for emergency aid, â‚¬0.6bn for the Brexit Adjustment Reserve, and the remainder for other smaller funds.',
+    'p1' => 'In 2025, spending on the European Union’s special instruments amounts to €6.7bn. Specifically, €4.3bn for support to Ukraine, €1.1bn for the European Solidarity Reserve, €0.6bn for emergency aid, €0.6bn for the Brexit Adjustment Reserve, and the remainder for other smaller funds.',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament.',
   ),

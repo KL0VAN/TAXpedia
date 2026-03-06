@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
+
 
 if (!function_exists('itlp_get_lang')) {
   function itlp_get_lang() {
@@ -11,7 +13,7 @@ if (!function_exists('itlp_get_lang')) {
     return in_array($lang, array('it','en'), true) ? $lang : 'it';
   }
 }
-$ITLP_LANG = itlp_get_lang();
+$ITLP_LANG = function_exists('tp_lang') ? tp_lang() : itlp_get_lang();
 
 if (!function_exists('itlp_h')) {
   function itlp_h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
@@ -141,6 +143,7 @@ if (!function_exists('itlp_e')) {
 
   <!-- Chart.js + logica calcolatrice -->
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script defer src="/calculator/js/tp-i18n-local.js"></script>
   <script defer src="calculatorAustria.js"></script>
 </head>
 <body>

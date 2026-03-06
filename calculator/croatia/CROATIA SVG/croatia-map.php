@@ -13,6 +13,7 @@ if (!function_exists('hrlp_get_lang')) {
   }
 }
 $HRLP_LANG = hrlp_get_lang();
+$HRLP_MAP_META_TITLE = ($HRLP_LANG === 'en') ? 'Interactive Map of Croatian Counties - TAXpedia' : 'Mappa Interattiva Contee Croazia - TAXpedia';
 
 /**
  * Croazia - mappa SVG interattiva (21 contee + Grad Zagreb)
@@ -128,7 +129,7 @@ $svgMarkup = load_and_prepare_svg($svgFile, $REGIONS_HR);
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mappa Contee Croazia</title>
+  <title><?php echo htmlspecialchars($HRLP_MAP_META_TITLE, ENT_QUOTES, 'UTF-8'); ?></title>
   <link rel="stylesheet" href="croatia-map.css" />
   <script src="croatia-map.js" defer></script>
 </head>

@@ -46,7 +46,7 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE â€” TAXpedia',
+    'title' => 'Bilancio UE — TAXpedia',
     'h2' => 'Migrazione e Gestione delle Frontiere',
     'p1' => 'L\'Unione Europea spende un totale di 4,8 mld di euro per la migrazione e la gestione delle frontiere. Nello specifico 2,1 mld per il controllo dei flussi migratori mentre 2,7 mld per la gestione delle frontiere.',
     'sources_label' => 'Fonti:',
@@ -54,9 +54,9 @@ $GLOBALS['tp_i18n_dict'] = array(
   ),
 
   'en' => array(
-    'title' => 'EU Budget â€” TAXpedia',
+    'title' => 'EU Budget — TAXpedia',
     'h2' => 'Migration and Border Management',
-    'p1' => 'The European Union allocates a total of â‚¬4.8bn to migration and border management. Specifically, â‚¬2.1bn for managing migration flows and â‚¬2.7bn for border management.',
+    'p1' => 'The European Union allocates a total of €4.8bn to migration and border management. Specifically, €2.1bn for managing migration flows and €2.7bn for border management.',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament',
   ),

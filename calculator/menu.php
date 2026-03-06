@@ -9,7 +9,7 @@ require_once __DIR__ . '/../i18n/i18n.php';
 $TPM_LANG = tp_lang();
 $TPM_I18N = array(
   'it' => array(
-    'meta_title'   => 'Calcolatori per Nazione â€” TAXpedia',
+    'meta_title'   => 'Menu Calcolatori per Nazione - TAXpedia',
     'h1'           => 'Calcolatori per Nazione',
     'sub'          => 'Scegli un calcolatore nazionale e scopri come si divide la spesa pubblica nei diversi paesi europei. Nuovi paesi presto in arrivo.',
     'aria_select'  => 'Seleziona un calcolatore nazionale',
@@ -27,13 +27,16 @@ $TPM_I18N = array(
     'pl_name'      => 'Polonia',
     'pt_name'      => 'Portogallo',
     'si_name'      => 'Slovenia',
+    'dk_name'      => 'Danimarca',
+    'ie_name'      => 'Irlanda',
+    'cz_name'      => 'Repubblica Ceca',
 
     'foot'         => 'Calcolatore spesa pubblica ',
     'coming'       => 'Presto disponibile',
   ),
 
   'en' => array(
-    'meta_title'   => 'Country calculators â€” TAXpedia',
+    'meta_title'   => 'Country Calculators Menu - TAXpedia',
     'h1'           => 'Calculators by country',
     'sub'          => 'Choose a national calculator and see how public spending is divided across European countries. New countries coming soon.',
     'aria_select'  => 'Select a national calculator',
@@ -51,6 +54,9 @@ $TPM_I18N = array(
     'pl_name'      => 'Poland',
     'pt_name'      => 'Portugal',
     'si_name'      => 'Slovenia',
+    'dk_name'      => 'Denmark',
+    'ie_name'      => 'Ireland',
+    'cz_name'      => 'Czech Republic',
 
     'foot'         => 'Public spending calculator',
     'coming'       => 'Soon available',
@@ -215,6 +221,33 @@ if (!function_exists('tpm_e')) {
           </div>
           <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
+
+        <!-- Danimarca (coming soon) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag" style="background-image:url('denmark/flagdenmark.png')" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('dk_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('coming'); ?></div>
+        </div>
+
+        <!-- Irlanda (coming soon) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag" style="background-image:url('ireland/flagireland.png')" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('ie_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('coming'); ?></div>
+        </div>
+
+        <!-- Repubblica Ceca (coming soon) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag" style="background-image:url('czech/flagczech.png')" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('cz_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('coming'); ?></div>
+        </div>
 
       </div>
     </section>

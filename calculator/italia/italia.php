@@ -25,7 +25,7 @@ if (!function_exists('itlp_h')) {
 
 $ITLP_I18N = array(
   'it' => array(
-    'title' => "Dove vanno le tue tasse? — TAXpedia",
+    'title' => "Calcolatore Tasse Italia - TAXpedia",
     'meta_desc' => "Inserisci il tuo reddito e scopri come lo Stato utilizza i tuoi contributi.",
     'h1' => "Come spende l'Italia le tasse dei cittadini?",
     'subtitle' => "Inserisci il tuo reddito e scopri come lo Stato utilizza i tuoi contributi.",
@@ -78,7 +78,7 @@ $ITLP_I18N = array(
   ),
 
   'en' => array(
-    'title' => "Where do your taxes go? — TAXpedia",
+    'title' => "Italy Tax Calculator - TAXpedia",
     'meta_desc' => "Enter your income and see how the State allocates your contributions.",
     'h1' => "How does Italy spend taxpayers’ money?",
     'subtitle' => "Enter your income and see how the State allocates your contributions.",

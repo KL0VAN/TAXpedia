@@ -18,6 +18,7 @@ if (!function_exists('itlp_get_lang')) {
   }
 }
 $ITLP_LANG = itlp_get_lang();
+$ITLP_MAP_META_TITLE = ($ITLP_LANG === 'en') ? 'Interactive Map of Italian Regions - TAXpedia' : 'Mappa Interattiva Regioni Italia - TAXpedia';
 
 $svgFile = __DIR__ . '/italyHigh.svg';
 
@@ -136,7 +137,7 @@ $svgMarkup = load_and_prepare_svg($svgFile, $REGIONS_IT);
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mappa Regioni Italia</title>
+  <title><?php echo htmlspecialchars($ITLP_MAP_META_TITLE, ENT_QUOTES, 'UTF-8'); ?></title>
   <link rel="stylesheet" href="italia-map.css" />
   <script src="italia-map.js" defer></script>
 </head>

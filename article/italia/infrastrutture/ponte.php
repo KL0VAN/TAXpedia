@@ -168,7 +168,7 @@ if (!function_exists('ponte_e')) {
 }
 ?>
 <!doctype html>
-<html lang="<?php echo ponte_e($PONTE_LANG); ?>">
+<html lang="<?php echo ponte_h($PONTE_LANG); ?>">
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>

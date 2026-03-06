@@ -52,8 +52,23 @@ const SETTORI_UE = [
   { nome:'Sicurezza e Difesa',                           percentuale:0.0003, link:'/article/europe/sicurezza_difesa.php' },
 ];
 
+/* ========================= i18n helper ========================= */
+const tpCalcI18n = window.tpI18n || null;
+const tpCalcLabel = (v) => {
+  if (tpCalcI18n && typeof tpCalcI18n.label === 'function') return tpCalcI18n.label(v);
+  return String(v == null ? '' : v);
+};
+const tpCalcText = (key, fallback) => {
+  if (tpCalcI18n && typeof tpCalcI18n.t === 'function') {
+    const value = tpCalcI18n.t(key);
+    if (value) return value;
+  }
+  return fallback;
+};
+
 /* ========================= UTIL ========================= */
 const nfEuro = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' });
+
 const euro = n => nfEuro.format(Number(n || 0));
 
 function calcolaIRPEF(reddito) {
@@ -273,7 +288,7 @@ function renderPieChart(canvasEl, labels, data, colors, options = {}) {
           const tot = data.reduce((a,b)=>a+Number(b||0),0) || 1;
           explEl.textContent = `${labels[idx]}: ${euro(val)} (${((val/tot)*100).toFixed(1)}%)`;
         } else {
-          explEl.textContent = options.defaultExplanation || 'Tocca sul grafico per i dettagli.';
+          explEl.textContent = options.defaultExplanation || tpCalcText('expl_default', 'Tocca sul grafico per i dettagli.');
         }
       }
     }
@@ -340,20 +355,20 @@ function runCalcolo() {
   /* ------------------ ITALIA: table + chart + legend (colonna) ------------------ */
   // righe (tabella fallback)
   const rowsIt = SETTORI.map(s => ({
-    nome: `<a href="${s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${s.nome}</a>`,
+    nome: `<a href="${s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${tpCalcLabel(s.nome)}</a>`,
     importo: s.percentuale * tasse
   }));
   renderTable(tabIt, rowsIt);
 
   // chart ITALIA
-  const labelsIt = SETTORI.map(s => s.nome);
+  const labelsIt = SETTORI.map(s => tpCalcLabel(s.nome));
   const valuesIt = SETTORI.map(s => Number((s.percentuale * tasse).toFixed(2)));
   const colorsIt = genColors(labelsIt.length, 8);
   safeDestroy(chartItalia);
   chartItalia = renderPieChart(canvasIt, labelsIt, valuesIt, colorsIt, {
     existingChart: chartItalia,
     explanationEl: explIt,
-    defaultExplanation: 'Tocca sul grafico per i dettagli.'
+    defaultExplanation: tpCalcText('expl_default', 'Tocca sul grafico per i dettagli.')
   });
 
   // legenda colonna ITALIA: solo Settore + Importo; hover evidenzia fetta; click apre dettaglio
@@ -373,7 +388,7 @@ function runCalcolo() {
         chartItalia.setActiveElements([]);
         chartItalia.update();
       }
-      if (explIt) explIt.textContent = 'Tocca sul grafico per i dettagli.';
+      if (explIt) explIt.textContent = tpCalcText('expl_default', 'Tocca sul grafico per i dettagli.');
     },
     onClick: (i) => {
       const sector = SETTORI[i];
@@ -384,17 +399,17 @@ function runCalcolo() {
   });
 
   /* ------------------ UE: table + chart + legend (colonna) ------------------ */
-  const rowsUe = SETTORI_UE.map(s => ({ nome: s.nome, importo: s.percentuale * tasse }));
+  const rowsUe = SETTORI_UE.map(s => ({ nome: tpCalcLabel(s.nome), importo: s.percentuale * tasse }));
   renderTable(tabUe, rowsUe);
 
-  const labelsUe = SETTORI_UE.map(s => s.nome);
+  const labelsUe = SETTORI_UE.map(s => tpCalcLabel(s.nome));
   const valuesUe = SETTORI_UE.map(s => Number((s.percentuale * tasse).toFixed(2)));
   const colorsUe = genBlueShades(labelsUe.length); // ⬅️ sfumature di blu per il grafico UE
   safeDestroy(chartUE);
   chartUE = renderPieChart(canvasUe, labelsUe, valuesUe, colorsUe, {
     existingChart: chartUE,
     explanationEl: explUe,
-    defaultExplanation: 'Tocca sul grafico per i dettagli.'
+    defaultExplanation: tpCalcText('expl_default', 'Tocca sul grafico per i dettagli.')
   });
 
   // legenda UE: hover evidenzia slice, click APRE LINK
@@ -414,7 +429,7 @@ function runCalcolo() {
         chartUE.setActiveElements([]);
         chartUE.update();
       }
-      if (explUe) explUe.textContent = 'Tocca sul grafico per i dettagli.';
+      if (explUe) explUe.textContent = tpCalcText('expl_default', 'Tocca sul grafico per i dettagli.');
     },
     onClick: (i) => {
       const sector = SETTORI_UE[i];

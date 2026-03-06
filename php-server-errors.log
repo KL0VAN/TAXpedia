@@ -1,0 +1,91 @@
+[Fri Mar  6 17:53:35 2026] PHP 8.5.1 Development Server (http://127.0.0.1:8142) started
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50404 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50404 [200]: GET /article/articoli.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50404 Closing
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50405 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50405 [200]: GET /index.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50405 Closing
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50406 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50406 [200]: GET /article/europe/coesione.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50406 Closing
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50407 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50407 [200]: GET /article/europe/mercato_unico.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50407 Closing
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50408 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50408 [200]: GET /article/europe/migrazione_gestione.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50408 Closing
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50409 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50409 [200]: GET /article/europe/pubblica_amm_ue.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50409 Closing
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50410 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50410 [200]: GET /article/europe/rapporti_vicinato.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50410 Closing
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50411 Accepted
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50411 [200]: GET /article/europe/risorse_naturali.php?lang=it
+[Fri Mar  6 17:53:35 2026] 127.0.0.1:50411 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50412 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50412 [200]: GET /article/europe/sicurezza_difesa.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50412 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50413 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50413 [200]: GET /article/europe/strumenti_speciali.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50413 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50414 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50414 [200]: GET /article/italia/altro.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50414 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50415 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50415 [200]: GET /article/italia/articolo_prova_standard.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50415 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50416 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50416 [200]: GET /article/italia/bilancio_ue.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50416 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50417 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50417 [200]: GET /article/italia/costo_regionali.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50417 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50418 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50418 [200]: GET /article/italia/cultura_sport.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50418 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50419 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50419 [200]: GET /article/italia/difesa.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50419 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50420 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50420 [200]: GET /article/italia/giustizia.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50420 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50421 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50421 [200]: GET /article/italia/infrastrutture/ponte.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50421 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50422 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50422 [200]: GET /article/italia/infrastrutture_trasporti.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50422 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50423 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50423 [200]: GET /article/italia/interessi.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50423 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50425 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50425 [200]: GET /article/italia/istruzione_ricerca.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50425 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50426 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50426 [200]: GET /article/italia/politiche_economiche.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50426 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50427 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50427 [200]: GET /article/italia/protezione_ambientale.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50427 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50428 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50428 [200]: GET /article/italia/protezione_sociale.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50428 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50429 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50429 [200]: GET /article/italia/pubblica_amministrazione.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50429 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50430 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50430 [200]: GET /article/italia/sanita.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50430 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50431 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50431 [200]: GET /article/italia/sicurezza_ordine.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50431 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50432 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50432 [200]: GET /calculator/france/france.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50432 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50433 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50433 [200]: GET /calculator/italia/italia.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50433 Closing
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50434 Accepted
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50434 [200]: GET /glossary/glossario.php?lang=it
+[Fri Mar  6 17:53:36 2026] 127.0.0.1:50434 Closing

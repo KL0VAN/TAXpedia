@@ -46,7 +46,7 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE â€” TAXpedia',
+    'title' => 'Bilancio UE — TAXpedia',
     'h2' => 'Rapporti con il Vicinato e con il Mondo',
     'p1' => 'Nel 2025 l\'Unione Europea ha speso 16,3 mld di euro per i rapporti con il paesi vicini e nel resto del mondo. Nel dettaglio per le relazioni diplomatiche e i programmi attivi nei paesi all\'estero dell\'Unione sono stati spesi 13,6 mld di euro. Per i programmi di pre adesione dei paesi candidati a diventare nuovi membri sono stati spesi 2,7 mld di euro.',
     'sources_label' => 'Fonti:',
@@ -54,9 +54,9 @@ $GLOBALS['tp_i18n_dict'] = array(
   ),
 
   'en' => array(
-    'title' => 'EU Budget â€” TAXpedia',
+    'title' => 'EU Budget — TAXpedia',
     'h2' => 'Neighbourhood and Global Relations',
-    'p1' => 'In 2025, the European Union spent â‚¬16.3bn on relations with neighbouring countries and the rest of the world. Of this, â‚¬13.6bn went to diplomatic relations and programmes in countries outside the EU. â‚¬2.7bn went to pre-accession programmes for candidate countries seeking to become new members.',
+    'p1' => 'In 2025, the European Union spent €16.3bn on relations with neighbouring countries and the rest of the world. Of this, €13.6bn went to diplomatic relations and programmes in countries outside the EU. €2.7bn went to pre-accession programmes for candidate countries seeking to become new members.',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament',
   ),

@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
+
 /**
  * NOTE (futuro):
  * - Se un domani vuoi tradurre anche testi generati via JS (legende/settori/chart),
@@ -16,7 +18,7 @@ if (!function_exists('hrlp_get_lang')) {
     return in_array($lang, array('it','en'), true) ? $lang : 'it';
   }
 }
-$HRLP_LANG = hrlp_get_lang();
+$HRLP_LANG = function_exists('tp_lang') ? tp_lang() : hrlp_get_lang();
 
 if (!function_exists('hrlp_h')) {
   function hrlp_h($s): string { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
@@ -24,7 +26,7 @@ if (!function_exists('hrlp_h')) {
 
 $HRLP_I18N = array(
   'it' => array(
-    'title' => "Dove vanno le tue tasse? — TAXpedia",
+    'title' => "Calcolatore Tasse Croazia - TAXpedia",
     'meta_desc' => "Inserisci il tuo reddito e scopri come lo Stato utilizza i tuoi contributi.",
     'h1' => "Come spende la Croazia le tasse dei cittadini?",
     'subtitle' => "Inserisci il tuo reddito e scopri come lo Stato utilizza i tuoi contributi.",
@@ -87,7 +89,7 @@ $HRLP_I18N = array(
   ),
 
   'en' => array(
-    'title' => "Where do your taxes go? — TAXpedia",
+    'title' => "Croatia Tax Calculator - TAXpedia",
     'meta_desc' => "Enter your income and see how the State allocates your contributions.",
     'h1' => "How does Croatia spend taxpayers’ money?",
     'subtitle' => "Enter your income and see how the State allocates your contributions.",

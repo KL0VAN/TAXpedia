@@ -18,6 +18,7 @@ if (!function_exists('itlp_h')) {
 
 $ITLP_I18N = array(
   'it' => array(
+    'meta_title' => 'Programma Educazione Fiscale UE - TAXpedia',
     'program-lede' => 'EU Youth Tax Literacy Program è un’iniziativa educativa di TAXpedia che rende accessibili i concetti fondamentali di tassazione e finanza pubblica, collegandoli alla cittadinanza europea e alla partecipazione democratica. Attraverso lezioni brevi e basate su fonti ufficiali, il programma aiuta i giovani a interpretare imposte su reddito e consumi, comprendere il ruolo dei contributi, e leggere in modo critico come vengono finanziati servizi e politiche pubbliche, a livello nazionale ed europeo.',
     'update' => 'Ultimo aggiornamento:',
     'download' => 'Scarica le lezioni',
@@ -40,6 +41,7 @@ $ITLP_I18N = array(
     'disclaimer' => 'Materiale educativo: non è consulenza fiscale. Le regole possono cambiare, controlla sempre le fonti ufficiali.',
   ),
   'en' => array(
+    'meta_title' => 'EU Youth Tax Literacy Program - TAXpedia',
     'program-lede' => 'The EU Youth Tax Literacy Program is an educational initiative by TAXpedia that makes the fundamental concepts of taxation and public finance accessible, connecting them to European citizenship and democratic participation. Through short lessons based on official sources, the program helps young people interpret income and consumption taxes, understand the role of contributions, and critically analyze how public services and policies are financed at the national and European levels.',
     'update' => 'Last update:', 
     'download' => 'Download the lessons',
@@ -82,7 +84,7 @@ if (!function_exists('itlp_e')) {
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>EU Youth Tax Literacy Program — TAXpedia</title>
+  <title><?php echo itlp_e('meta_title'); ?></title>
   <link rel="icon" href="/imm/logoT.png" type="image/png">
 
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;800&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
