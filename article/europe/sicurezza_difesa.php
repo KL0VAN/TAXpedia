@@ -1,7 +1,12 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /* ===================== TP i18n (local) ===================== */
 if (!function_exists('tp_i18n_get_lang')) {
   function tp_i18n_get_lang() {
+    if (function_exists('tp_lang')) {
+      return tp_lang();
+    }
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $q = strtolower(trim((string)$_GET['lang']));
@@ -41,7 +46,7 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE — TAXpedia',
+    'title' => 'Bilancio UE â€” TAXpedia',
     'h2' => 'Sicurezza e Difesa',
     'p1' => 'l\'Unione Europea nel 2025 ha speso 2,6 mld di euro per la sicurezza e la difesa. Nel dettaglio sono stati spesi 800 mil per la sicurezza interna e per i programmi di sicurezza delle centrali nucleari e 1,8 mld in investimenti nel settore della difesa*.',
     'note' => '*NON COMPRENDE IL PIANO REARM EUROPE',
@@ -50,9 +55,9 @@ $GLOBALS['tp_i18n_dict'] = array(
   ),
 
   'en' => array(
-    'title' => 'EU Budget — TAXpedia',
+    'title' => 'EU Budget â€” TAXpedia',
     'h2' => 'Security and Defence',
-    'p1' => 'In 2025, the European Union spent €2.6bn on security and defence. Specifically, €800m on internal security and nuclear power plant safety programmes, and €1.8bn on investments in the defence sector*.',
+    'p1' => 'In 2025, the European Union spent â‚¬2.6bn on security and defence. Specifically, â‚¬800m on internal security and nuclear power plant safety programmes, and â‚¬1.8bn on investments in the defence sector*.',
     'note' => '*DOES NOT INCLUDE THE REARM EUROPE PLAN',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament.',

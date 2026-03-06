@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (costo_regionali.php)
  * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + anti-redeclare
  */
 
-if (!isset($CR_SUPPORTED)) $CR_SUPPORTED = array('it', 'en');
-
-$CR_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $CR_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $CR_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($CR_LANG, $CR_SUPPORTED, true)) $CR_LANG = 'it';
+$CR_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $CR_I18N = array(
 

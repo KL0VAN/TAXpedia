@@ -1,7 +1,12 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /* ===================== TP i18n (local) ===================== */
 if (!function_exists('tp_i18n_get_lang')) {
   function tp_i18n_get_lang() {
+    if (function_exists('tp_lang')) {
+      return tp_lang();
+    }
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $q = strtolower(trim((string)$_GET['lang']));
@@ -41,17 +46,17 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE — TAXpedia',
+    'title' => 'Bilancio UE â€” TAXpedia',
     'h2' => 'Mercato Unico, Innovazione e Agenda Digitale',
-    'p1' => 'L’Unione Europea nel 2025 ha speso € 21,5 mld di euro per il mercato unico comunitario, l’innovazione e lo sviluppo digitale. Di cui 13,5 mld di euro per la ricerca e l’innovazione, 4,6 mld in investimenti strategici all\'interno e all\'esterno della comunità europea, 1 mld per il mercato unico e le questioni economiche e 2,4 mld per il programma spaziale europeo (ESA).',
+    'p1' => 'Lâ€™Unione Europea nel 2025 ha speso â‚¬ 21,5 mld di euro per il mercato unico comunitario, lâ€™innovazione e lo sviluppo digitale. Di cui 13,5 mld di euro per la ricerca e lâ€™innovazione, 4,6 mld in investimenti strategici all\'interno e all\'esterno della comunitÃ  europea, 1 mld per il mercato unico e le questioni economiche e 2,4 mld per il programma spaziale europeo (ESA).',
     'sources_label' => 'Fonti:',
     'sources_detail' => 'Bilancio 2025 concordato tra Consiglio Europeo e Parlamento Europeo.',
   ),
 
   'en' => array(
-    'title' => 'EU Budget — TAXpedia',
+    'title' => 'EU Budget â€” TAXpedia',
     'h2' => 'Single Market, Innovation and Digital Agenda',
-    'p1' => 'In 2025, the European Union spent €21.5bn on the EU Single Market, innovation and digital development. Of this, €13.5bn went to research and innovation, €4.6bn to strategic investments inside and outside the EU, €1bn to the Single Market and economic affairs, and €2.4bn to the European space programme (ESA).',
+    'p1' => 'In 2025, the European Union spent â‚¬21.5bn on the EU Single Market, innovation and digital development. Of this, â‚¬13.5bn went to research and innovation, â‚¬4.6bn to strategic investments inside and outside the EU, â‚¬1bn to the Single Market and economic affairs, and â‚¬2.4bn to the European space programme (ESA).',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament.',
   ),

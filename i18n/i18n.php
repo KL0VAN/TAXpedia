@@ -39,19 +39,32 @@ if (!function_exists('tp_lang_url')) {
 }
 
 // Init dizionari + lingua
-$get = isset($_GET['lang']) ? $_GET['lang'] : null;
-$cookie = isset($_COOKIE[TP_LANG_COOKIE]) ? $_COOKIE[TP_LANG_COOKIE] : null;
+$getRaw = isset($_GET['lang']) ? $_GET['lang'] : null;
+$cookieRaw = isset($_COOKIE[TP_LANG_COOKIE]) ? $_COOKIE[TP_LANG_COOKIE] : null;
+$hasGetLang = isset($_GET['lang']);
 
 $supported = isset($GLOBALS['TP_SUPPORTED_LANGS']) ? $GLOBALS['TP_SUPPORTED_LANGS'] : array('it','en');
 
-$lang = tp_normalize_lang($get ? $get : $cookie, $supported, TP_DEFAULT_LANG);
+// Priorita coerente: GET valido > cookie valido > default
+$getLang = $hasGetLang ? tp_normalize_lang($getRaw, $supported, '') : '';
+$cookieLang = tp_normalize_lang($cookieRaw, $supported, '');
+
+if ($getLang !== '') {
+  $lang = $getLang;
+} elseif ($cookieLang !== '') {
+  $lang = $cookieLang;
+} else {
+  $lang = TP_DEFAULT_LANG;
+}
+
 $GLOBALS['TP_LANG'] = $lang;
 
-// IMPORTANTE: Salva il cookie in PHP se l'utente ha cliccato IT/EN (da ?lang=...)
-// Questo garantisce persistenza della lingua tra pagine, indipendentemente da JavaScript
-if ($get && in_array($get, $supported, true) && !headers_sent()) {
+// Salva il cookie solo quando la query contiene una lingua valida.
+// Evita reset accidentali al default in caso di ?lang non supportato.
+if ($hasGetLang && $getLang !== '' && !headers_sent()) {
   $maxAge = 31536000; // 1 anno
-  setcookie(TP_LANG_COOKIE, $lang, time() + $maxAge, '/', '', false, false);
+  setcookie(TP_LANG_COOKIE, $getLang, time() + $maxAge, '/', '', false, false);
+  $_COOKIE[TP_LANG_COOKIE] = $getLang;
 }
 
 // Root sicura: cartella parent di /i18n

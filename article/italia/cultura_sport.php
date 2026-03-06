@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (cultura_sport.php)
  * - NON usa bootstrap/globale
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + protezione anti-redeclare
  */
 
-if (!isset($CUS_SUPPORTED)) $CUS_SUPPORTED = array('it', 'en');
-
-$CUS_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $CUS_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $CUS_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($CUS_LANG, $CUS_SUPPORTED, true)) $CUS_LANG = 'it';
+$CUS_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $CUS_I18N = array(
 

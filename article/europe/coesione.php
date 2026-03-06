@@ -1,7 +1,12 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /* ===================== TP i18n (local) ===================== */
 if (!function_exists('tp_i18n_get_lang')) {
   function tp_i18n_get_lang() {
+    if (function_exists('tp_lang')) {
+      return tp_lang();
+    }
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $q = strtolower(trim((string)$_GET['lang']));
@@ -41,19 +46,19 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE — TAXpedia',
+    'title' => 'Bilancio UE â€” TAXpedia',
     'h2' => 'Coesione, Resilienza e Valori',
-    'p1' => 'L’Unione Europea nel 2025 ha investito 78 mld di euro per favorire la coesione nei paesi comunitari.',
-    'p2' => 'Di cui 49,2 mld sono stati investiti nello sviluppo regionale e nella coesione, 17,2 mld per il fondo sociale europeo (FSE), 6,2 mld per la ripresa e la resilienza, 5,4 mld nella coesione sociale e nei valori dell’Unione.',
+    'p1' => 'Lâ€™Unione Europea nel 2025 ha investito 78 mld di euro per favorire la coesione nei paesi comunitari.',
+    'p2' => 'Di cui 49,2 mld sono stati investiti nello sviluppo regionale e nella coesione, 17,2 mld per il fondo sociale europeo (FSE), 6,2 mld per la ripresa e la resilienza, 5,4 mld nella coesione sociale e nei valori dellâ€™Unione.',
     'sources_label' => 'Fonti:',
     'sources_detail' => 'Bilancio 2025 concordato tra Consiglio Europeo e Parlamento Europeo.',
   ),
 
   'en' => array(
-    'title' => 'EU Budget — TAXpedia',
+    'title' => 'EU Budget â€” TAXpedia',
     'h2' => 'Cohesion, Resilience and Values',
-    'p1' => 'In 2025, the European Union invested €78bn to foster cohesion across Member States.',
-    'p2' => 'Of this, €49.2bn went to regional development and cohesion, €17.2bn to the European Social Fund (ESF), €6.2bn to recovery and resilience, and €5.4bn to social cohesion and the Union’s values.',
+    'p1' => 'In 2025, the European Union invested â‚¬78bn to foster cohesion across Member States.',
+    'p2' => 'Of this, â‚¬49.2bn went to regional development and cohesion, â‚¬17.2bn to the European Social Fund (ESF), â‚¬6.2bn to recovery and resilience, and â‚¬5.4bn to social cohesion and the Unionâ€™s values.',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament.',
   ),

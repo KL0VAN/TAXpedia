@@ -2,20 +2,42 @@
 (function (w) {
   if (w.tpI18n) return;
 
+  function normalizeLang(v) {
+    v = (v || "").toLowerCase().trim();
+    return (v === "it" || v === "en") ? v : "";
+  }
+
+  function readCookie(name) {
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const m = document.cookie.match(new RegExp(`(?:^|;\\s*)${escaped}=([^;]+)`));
+    if (!m || !m[1]) return "";
+    try {
+      return decodeURIComponent(m[1]);
+    } catch (e) {
+      return "";
+    }
+  }
+
   function tpGetLang() {
     // 1) URL param ?lang=
     try {
       const sp = new URLSearchParams(w.location.search || "");
-      const q = (sp.get("lang") || "").toLowerCase().trim();
-      if (q === "it" || q === "en") return q;
+      const q = normalizeLang(sp.get("lang") || "");
+      if (q) return q;
     } catch (e) { /* ignore */ }
 
-    // 2) cookie tp_lang
-    const m = document.cookie.match(/(?:^|;\s*)tp_lang=([^;]+)/);
-    if (m && m[1]) {
-      const c = decodeURIComponent(m[1]).toLowerCase().trim();
-      if (c === "it" || c === "en") return c;
-    }
+    // 2) cookie tp_lang (legacy principale)
+    const tp = normalizeLang(readCookie("tp_lang"));
+    if (tp) return tp;
+
+    // 3) cookie site_lang (compat)
+    const site = normalizeLang(readCookie("site_lang"));
+    if (site) return site;
+
+    // 4) html lang attribute
+    const htmlLang = normalizeLang((document.documentElement && document.documentElement.lang) || "");
+    if (htmlLang) return htmlLang;
+
     return "it";
   }
 
@@ -86,5 +108,5 @@
     return lang === "en" ? (LABEL_EN[s] || s) : s;
   }
 
-  w.tpI18n = { lang, t, label };
+  w.tpI18n = { lang, t, label, getLang: tpGetLang };
 })(window);

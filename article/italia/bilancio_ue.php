@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (bilancio_ue.php)
  * - NON usa bootstrap/globale
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + protezione anti-redeclare
  */
 
-if (!isset($BUE_SUPPORTED)) $BUE_SUPPORTED = array('it', 'en');
-
-$BUE_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $BUE_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $BUE_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($BUE_LANG, $BUE_SUPPORTED, true)) $BUE_LANG = 'it';
+$BUE_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $BUE_I18N = array(
 

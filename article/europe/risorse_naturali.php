@@ -1,7 +1,12 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /* ===================== TP i18n (local) ===================== */
 if (!function_exists('tp_i18n_get_lang')) {
   function tp_i18n_get_lang() {
+    if (function_exists('tp_lang')) {
+      return tp_lang();
+    }
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $q = strtolower(trim((string)$_GET['lang']));
@@ -41,17 +46,17 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE — TAXpedia',
+    'title' => 'Bilancio UE â€” TAXpedia',
     'h2' => 'Risorse Naturali e Ambiente',
-    'p1' => 'L\'Unione Europea nel 2025 ha speso 56,7 mld di euro per le risorse naturali e l\'ambiente. La maggior parte dei fondi, 54,3 mld di euro, è dedicata al sostegno all\'agricoltura e alle politiche marittime mentre i restanti 2,4 mld sono indirizzati alla protezione ambientale e al cambiamento climatico.',
+    'p1' => 'L\'Unione Europea nel 2025 ha speso 56,7 mld di euro per le risorse naturali e l\'ambiente. La maggior parte dei fondi, 54,3 mld di euro, Ã¨ dedicata al sostegno all\'agricoltura e alle politiche marittime mentre i restanti 2,4 mld sono indirizzati alla protezione ambientale e al cambiamento climatico.',
     'sources_label' => 'Fonti:',
     'sources_detail' => 'Bilancio 2025 concordato tra Consiglio Europeo e Parlamento Europeo',
   ),
 
   'en' => array(
-    'title' => 'EU Budget — TAXpedia',
+    'title' => 'EU Budget â€” TAXpedia',
     'h2' => 'Natural Resources and Environment',
-    'p1' => 'In 2025, the European Union spent €56.7bn on natural resources and the environment. Most of the funds (€54.3bn) are devoted to supporting agriculture and maritime policies, while the remaining €2.4bn are allocated to environmental protection and climate change.',
+    'p1' => 'In 2025, the European Union spent â‚¬56.7bn on natural resources and the environment. Most of the funds (â‚¬54.3bn) are devoted to supporting agriculture and maritime policies, while the remaining â‚¬2.4bn are allocated to environmental protection and climate change.',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament',
   ),

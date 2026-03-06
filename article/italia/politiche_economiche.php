@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (politiche_economiche.php)
  * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + anti-redeclare
  */
 
-if (!isset($ECO_SUPPORTED)) $ECO_SUPPORTED = array('it', 'en');
-
-$ECO_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $ECO_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $ECO_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($ECO_LANG, $ECO_SUPPORTED, true)) $ECO_LANG = 'it';
+$ECO_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $ECO_I18N = array(
 

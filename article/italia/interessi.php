@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (interessi.php)
  * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + anti-redeclare
  */
 
-if (!isset($INTR_SUPPORTED)) $INTR_SUPPORTED = array('it', 'en');
-
-$INTR_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $INTR_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $INTR_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($INTR_LANG, $INTR_SUPPORTED, true)) $INTR_LANG = 'it';
+$INTR_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $INTR_I18N = array(
 

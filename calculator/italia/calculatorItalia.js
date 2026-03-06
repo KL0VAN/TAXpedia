@@ -21,6 +21,12 @@
 
 /* ========================= i18n (LOCAL) ========================= */
 function calcit_getLang() {
+  // 0) helper condiviso (se disponibile)
+  if (window.tpI18n && typeof window.tpI18n.lang === 'string') {
+    const l = window.tpI18n.lang.toLowerCase().trim();
+    if (l === 'it' || l === 'en') return l;
+  }
+
   // 1) URL param ?lang=
   try {
     const sp = new URLSearchParams(window.location.search || '');
@@ -33,6 +39,13 @@ function calcit_getLang() {
   if (m && m[1]) {
     const c = decodeURIComponent(m[1]).toLowerCase().trim();
     if (c === 'it' || c === 'en') return c;
+  }
+
+  // 3) cookie site_lang
+  const m2 = document.cookie.match(/(?:^|;\s*)site_lang=([^;]+)/);
+  if (m2 && m2[1]) {
+    const c2 = decodeURIComponent(m2[1]).toLowerCase().trim();
+    if (c2 === 'it' || c2 === 'en') return c2;
   }
 
   return 'it';

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (altro.php)
  * - NON usa bootstrap/globale
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + protezione anti-redeclare
  */
 
-if (!isset($ALT_SUPPORTED)) $ALT_SUPPORTED = array('it', 'en');
-
-$ALT_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $ALT_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $ALT_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($ALT_LANG, $ALT_SUPPORTED, true)) $ALT_LANG = 'it';
+$ALT_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $ALT_I18N = array(
 

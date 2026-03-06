@@ -1,24 +1,15 @@
-<?php
+﻿<?php
 /**
- * i18n LOCALE (IT/EN) — solo per questa pagina (calculator/menu.php)
- * - NON usa bootstrap/globale
- * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
+ * i18n LOCALE (IT/EN) - solo per questa pagina (calculator/menu.php)
+ * - Usa il bootstrap i18n globale per risolvere lingua e fallback
  * - Funzioni con prefisso dedicato + protezione anti-redeclare
  */
+require_once __DIR__ . '/../i18n/i18n.php';
 
-if (!isset($TPM_SUPPORTED)) $TPM_SUPPORTED = array('it', 'en');
-
-$TPM_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $TPM_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $TPM_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($TPM_LANG, $TPM_SUPPORTED, true)) $TPM_LANG = 'it';
-
+$TPM_LANG = tp_lang();
 $TPM_I18N = array(
   'it' => array(
-    'meta_title'   => 'Calcolatori per Nazione — TAXpedia',
+    'meta_title'   => 'Calcolatori per Nazione â€” TAXpedia',
     'h1'           => 'Calcolatori per Nazione',
     'sub'          => 'Scegli un calcolatore nazionale e scopri come si divide la spesa pubblica nei diversi paesi europei. Nuovi paesi presto in arrivo.',
     'aria_select'  => 'Seleziona un calcolatore nazionale',
@@ -42,7 +33,7 @@ $TPM_I18N = array(
   ),
 
   'en' => array(
-    'meta_title'   => 'Country calculators — TAXpedia',
+    'meta_title'   => 'Country calculators â€” TAXpedia',
     'h1'           => 'Calculators by country',
     'sub'          => 'Choose a national calculator and see how public spending is divided across European countries. New countries coming soon.',
     'aria_select'  => 'Select a national calculator',
@@ -240,3 +231,4 @@ if (!function_exists('tpm_e')) {
   <script src="/calculator/NazioniController.js?v=20260208"></script>
 </body>
 </html>
+

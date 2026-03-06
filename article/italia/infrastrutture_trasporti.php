@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (infrastrutture_trasporti.php)
  * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + anti-redeclare
  */
 
-if (!isset($INT_SUPPORTED)) $INT_SUPPORTED = array('it', 'en');
-
-$INT_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $INT_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $INT_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($INT_LANG, $INT_SUPPORTED, true)) $INT_LANG = 'it';
+$INT_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $INT_I18N = array(
 

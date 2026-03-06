@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (protezione_sociale.php)
  * - NON usa bootstrap/globale
@@ -8,6 +9,10 @@
 
 if (!function_exists('psoc_get_lang')) {
   function psoc_get_lang() {
+    if (function_exists('tp_lang')) {
+      return tp_lang();
+    }
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $lang = strtolower(trim((string) $_GET['lang']));

@@ -4,6 +4,7 @@
  * - Se un domani vuoi tradurre anche testi generati via JS (legende/settori/chart),
  *   conviene spostare le stringhe in un oggetto JS alimentato da PHP (data-* o window.__I18N__).
  */
+require_once __DIR__ . '/../../i18n/i18n.php';
 
 if (!function_exists('itlp_get_lang')) {
   function itlp_get_lang() {
@@ -16,7 +17,7 @@ if (!function_exists('itlp_get_lang')) {
     return in_array($lang, array('it','en'), true) ? $lang : 'it';
   }
 }
-$ITLP_LANG = itlp_get_lang();
+$ITLP_LANG = function_exists('tp_lang') ? tp_lang() : itlp_get_lang();
 
 if (!function_exists('itlp_h')) {
   function itlp_h($s) { return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
@@ -296,6 +297,9 @@ $TP_ITALIA_SVG = tp_load_and_prepare_svg($svgFile, $REGIONS_IT);
 
   <!-- Chart.js UNA VOLTA SOLA -->
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Helper i18n condiviso -->
+  <script defer src="/calculator/js/tp-i18n-local.js"></script>
 
   <!-- Il tuo calcolatore (non lo duplichiamo: lo rendiamo reattivo da qui) -->
   <script defer src="calculatorItalia.js"></script>

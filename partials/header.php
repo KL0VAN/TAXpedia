@@ -1,37 +1,39 @@
 <?php require_once __DIR__ . '/../i18n/i18n.php';?>
 
-<!-- Switch lingua (UNA SOLA VOLTA, uguale su tutte le pagine) -->
-<div class="tp-lang-switch" aria-label="<?php echo e('lang_label'); ?>">
-  <a class="tp-lang-pill <?php echo (tp_lang() === 'it') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('it'); ?>" hreflang="it" lang="it">IT</a>
-  <a class="tp-lang-pill <?php echo (tp_lang() === 'en') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('en'); ?>" hreflang="en" lang="en">EN</a>
-</div>
+<header class="site-header site-header--eu">
+  <div class="container nav-wrap">
+    <button id="menuButton" class="hamburger" aria-label="Apri menu" aria-controls="drawer" aria-expanded="false">
+      <span class="hamburger__box"><span class="hamburger__inner"></span></span>
+    </button>
 
-  <button id="menuButton" class="hamburger" aria-label="Apri menu" aria-controls="drawer" aria-expanded="false">
-    <span class="hamburger__box"><span class="hamburger__inner"></span></span>
-  </button>
+    <a class="logo-text" href="/index.php" aria-label="Homepage TAXpedia">TAXpedia</a>
 
-  <aside id="drawer" class="drawer" aria-hidden="true">
-    <nav aria-label="Menu principale">
-      <ul id="drawerList" class="drawer__list"></ul>
-    </nav>
-  </aside>
-
-  <div id="drawerBackdrop" class="drawer__backdrop" hidden></div>
-  <header class="site-header site-header--eu">
-    <div class="container nav-wrap">
-      <a class="logo-text" href="/index.php" aria-label="Homepage TAXpedia">TAXpedia</a>
-      <nav class="main-nav" aria-label="Menu principale">
-        <ul>
-          <li><a href="/index.php"><?php echo e('nav_home'); ?></a></li>
-          <li><a href="/calculator/menu.php"><?php echo e('nav_calculator'); ?></a></li>
-          <li><a href="/article/articoli.php"><?php echo e('nav_article'); ?></a></li>
-          <li><a href="/glossary/glossario.php"><?php echo e('nav_glossary'); ?></a></li>
-          <li><a href="/tools/program.php"><?php echo e('nav_lessons'); ?></a></li>
-          <li><a href="/aboutus/aboutus.php"><?php echo e('nav_about'); ?></a></li>
-        </ul>
-      </nav>
+    <!-- Switch lingua -->
+    <div class="tp-lang-switch" aria-label="<?php echo e('lang_label'); ?>">
+      <a class="tp-lang-pill <?php echo (tp_lang() === 'it') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('it'); ?>" hreflang="it" lang="it">IT</a>
+      <a class="tp-lang-pill <?php echo (tp_lang() === 'en') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('en'); ?>" hreflang="en" lang="en">EN</a>
     </div>
-  </header>
+
+    <nav class="main-nav" aria-label="Menu principale">
+      <ul>
+        <li><a href="/index.php"><?php echo e('nav_home'); ?></a></li>
+        <li><a href="/calculator/menu.php"><?php echo e('nav_calculator'); ?></a></li>
+        <li><a href="/article/articoli.php"><?php echo e('nav_article'); ?></a></li>
+        <li><a href="/glossary/glossario.php"><?php echo e('nav_glossary'); ?></a></li>
+        <li><a href="/tools/program.php"><?php echo e('nav_lessons'); ?></a></li>
+        <li><a href="/aboutus/aboutus.php"><?php echo e('nav_about'); ?></a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<aside id="drawer" class="drawer" aria-hidden="true">
+  <nav aria-label="Menu principale">
+    <ul id="drawerList" class="drawer__list"></ul>
+  </nav>
+</aside>
+
+<div id="drawerBackdrop" class="drawer__backdrop" hidden></div>
 
 <script>
 /* 
@@ -42,22 +44,38 @@
 (function(){
   try{
     var url = new URL(window.location.href);
-    var currentLang = url.searchParams.get('lang');
-    
-    // Se non c'è parametro GET, prova dal cookie
-    if(!currentLang){
-      var match = document.cookie.match(/(?:^|;\s*)tp_lang=([^;]*)/);
-      if(match && match[1]){
-        currentLang = decodeURIComponent(match[1]);
-      }
-    }
-    
-    if(!currentLang) return;
-    
     var supported = ['it','en'];
-    if(supported.indexOf(currentLang) === -1) return;
+    var maxAge = 31536000; // 1 anno
 
-    // Rimuovi ?lang=... dalla URL visibile (il cookie/sessione lo ricorda)
+    function normalizeLang(v){
+      v = (v || '').toString().toLowerCase().trim();
+      return supported.indexOf(v) !== -1 ? v : '';
+    }
+
+    function getCookie(name){
+      var escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + escaped + '=([^;]*)'));
+      if (!m || !m[1]) return '';
+      try { return decodeURIComponent(m[1]); } catch (e) { return ''; }
+    }
+
+    function setLangCookies(lang){
+      var base = '; Max-Age=' + maxAge + '; Path=/; SameSite=Lax';
+      var secure = (window.location.protocol === 'https:') ? '; Secure' : '';
+      document.cookie = 'tp_lang=' + encodeURIComponent(lang) + base + secure;
+      document.cookie = 'site_lang=' + encodeURIComponent(lang) + base + secure;
+    }
+
+    var currentLang = normalizeLang(url.searchParams.get('lang'));
+    if(!currentLang) currentLang = normalizeLang(getCookie('tp_lang'));
+    if(!currentLang) currentLang = normalizeLang(getCookie('site_lang'));
+    if(!currentLang) currentLang = normalizeLang(document.documentElement.lang);
+    if(!currentLang) currentLang = 'it';
+
+    // Garantisce persistenza anche quando PHP non puo piu inviare header/cookie.
+    setLangCookies(currentLang);
+
+    // Rimuovi ?lang=... dalla URL visibile (il cookie lo ricorda)
     if(url.searchParams.has('lang')){
       url.searchParams.delete('lang');
       var newUrl = url.pathname;
@@ -66,25 +84,21 @@
       window.history.replaceState({}, '', newUrl);
     }
 
-    // Aggiungi ?lang=... a TUTTI i link interni
+    // Aggiungi ?lang=... a tutti i link interni
     var links = document.querySelectorAll('a[href]');
     var origin = window.location.origin;
-    
+
     for(var i = 0; i < links.length; i++){
       var href = links[i].getAttribute('href');
       if(!href) continue;
-      
-      // Salta link esterni, mailto, tel, and, javascript
+
       if(/^(https?:|mailto:|tel:|javascript:)/.test(href)) continue;
-      if(/^#/.test(href)) continue; // Solo anchor
-      
+      if(/^#/.test(href)) continue;
+
       try{
         var linkUrl = new URL(href, origin);
-        
-        // Solo processa link dello stesso origine (interni)
         if(linkUrl.origin !== origin) continue;
-        
-        // Se non ha ?lang=..., aggiungilo
+
         if(!linkUrl.searchParams.has('lang')){
           linkUrl.searchParams.set('lang', currentLang);
           var newHref = linkUrl.pathname;
@@ -97,14 +111,14 @@
       }
     }
   }catch(e){
-    // Silently fail se qualcosa non funziona
+    // Silently fail
   }
 })();
 </script>
 
-<!-- Menù di lato -->
-  <script>
-  (function(){
+<!-- Menu di lato -->
+<script>
+(function(){
   var btn = document.getElementById('menuButton');
   var drawer = document.getElementById('drawer');
   var list = document.getElementById('drawerList');
@@ -112,11 +126,10 @@
 
   var candidates = ['.main-nav a','header nav a','.site-header nav a'];
   var links = [];
-  for (var i=0;i<candidates.length;i++){
+  for (var i = 0; i < candidates.length; i++){
     var found = Array.prototype.slice.call(document.querySelectorAll(candidates[i]));
     if(found.length){ links = found; break; }
   }
-  
 
   list.innerHTML = '';
   var here = location.pathname.replace(/\/index\.html?$/i,'/');
@@ -139,7 +152,7 @@
     backdrop.hidden = false;
     btn.setAttribute('aria-expanded','true');
     drawer.setAttribute('aria-hidden','false');
-    var first = drawer.querySelector('a'); if(first) try{ first.focus({preventScroll:true}); }catch(_){}
+    var first = drawer.querySelector('a'); if(first) try{ first.focus({preventScroll:true}); }catch(_){ }
     document.documentElement.style.overflow='hidden';
   }
   function close(){
@@ -147,17 +160,16 @@
     backdrop.hidden = true;
     btn.setAttribute('aria-expanded','false');
     drawer.setAttribute('aria-hidden','true');
-    try{ btn.focus({preventScroll:true}); }catch(_){}
+    try{ btn.focus({preventScroll:true}); }catch(_){ }
     document.documentElement.style.overflow='';
   }
   function toggle(){ drawer.classList.contains('open') ? close() : open(); }
 
   if(btn){ btn.addEventListener('click', toggle); }
   if(backdrop){ backdrop.addEventListener('click', close); }
-  window.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+  window.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
 
   var host = document.querySelector('.nav-wrap') || document.querySelector('.site-header') || document.querySelector('header');
   if (host && !host.contains(btn)) host.prepend(btn);
-  })();
-  </script>
-    
+})();
+</script>

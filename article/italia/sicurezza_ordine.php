@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 // Sicurezza e ordine pubblico — TAXpedia
 // Versione PHP con header e footer unificati
 
@@ -10,6 +11,10 @@
 
 if (!function_exists('sop_get_lang')) {
   function sop_get_lang() {
+    if (function_exists('tp_lang')) {
+      return tp_lang();
+    }
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $lang = strtolower(trim((string) $_GET['lang']));

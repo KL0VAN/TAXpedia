@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (difesa.php)
  * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + anti-redeclare
  */
 
-if (!isset($DIF_SUPPORTED)) $DIF_SUPPORTED = array('it', 'en');
-
-$DIF_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $DIF_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $DIF_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($DIF_LANG, $DIF_SUPPORTED, true)) $DIF_LANG = 'it';
+$DIF_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $DIF_I18N = array(
 

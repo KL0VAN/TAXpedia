@@ -1,7 +1,12 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /* ===================== TP i18n (local) ===================== */
 if (!function_exists('tp_i18n_get_lang')) {
   function tp_i18n_get_lang() {
+    if (function_exists('tp_lang')) {
+      return tp_lang();
+    }
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $q = strtolower(trim((string)$_GET['lang']));
@@ -41,17 +46,17 @@ $tp_lang = tp_i18n_get_lang();
 
 $GLOBALS['tp_i18n_dict'] = array(
   'it' => array(
-    'title' => 'Bilancio UE — TAXpedia',
+    'title' => 'Bilancio UE â€” TAXpedia',
     'h2' => 'Pubblica Amministrazione Europea',
-    'p1' => 'L\'Unione Europea nel 2025 ha speso un totale di 12,8 mld di euro per la pubblica amministrazione. Nel dettaglio tale spesa comprende il costo delle pensioni che ammonta a 2,8 mld e la spesa per le scuole europee, che ammonta a quasi 300 milioni. Una grossa parte del programma è composta dalle spese amministrative delle istituzioni europee che raggiunge i 9,7 mld di euro. Quest\'ultima voce comprende anche il parlamento europeo (2,5 mld) e la Commissione (4,5 mld).',
+    'p1' => 'L\'Unione Europea nel 2025 ha speso un totale di 12,8 mld di euro per la pubblica amministrazione. Nel dettaglio tale spesa comprende il costo delle pensioni che ammonta a 2,8 mld e la spesa per le scuole europee, che ammonta a quasi 300 milioni. Una grossa parte del programma Ã¨ composta dalle spese amministrative delle istituzioni europee che raggiunge i 9,7 mld di euro. Quest\'ultima voce comprende anche il parlamento europeo (2,5 mld) e la Commissione (4,5 mld).',
     'sources_label' => 'Fonti:',
     'sources_detail' => 'Bilancio 2025 concordato tra Consiglio Europeo e Parlamento Europeo',
   ),
 
   'en' => array(
-    'title' => 'EU Budget — TAXpedia',
+    'title' => 'EU Budget â€” TAXpedia',
     'h2' => 'European Public Administration',
-    'p1' => 'In 2025, the European Union spent a total of €12.8bn on public administration. This includes pension costs of €2.8bn and spending on European Schools of almost €300 million. A large share consists of administrative expenditure of EU institutions, totalling €9.7bn. This item also includes the European Parliament (€2.5bn) and the European Commission (€4.5bn).',
+    'p1' => 'In 2025, the European Union spent a total of â‚¬12.8bn on public administration. This includes pension costs of â‚¬2.8bn and spending on European Schools of almost â‚¬300 million. A large share consists of administrative expenditure of EU institutions, totalling â‚¬9.7bn. This item also includes the European Parliament (â‚¬2.5bn) and the European Commission (â‚¬4.5bn).',
     'sources_label' => 'Sources:',
     'sources_detail' => '2025 budget agreed between the European Council and the European Parliament',
   ),

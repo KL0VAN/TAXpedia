@@ -66,7 +66,7 @@ $page_i18n = array(
 
   'stat' => '5000+ mld',
   'stat_label' => ($lang === 'en') ? 'of public spending<br> analyzed' : 'di spesa pubblica<br> analizzata',
-  'about_stat_1_num' => '9',
+  'about_stat_1_num' => '12',
   'about_stat_1_label' => ($lang === 'en') ? 'Countries covered' : 'Paesi coperti',
   'about_stat_2_num' => '31',
   'about_stat_2_label' => ($lang === 'en') ? 'Glossary entries' : 'Voci di glossario',

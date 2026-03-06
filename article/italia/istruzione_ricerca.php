@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../i18n/i18n.php';
 /**
  * i18n LOCALE (IT/EN) — solo per questa pagina (istruzione_ricerca.php)
  * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
@@ -6,15 +7,7 @@
  * - Funzioni con prefisso dedicato + anti-redeclare
  */
 
-if (!isset($EDU_SUPPORTED)) $EDU_SUPPORTED = array('it', 'en');
-
-$EDU_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $EDU_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $EDU_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
-if (!in_array($EDU_LANG, $EDU_SUPPORTED, true)) $EDU_LANG = 'it';
+$EDU_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 
 $EDU_I18N = array(
 
