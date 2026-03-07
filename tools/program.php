@@ -1,6 +1,10 @@
 <?php
+require_once __DIR__ . '/../i18n/i18n.php';
+
 if (!function_exists('itlp_get_lang')) {
   function itlp_get_lang() {
+    if (function_exists('tp_lang')) return tp_lang();
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $lang = strtolower(trim((string) $_GET['lang']));
@@ -144,8 +148,8 @@ if (!function_exists('itlp_e')) {
 
   <hr style="margin:2rem 0;" />
 
-  <h3 id="tutte-le-lezioni"><?php echo itlp_e(key: 'download'); ?></h3>
-  <p style="margin-top:.25rem;"><?php echo itlp_e(key: 'download_p'); ?></p>
+  <h3 id="tutte-le-lezioni"><?php echo itlp_e('download'); ?></h3>
+  <p style="margin-top:.25rem;"><?php echo itlp_e('download_p'); ?></p>
 
   <ul class="lessons" style="list-style:none; padding:0; display:grid; gap:1rem;">
     <!-- CARD 1 -->
@@ -157,7 +161,7 @@ if (!function_exists('itlp_e')) {
       </p>
 
       <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
-        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_Tasse101.pdf" download><?php echo itlp_e(key: 'download_pdf'); ?></a>
+        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_Tasse101.pdf" download><?php echo itlp_e('download_pdf'); ?></a>
       </div>
     </li>
 
@@ -171,7 +175,7 @@ if (!function_exists('itlp_e')) {
         <span><strong><?php echo itlp_e('feature1'); ?></strong><?php echo itlp_e('feature2'); ?></span> · <span><strong><?php echo itlp_e('feature3'); ?></strong> IT</span>
       </p>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
-        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_IRPEF.pdf" download><?php echo itlp_e(key: 'download_pdf'); ?></a>
+        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_IRPEF.pdf" download><?php echo itlp_e('download_pdf'); ?></a>
       </div>
     </li>
 
@@ -185,7 +189,7 @@ if (!function_exists('itlp_e')) {
         <span><strong><?php echo itlp_e('feature1'); ?></strong><?php echo itlp_e('feature2'); ?></span> · <span><strong><?php echo itlp_e('feature3'); ?></strong> IT</span>
       </p>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
-        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_IVA.pdf" download><?php echo itlp_e(key: 'download_pdf'); ?></a>
+        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_IVA.pdf" download><?php echo itlp_e('download_pdf'); ?></a>
       </div>
     </li>
   </ul>

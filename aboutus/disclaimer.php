@@ -5,15 +5,11 @@
  * - Lingua da cookie tp_lang (fallback IT); ?lang= ha priorità
  * - Funzioni con prefisso dedicato + protezione anti-redeclare
  */
+require_once __DIR__ . '/../i18n/i18n.php';
 
 if (!isset($DSC_SUPPORTED)) $DSC_SUPPORTED = array('it', 'en');
 
-$DSC_LANG = 'it';
-if (isset($_GET['lang'])) {
-  $DSC_LANG = strtolower(trim((string) $_GET['lang']));
-} elseif (isset($_COOKIE['tp_lang'])) {
-  $DSC_LANG = strtolower(trim((string) $_COOKIE['tp_lang']));
-}
+$DSC_LANG = function_exists('tp_lang') ? tp_lang() : 'it';
 if (!in_array($DSC_LANG, $DSC_SUPPORTED, true)) $DSC_LANG = 'it';
 
 $DSC_I18N = array(

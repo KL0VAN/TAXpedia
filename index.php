@@ -208,27 +208,27 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
   <section id="edu-tools" class="edu-tools" aria-label="Strumenti per l’educazione finanziaria">
   <div class="container">
     <div class="section-head section-head--center">
-      <h2 style="color:white"><?php echo t(key: 'program_h2'); ?></h2>
-      <p style="color:white" class="subtitle"><?php echo t(key: 'program_p'); ?></p>
+      <h2 style="color:white"><?php echo t('program_h2'); ?></h2>
+      <p style="color:white" class="subtitle"><?php echo t('program_p'); ?></p>
     </div>
 
     <div class="edu-grid">
       <!-- Programma -->
       <article class="edu-card">
         <div class="edu-card-top">
-          <span class="edu-badge"><?php echo t(key: 'edu-badge_1'); ?></span>
+          <span class="edu-badge"><?php echo t('edu-badge_1'); ?></span>
           <h3>EU Youth Tax Literacy Program</h3>
-          <p class="edu-text"><?php echo t(key: 'edu-text_1'); ?></p>
+          <p class="edu-text"><?php echo t('edu-text_1'); ?></p>
         </div>
         <div class="edu-actions">
-          <a class="btn btn-primary" href="/tools/program.php"><?php echo t(key: 'download_edu'); ?></a>
+          <a class="btn btn-primary" href="/tools/program.php"><?php echo t('download_edu'); ?></a>
         </div>
       </article>
 
       <!-- Glossario -->
       <article class="edu-card">
         <div class="edu-card-top">
-          <span class="edu-badge"><?php echo t(key: 'edu-badge_2'); ?></span>
+          <span class="edu-badge"><?php echo t('edu-badge_2'); ?></span>
           <h3><?php echo t('gloss_h3'); ?></h3>
           <p class="edu-text"><?php echo t('gloss_sub'); ?></p>
         </div>

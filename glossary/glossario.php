@@ -18,9 +18,12 @@
  * - Gli anchor (#letter-* / #term) vengono “corretti” con uno scroll offset calcolato
  *   (header sticky/fixed + barra A–Z sticky), evitando che le lettere risultino coperte.
  */
+require_once __DIR__ . '/../i18n/i18n.php';
 
 if (!function_exists('glos_get_lang')) {
   function glos_get_lang() {
+    if (function_exists('tp_lang')) return tp_lang();
+
     $lang = 'it';
     if (isset($_GET['lang'])) {
       $lang = strtolower(trim((string) $_GET['lang']));

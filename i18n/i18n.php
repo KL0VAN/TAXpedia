@@ -3,6 +3,7 @@
 
 if (!defined('TP_DEFAULT_LANG')) define('TP_DEFAULT_LANG', 'it');
 if (!defined('TP_LANG_COOKIE'))  define('TP_LANG_COOKIE', 'tp_lang');
+if (!defined('TP_LANG_COOKIE_COMPAT')) define('TP_LANG_COOKIE_COMPAT', 'site_lang');
 
 $GLOBALS['TP_SUPPORTED_LANGS'] = array('it', 'en');
 
@@ -16,6 +17,37 @@ if (!function_exists('tp_normalize_lang')) {
 if (!function_exists('tp_lang')) {
   function tp_lang() {
     return isset($GLOBALS['TP_LANG']) ? $GLOBALS['TP_LANG'] : TP_DEFAULT_LANG;
+  }
+}
+
+if (!function_exists('tp_set_lang_cookie')) {
+  function tp_set_lang_cookie($lang) {
+    $supported = isset($GLOBALS['TP_SUPPORTED_LANGS']) ? $GLOBALS['TP_SUPPORTED_LANGS'] : array('it','en');
+    $lang = tp_normalize_lang($lang, $supported, '');
+    if ($lang === '' || headers_sent()) return;
+
+    $maxAge = 31536000; // 1 anno
+    $expire = time() + $maxAge;
+    $isHttps = (
+      (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+      (isset($_SERVER['SERVER_PORT']) && (string)$_SERVER['SERVER_PORT'] === '443')
+    );
+
+    if (defined('PHP_VERSION_ID') && PHP_VERSION_ID >= 70300) {
+      $opts = array(
+        'expires' => $expire,
+        'path' => '/',
+        'secure' => $isHttps,
+        'httponly' => false,
+        'samesite' => 'Lax',
+      );
+      setcookie(TP_LANG_COOKIE, $lang, $opts);
+    } else {
+      $path = '/; samesite=Lax';
+      setcookie(TP_LANG_COOKIE, $lang, $expire, $path, '', $isHttps, false);
+    }
+
+    $_COOKIE[TP_LANG_COOKIE] = $lang;
   }
 }
 
@@ -41,13 +73,16 @@ if (!function_exists('tp_lang_url')) {
 // Init dizionari + lingua
 $getRaw = isset($_GET['lang']) ? $_GET['lang'] : null;
 $cookieRaw = isset($_COOKIE[TP_LANG_COOKIE]) ? $_COOKIE[TP_LANG_COOKIE] : null;
+$compatCookieRaw = isset($_COOKIE[TP_LANG_COOKIE_COMPAT]) ? $_COOKIE[TP_LANG_COOKIE_COMPAT] : null;
 $hasGetLang = isset($_GET['lang']);
 
 $supported = isset($GLOBALS['TP_SUPPORTED_LANGS']) ? $GLOBALS['TP_SUPPORTED_LANGS'] : array('it','en');
 
 // Priorita coerente: GET valido > cookie valido > default
 $getLang = $hasGetLang ? tp_normalize_lang($getRaw, $supported, '') : '';
-$cookieLang = tp_normalize_lang($cookieRaw, $supported, '');
+$primaryCookieLang = tp_normalize_lang($cookieRaw, $supported, '');
+$compatCookieLang = tp_normalize_lang($compatCookieRaw, $supported, '');
+$cookieLang = ($primaryCookieLang !== '') ? $primaryCookieLang : $compatCookieLang;
 
 if ($getLang !== '') {
   $lang = $getLang;
@@ -59,12 +94,12 @@ if ($getLang !== '') {
 
 $GLOBALS['TP_LANG'] = $lang;
 
-// Salva il cookie solo quando la query contiene una lingua valida.
-// Evita reset accidentali al default in caso di ?lang non supportato.
-if ($hasGetLang && $getLang !== '' && !headers_sent()) {
-  $maxAge = 31536000; // 1 anno
-  setcookie(TP_LANG_COOKIE, $getLang, time() + $maxAge, '/', '', false, false);
-  $_COOKIE[TP_LANG_COOKIE] = $getLang;
+// `tp_lang` è l'unico cookie autorevole.
+// `site_lang` resta solo come fallback di compatibilità in lettura.
+if ($hasGetLang && $getLang !== '') {
+  tp_set_lang_cookie($getLang);
+} elseif ($cookieLang !== '' && ($primaryCookieLang !== $cookieLang || $compatCookieLang !== $cookieLang)) {
+  tp_set_lang_cookie($cookieLang);
 }
 
 // Root sicura: cartella parent di /i18n

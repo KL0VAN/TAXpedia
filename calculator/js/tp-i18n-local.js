@@ -43,6 +43,11 @@
 
   const lang = tpGetLang();
 
+  function localizeUrl(url) {
+    if (typeof w.tpLangUrl === "function") return w.tpLangUrl(url);
+    return url;
+  }
+
   // Testi JS (non-PHP): errore input + box spiegazione + tooltip
   const I18N = {
     it: {
@@ -108,5 +113,5 @@
     return lang === "en" ? (LABEL_EN[s] || s) : s;
   }
 
-  w.tpI18n = { lang, t, label, getLang: tpGetLang };
+  w.tpI18n = { lang, t, label, getLang: tpGetLang, url: localizeUrl };
 })(window);

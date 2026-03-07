@@ -6,7 +6,7 @@
  * - Funzioni con prefisso dedicato + protezione anti-redeclare
  */
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/i18n/i18n.php';
+require_once __DIR__ . '/../i18n/i18n.php';
 
 if (!isset($ABU_SUPPORTED)) $ABU_SUPPORTED = array('it', 'en');
 
@@ -67,7 +67,7 @@ $ABU_I18N = array(
     'desc_1'     => 'Born in Milan, Italy, he attended Volta High School, where he was a school representative. Since September 2025, he has been studying mechanical engineering at the Polytechnic University of Milan. Defines the site\'s editorial line and coordinates its work.',
 
     'role_2'     => 'Development & UX/UI Director',
-    'desc_2'     => 'Born in Osijek, Croatia. At 14, he moved to Milan, where he is finishing high school as a computer and telecommunications technician. Handles the site’s technical development and its user interface.',
+    'desc_2'     => 'Born in Osijek, Croatia. At 13, he moved to Milan, where he is finishing high school as a computer and telecommunications technician. Handles the site’s technical development and its user interface.',
 
     'role_3'     => 'Research & Data Analysis Director',
     'desc_3'     => 'Born in Milan, Italy, he attended the Leonardo da Vinci High School. Since September 2024, he has been studying business economics at Bocconi University in Milan. Analyzes official sources and structures reliable datasets for our calculations and explanations.',

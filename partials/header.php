@@ -10,8 +10,8 @@
 
     <!-- Switch lingua -->
     <div class="tp-lang-switch" aria-label="<?php echo e('lang_label'); ?>">
-      <a class="tp-lang-pill <?php echo (tp_lang() === 'it') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('it'); ?>" hreflang="it" lang="it">IT</a>
-      <a class="tp-lang-pill <?php echo (tp_lang() === 'en') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('en'); ?>" hreflang="en" lang="en">EN</a>
+      <a class="tp-lang-pill <?php echo (tp_lang() === 'it') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('it'); ?>" data-lang="it" hreflang="it" lang="it"<?php echo (tp_lang() === 'it') ? ' aria-current="true"' : ''; ?>>IT</a>
+      <a class="tp-lang-pill <?php echo (tp_lang() === 'en') ? 'is-active' : ''; ?>" href="<?php echo tp_lang_url('en'); ?>" data-lang="en" hreflang="en" lang="en"<?php echo (tp_lang() === 'en') ? ' aria-current="true"' : ''; ?>>EN</a>
     </div>
 
     <nav class="main-nav" aria-label="Menu principale">
@@ -36,83 +36,152 @@
 <div id="drawerBackdrop" class="drawer__backdrop" hidden></div>
 
 <script>
-/* 
-  SCRIPT CENTRALE DI PERSISTENZA LINGUA
-  Propaga automaticamente ?lang=... a tutti i link interni
-  Garantisce che la lingua si mantenga tra le pagine senza modificare i singoli file
-*/
+/* Sincronizzazione lingua condivisa: stessa sorgente per PHP, JS e link client-side. */
 (function(){
-  try{
-    var url = new URL(window.location.href);
-    var supported = ['it','en'];
-    var maxAge = 31536000; // 1 anno
+  var supported = ['it', 'en'];
+  var maxAge = 31536000; // 1 anno
 
-    function normalizeLang(v){
-      v = (v || '').toString().toLowerCase().trim();
-      return supported.indexOf(v) !== -1 ? v : '';
-    }
-
-    function getCookie(name){
-      var escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + escaped + '=([^;]*)'));
-      if (!m || !m[1]) return '';
-      try { return decodeURIComponent(m[1]); } catch (e) { return ''; }
-    }
-
-    function setLangCookies(lang){
-      var base = '; Max-Age=' + maxAge + '; Path=/; SameSite=Lax';
-      var secure = (window.location.protocol === 'https:') ? '; Secure' : '';
-      document.cookie = 'tp_lang=' + encodeURIComponent(lang) + base + secure;
-      document.cookie = 'site_lang=' + encodeURIComponent(lang) + base + secure;
-    }
-
-    var currentLang = normalizeLang(url.searchParams.get('lang'));
-    if(!currentLang) currentLang = normalizeLang(getCookie('tp_lang'));
-    if(!currentLang) currentLang = normalizeLang(getCookie('site_lang'));
-    if(!currentLang) currentLang = normalizeLang(document.documentElement.lang);
-    if(!currentLang) currentLang = 'it';
-
-    // Garantisce persistenza anche quando PHP non puo piu inviare header/cookie.
-    setLangCookies(currentLang);
-
-    // Rimuovi ?lang=... dalla URL visibile (il cookie lo ricorda)
-    if(url.searchParams.has('lang')){
-      url.searchParams.delete('lang');
-      var newUrl = url.pathname;
-      if(url.search) newUrl += url.search;
-      if(url.hash) newUrl += url.hash;
-      window.history.replaceState({}, '', newUrl);
-    }
-
-    // Aggiungi ?lang=... a tutti i link interni
-    var links = document.querySelectorAll('a[href]');
-    var origin = window.location.origin;
-
-    for(var i = 0; i < links.length; i++){
-      var href = links[i].getAttribute('href');
-      if(!href) continue;
-
-      if(/^(https?:|mailto:|tel:|javascript:)/.test(href)) continue;
-      if(/^#/.test(href)) continue;
-
-      try{
-        var linkUrl = new URL(href, origin);
-        if(linkUrl.origin !== origin) continue;
-
-        if(!linkUrl.searchParams.has('lang')){
-          linkUrl.searchParams.set('lang', currentLang);
-          var newHref = linkUrl.pathname;
-          if(linkUrl.search) newHref += linkUrl.search;
-          if(linkUrl.hash) newHref += linkUrl.hash;
-          links[i].setAttribute('href', newHref);
-        }
-      }catch(e){
-        // Ignora link malformati
-      }
-    }
-  }catch(e){
-    // Silently fail
+  function normalizeLang(v){
+    v = (v || '').toString().toLowerCase().trim();
+    return supported.indexOf(v) !== -1 ? v : '';
   }
+
+  function onReady(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  function getCookie(name){
+    var escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var m = document.cookie.match(new RegExp('(?:^|;\\s*)' + escaped + '=([^;]*)'));
+    if (!m || !m[1]) return '';
+    try { return decodeURIComponent(m[1]); } catch (e) { return ''; }
+  }
+
+  function setLangCookie(lang){
+    lang = normalizeLang(lang);
+    if (!lang) return;
+
+    var base = '; Max-Age=' + maxAge + '; Path=/; SameSite=Lax';
+    var secure = (window.location.protocol === 'https:') ? '; Secure' : '';
+    document.cookie = 'tp_lang=' + encodeURIComponent(lang) + base + secure;
+  }
+
+  function currentLang(){
+    return normalizeLang(window.tpCurrentLang)
+      || normalizeLang(getCookie('tp_lang'))
+      || normalizeLang(getCookie('site_lang'))
+      || normalizeLang(document.documentElement.lang)
+      || 'it';
+  }
+
+  function localizeUrl(href){
+    if (!href || /^(mailto:|tel:|javascript:)/i.test(href) || href.charAt(0) === '#') return href;
+
+    try {
+      var url = new URL(href, window.location.href);
+      if (url.origin !== window.location.origin) return href;
+
+      url.searchParams.set('lang', currentLang());
+
+      var localized = url.pathname;
+      if (url.search) localized += url.search;
+      if (url.hash) localized += url.hash;
+      return localized;
+    } catch (e) {
+      return href;
+    }
+  }
+
+  function localizeAnchors(root){
+    if (!root || !root.querySelectorAll) return;
+
+    var links = root.querySelectorAll('a[href]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      if (a.classList && a.classList.contains('tp-lang-pill')) continue;
+      var href = a.getAttribute('href');
+      if (!href) continue;
+      a.setAttribute('href', localizeUrl(href));
+    }
+  }
+
+  function getPillTargetLang(a){
+    if (!a) return '';
+
+    var explicit = normalizeLang(a.getAttribute('data-lang'))
+      || normalizeLang(a.getAttribute('lang'))
+      || normalizeLang(a.getAttribute('hreflang'))
+      || normalizeLang(a.textContent);
+    if (explicit) return explicit;
+
+    try {
+      var url = new URL(a.href, window.location.origin);
+      var byQuery = normalizeLang(url.searchParams.get('lang'));
+      if (byQuery) return byQuery;
+    } catch (e) {}
+    return '';
+  }
+
+  function syncPills(){
+    var lang = currentLang();
+    var pills = document.querySelectorAll('.tp-lang-pill');
+    for (var i = 0; i < pills.length; i++) {
+      var isActive = getPillTargetLang(pills[i]) === lang;
+      pills[i].classList.toggle('is-active', isActive);
+      if (isActive) pills[i].setAttribute('aria-current', 'true');
+      else pills[i].removeAttribute('aria-current');
+    }
+  }
+
+  try {
+    var url = new URL(window.location.href);
+    var lang = normalizeLang(url.searchParams.get('lang'))
+      || normalizeLang(getCookie('tp_lang'))
+      || normalizeLang(getCookie('site_lang'))
+      || normalizeLang(document.documentElement.lang)
+      || 'it';
+
+    window.tpCurrentLang = lang;
+    window.tpLangUrl = localizeUrl;
+
+    document.documentElement.lang = lang;
+    if (normalizeLang(getCookie('tp_lang')) !== lang) setLangCookie(lang);
+
+    if (url.searchParams.has('lang')) {
+      url.searchParams.delete('lang');
+      var cleanUrl = url.pathname;
+      if (url.search) cleanUrl += url.search;
+      if (url.hash) cleanUrl += url.hash;
+      window.history.replaceState({}, '', cleanUrl);
+    }
+  } catch (e) {
+    window.tpCurrentLang = currentLang();
+    window.tpLangUrl = localizeUrl;
+  }
+
+  onReady(function(){
+    localizeAnchors(document);
+    syncPills();
+
+    document.addEventListener('click', function(e){
+      var pill = e.target && e.target.closest ? e.target.closest('.tp-lang-pill') : null;
+      if (!pill) return;
+
+      var targetLang = getPillTargetLang(pill);
+      if (!targetLang) return;
+
+      if (targetLang === currentLang()) {
+        e.preventDefault();
+        return;
+      }
+
+      window.tpCurrentLang = targetLang;
+      document.documentElement.lang = targetLang;
+      setLangCookie(targetLang);
+      syncPills();
+    }, false);
+  });
 })();
 </script>
 
@@ -136,7 +205,8 @@
   links.forEach(function(a){
     var li = document.createElement('li');
     var link = document.createElement('a');
-    link.href = a.getAttribute('href');
+    var rawHref = a.getAttribute('href');
+    link.href = (window.tpLangUrl && rawHref) ? window.tpLangUrl(rawHref) : rawHref;
     link.textContent = (a.textContent || a.innerText || '').trim() || a.getAttribute('aria-label') || 'Voce';
     try{
       var linkPath = new URL(link.href, location.origin).pathname.replace(/\/index\.html?$/i,'/');

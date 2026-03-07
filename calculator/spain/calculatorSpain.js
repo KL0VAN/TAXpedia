@@ -356,7 +356,7 @@ function runCalcolo() {
   /* ------------------ ITALIA: table + chart + legend (colonna) ------------------ */
   // righe (tabella fallback)
   const rowsIt = SETTORI.map(s => ({
-    nome: `<a href="${s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${tpCalcLabel(s.nome)}</a>`,
+    nome: `<a href="${window.tpLangUrl ? window.tpLangUrl(s.link) : s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${tpCalcLabel(s.nome)}</a>`,
     importo: s.percentuale * tasse
   }));
   renderTable(tabIt, rowsIt);
@@ -394,7 +394,7 @@ function runCalcolo() {
     onClick: (i) => {
       const sector = SETTORI[i];
       if (sector && sector.link) {
-        window.open(sector.link, '_blank', 'noopener');
+        window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
       }
     }
   });
@@ -435,7 +435,7 @@ function runCalcolo() {
     onClick: (i) => {
       const sector = SETTORI_UE[i];
       if (sector && sector.link) {
-        window.open(sector.link, '_blank', 'noopener');
+        window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
       }
     }
   });
@@ -469,4 +469,3 @@ function attachCalculator() {
 }
 
 document.addEventListener('DOMContentLoaded', attachCalculator);
-

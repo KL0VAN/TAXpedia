@@ -434,7 +434,7 @@ function runCalcolo() {
   const colorsIt = genColors(labelsIt.length, 8);
 
   const rowsIt = SETTORI.map((s, idx) => ({
-    nome: `<a href="${s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsIt[idx]}</a>`,
+    nome: `<a href="${window.tpLangUrl ? window.tpLangUrl(s.link) : s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsIt[idx]}</a>`,
     importo: s.percentuale * tasse
   }));
   renderTable(tabIt, rowsIt);
@@ -470,7 +470,7 @@ function runCalcolo() {
     },
     onClick: (i) => {
       const sector = SETTORI[i];
-      if (sector && sector.link) window.open(sector.link, '_blank', 'noopener');
+      if (sector && sector.link) window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
     }
   });
 
@@ -480,7 +480,7 @@ function runCalcolo() {
   const colorsUe = genBlueShades(labelsUe.length);
 
   const rowsUe = SETTORI_UE.map((s, idx) => ({
-    nome: `<a href="${s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsUe[idx]}</a>`,
+    nome: `<a href="${window.tpLangUrl ? window.tpLangUrl(s.link) : s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsUe[idx]}</a>`,
     importo: s.percentuale * tasse
   }));
   renderTable(tabUe, rowsUe);
@@ -516,7 +516,7 @@ function runCalcolo() {
     },
     onClick: (i) => {
       const sector = SETTORI_UE[i];
-      if (sector && sector.link) window.open(sector.link, '_blank', 'noopener');
+      if (sector && sector.link) window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
     }
   });
 

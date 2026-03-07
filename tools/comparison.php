@@ -1,5 +1,6 @@
 <?php
 declare(strict_types=1);
+require_once __DIR__ . '/../i18n/i18n.php';
 
 /* ===================== i18n (locale) ===================== */
 if (!function_exists('tp_get_lang')) {
@@ -43,8 +44,7 @@ if (!function_exists('tp_e')) {
   }
 }
 
-$lang = tp_get_lang();
-tp_set_lang_cookie($lang);
+$lang = function_exists('tp_lang') ? tp_lang() : tp_get_lang();
 
 $DICT = [
   'it' => [

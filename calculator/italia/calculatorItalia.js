@@ -569,7 +569,7 @@ if (boxRegioneBreakdownEl) {
       },
       onClick: (i) => {
         const sector = SETTORI_LOMBARDIA[i];
-        if (sector && sector.link) window.open(sector.link, '_blank', 'noopener');
+        if (sector && sector.link) window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
       }
     });
 
@@ -605,7 +605,7 @@ chartRegione = null;
 
   // tabella fallback (se esiste)
   const rowsIt = SETTORI.map((s, idx) => ({
-    nome: `<a href="${s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsIt[idx]}</a>`,
+    nome: `<a href="${window.tpLangUrl ? window.tpLangUrl(s.link) : s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsIt[idx]}</a>`,
     importo: valuesIt[idx]
   }));
   renderTable(tabIt, rowsIt);
@@ -641,7 +641,7 @@ chartRegione = null;
     },
     onClick: (i) => {
       const sector = SETTORI[i];
-      if (sector && sector.link) window.open(sector.link, '_blank', 'noopener');
+      if (sector && sector.link) window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
     }
   });
 
@@ -651,7 +651,7 @@ chartRegione = null;
   const colorsUe = genBlueShades(labelsUe.length);
 
   const rowsUe = SETTORI_UE.map((s, idx) => ({
-    nome: `<a href="${s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsUe[idx]}</a>`,
+    nome: `<a href="${window.tpLangUrl ? window.tpLangUrl(s.link) : s.link}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">${labelsUe[idx]}</a>`,
     importo: valuesUe[idx]
   }));
   renderTable(tabUe, rowsUe);
@@ -687,7 +687,7 @@ chartRegione = null;
     },
     onClick: (i) => {
       const sector = SETTORI_UE[i];
-      if (sector && sector.link) window.open(sector.link, '_blank', 'noopener');
+      if (sector && sector.link) window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
     }
   });
 
