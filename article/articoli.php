@@ -45,7 +45,7 @@ $js_i18n = [
   <link rel="stylesheet" href="stylearticoli.css"/>
 </head>
 
-<body>
+<body class="posts-archive-page">
   <?php include $_SERVER['DOCUMENT_ROOT'] . '/partials/header.php'; ?>
 
   <main class="container" id="main">

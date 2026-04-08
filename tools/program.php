@@ -28,6 +28,8 @@ $ITLP_I18N = array(
     'download' => 'Scarica le lezioni',
     'download_p' => 'Ogni lezione è pensata per essere letta individualmente. Contengono definizioni, concetti essenziali e un recap finale.',
     'download_pdf' => 'Scarica il PDF',
+    'download_pdf_it' => 'Scarica il PDF in italiano',
+    'download_pdf_en' => 'Scarica il PDF in inglese',
   
     'Starter-title' => 'Starter Pack: Tasse 101',
     'Starter-description' => 'Tipi di tasse, a cosa servono, chi le paga (legale vs reale), differenze chiave tra imposte e contributi.',
@@ -42,6 +44,10 @@ $ITLP_I18N = array(
     'IVA-description' => 'Cos’è l’IVA, perché è diversa dalle imposte sul reddito, e perché “chi la versa” non è sempre “chi la paga”.',
     'IVA-feature' => '',
 
+    'EU-title' => 'Bilancio UE',
+    'EU-description' => 'Cos’è il bilancio dell’Unione Europea e come funziona.',
+    'EU-feature' => '',
+
     'disclaimer' => 'Materiale educativo: non è consulenza fiscale. Le regole possono cambiare, controlla sempre le fonti ufficiali.',
   ),
   'en' => array(
@@ -51,6 +57,8 @@ $ITLP_I18N = array(
     'download' => 'Download the lessons',
     'download_p' => 'Each lesson is designed to be read individually. They contain definitions, key concepts, and a final summary.',
     'download_pdf' => 'Download the PDF',
+    'download_pdf_it' => 'Download the PDF in Italian',
+    'download_pdf_en' => 'Download the PDF in English',
 
     'Starter-title' => 'Starter Pack: Taxes 101',
     'Starter-description' => 'Types of taxes, what they are for, who pays them (legal vs. real), key differences between taxes and contributions.',
@@ -64,6 +72,10 @@ $ITLP_I18N = array(
     'IVA-title' => 'VAT and consumption taxes',
     'IVA-description' => 'What is VAT, why is it different from income taxes, and why “the one who pays it” is not always “the one who pays it”.',
     'IVA-feature' => '',
+
+    'EU-title' => 'EU budget',
+    'EU-description' => 'What is the European Union budget and how does it work?',
+    'EU-feature' => '',
 
     'disclaimer' => 'Educational materials: This is not tax advice. Rules may change, always check official sources.',
   ),
@@ -190,6 +202,21 @@ if (!function_exists('itlp_e')) {
       </p>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
         <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_IVA.pdf" download><?php echo itlp_e('download_pdf'); ?></a>
+      </div>
+    </li>
+
+    <!-- CARD 4 -->
+    <li class="lesson-card">
+      <h4 style="margin:.25rem 0;"><?php echo itlp_e('EU-title'); ?></h4>
+      <p style="margin:.25rem 0 0.75rem;">
+        <?php echo itlp_e('EU-description'); ?>
+      </p>
+      <p class="lesson-meta" style="margin:0 0 .75rem; font-size:.95rem; opacity:.85;">
+        <span><strong><?php echo itlp_e('feature1'); ?></strong><?php echo itlp_e('feature2'); ?></span> · <span><strong><?php echo itlp_e('feature3'); ?></strong> IT, EN</span>
+      </p>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_Bilancio_UE.pdf" download><?php echo itlp_e('download_pdf_it'); ?></a>
+        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_EU_Budget.pdf" download><?php echo itlp_e('download_pdf_en'); ?></a>
       </div>
     </li>
   </ul>

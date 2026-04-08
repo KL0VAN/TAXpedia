@@ -1,4 +1,18 @@
-<?php require_once __DIR__ . '/../i18n/i18n.php';?>
+<?php
+require_once __DIR__ . '/../i18n/i18n.php';
+
+$tp_main_nav = array(
+  array('href' => '/index.php', 'label' => e('nav_home')),
+  array('href' => '/calculator/menu.php', 'label' => e('nav_calculator')),
+  array('href' => '/article/articoli.php', 'label' => e('nav_article')),
+  array('href' => '/glossary/glossario.php', 'label' => e('nav_glossary')),
+  array('href' => '/tools/program.php', 'label' => e('nav_lessons')),
+  array('href' => '/aboutus/aboutus.php', 'label' => e('nav_about')),
+);
+
+$tp_drawer_comparison_href = '/tools/comparison.php';
+$tp_drawer_comparison_label = t('nav_comparison');
+?>
 
 <header class="site-header site-header--eu">
   <div class="container nav-wrap">
@@ -16,12 +30,9 @@
 
     <nav class="main-nav" aria-label="Menu principale">
       <ul>
-        <li><a href="/index.php"><?php echo e('nav_home'); ?></a></li>
-        <li><a href="/calculator/menu.php"><?php echo e('nav_calculator'); ?></a></li>
-        <li><a href="/article/articoli.php"><?php echo e('nav_article'); ?></a></li>
-        <li><a href="/glossary/glossario.php"><?php echo e('nav_glossary'); ?></a></li>
-        <li><a href="/tools/program.php"><?php echo e('nav_lessons'); ?></a></li>
-        <li><a href="/aboutus/aboutus.php"><?php echo e('nav_about'); ?></a></li>
+        <?php foreach ($tp_main_nav as $tp_nav_item): ?>
+        <li><a href="<?php echo htmlspecialchars($tp_nav_item['href'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo $tp_nav_item['label']; ?></a></li>
+        <?php endforeach; ?>
       </ul>
     </nav>
   </div>
@@ -192,6 +203,9 @@
   var drawer = document.getElementById('drawer');
   var list = document.getElementById('drawerList');
   var backdrop = document.getElementById('drawerBackdrop');
+  var calculatorHref = '/calculator/menu.php';
+  var comparisonHref = <?php echo json_encode($tp_drawer_comparison_href, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
+  var comparisonLabel = <?php echo json_encode($tp_drawer_comparison_label, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
 
   var candidates = ['.main-nav a','header nav a','.site-header nav a'];
   var links = [];
@@ -202,12 +216,12 @@
 
   list.innerHTML = '';
   var here = location.pathname.replace(/\/index\.html?$/i,'/');
-  links.forEach(function(a){
+
+  function appendDrawerLink(rawHref, text){
     var li = document.createElement('li');
     var link = document.createElement('a');
-    var rawHref = a.getAttribute('href');
     link.href = (window.tpLangUrl && rawHref) ? window.tpLangUrl(rawHref) : rawHref;
-    link.textContent = (a.textContent || a.innerText || '').trim() || a.getAttribute('aria-label') || 'Voce';
+    link.textContent = text || 'Voce';
     try{
       var linkPath = new URL(link.href, location.origin).pathname.replace(/\/index\.html?$/i,'/');
       if(linkPath === here) link.setAttribute('aria-current','page');
@@ -215,6 +229,31 @@
     li.appendChild(link);
     list.appendChild(li);
     link.addEventListener('click', close);
+  }
+
+  var drawerItems = links.map(function(a){
+    return {
+      href: a.getAttribute('href') || '',
+      text: (a.textContent || a.innerText || '').trim() || a.getAttribute('aria-label') || 'Voce'
+    };
+  });
+
+  var hasComparison = drawerItems.some(function(item){
+    return item.href === comparisonHref;
+  });
+
+  if (!hasComparison) {
+    var calculatorIndex = drawerItems.findIndex(function(item){
+      return item.href === calculatorHref;
+    });
+
+    var comparisonItem = { href: comparisonHref, text: comparisonLabel };
+    if (calculatorIndex >= 0) drawerItems.splice(calculatorIndex + 1, 0, comparisonItem);
+    else drawerItems.push(comparisonItem);
+  }
+
+  drawerItems.forEach(function(item){
+    appendDrawerLink(item.href, item.text);
   });
 
   function open(){

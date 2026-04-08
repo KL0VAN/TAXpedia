@@ -5,6 +5,7 @@ return array(
   'nav_calculator' => 'Calculator',
   'nav_about' => 'About us',
   'nav_article' => 'Our articles',
+  'nav_comparison' => 'Comparison',
   'nav_glossary' => 'Glossary',
   'nav_lessons' => 'Lessons',
   'footer_note' => 'Information for educational purposes.',

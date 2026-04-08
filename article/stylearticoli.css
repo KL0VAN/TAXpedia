@@ -29,6 +29,26 @@
   gap: 18px;
 }
 
+.posts-archive-page .posts-grid{
+  grid-template-columns: repeat(2, minmax(320px, 420px));
+  justify-content: center;
+  align-items: start;
+  gap: 24px;
+}
+
+.posts-archive-page .posts-grid a.post-card-link{
+  width: 100%;
+  max-width: 420px;
+  min-height: 0;
+  justify-self: center;
+}
+
+.posts-archive-page .posts-grid .post-thumb{
+  height: auto;
+  min-height: 220px;
+  aspect-ratio: 3 / 2;
+}
+
 /* Card come link */
 .posts-grid a.post-card-link{
   position: relative;
@@ -157,9 +177,34 @@
 /* Se nel file resta qualche vecchio bottone, lo nascondiamo */
 .post-card .post-link{ display: none !important; }
 
+@media (max-width: 960px){
+  .posts-archive-page .posts-grid{
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+    gap: 18px;
+  }
+
+  .posts-archive-page .posts-grid a.post-card-link{
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .posts-archive-page .posts-grid .post-thumb{
+    min-height: 0;
+  }
+}
+
 @media (max-width: 560px){
   .posts-grid .post-thumb{ height: 140px; }
   .posts-grid{ gap: 14px; }
+  .posts-archive-page .posts-grid{
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .posts-archive-page .posts-grid .post-thumb{
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
 }
 
 /* ===================== CONTROLLI: RICERCA + FILTRI TAG ===================== */
@@ -321,4 +366,7 @@
   .posts-select{
     flex: 1 1 220px;
   }
+}
+.posts-archive-page .posts-grid .post-body{
+  gap: 12px;
 }
