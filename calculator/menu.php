@@ -27,12 +27,25 @@ $TPM_I18N = array(
     'pl_name'      => 'Polonia',
     'pt_name'      => 'Portogallo',
     'si_name'      => 'Slovenia',
+    'bg_name'      => 'Bulgaria',
     'dk_name'      => 'Danimarca',
+    'gr_name'      => 'Grecia',
+    'hu_name'      => 'Ungheria',
     'ie_name'      => 'Irlanda',
-    'cz_name'      => 'Repubblica Ceca',
+    'cz_name'      => 'Cechia',
+    'ro_name'      => 'Romania',
+    'se_name'      => 'Svezia',
+    'lv_name'      => 'Lettonia',
+    'ee_name'      => 'Estonia',
+    'lt_name'      => 'Lituania',
+    'sk_name'      => 'Slovacchia',
+    'fi_name'      => 'Finlandia',
+    'cy_name'      => 'Cipro',
+    'mt_name'      => 'Malta',
 
     'foot'         => 'Calcolatore spesa pubblica ',
     'coming'       => 'Presto disponibile',
+    'work_progress' => 'Lavori in corso',
   ),
 
   'en' => array(
@@ -54,12 +67,25 @@ $TPM_I18N = array(
     'pl_name'      => 'Poland',
     'pt_name'      => 'Portugal',
     'si_name'      => 'Slovenia',
+    'bg_name'      => 'Bulgaria',
     'dk_name'      => 'Denmark',
+    'gr_name'      => 'Greece',
+    'hu_name'      => 'Hungary',
     'ie_name'      => 'Ireland',
-    'cz_name'      => 'Czech Republic',
+    'cz_name'      => 'Czechia',
+    'ro_name'      => 'Romania',
+    'se_name'      => 'Sweden',
+    'lv_name'      => 'Latvia',
+    'ee_name'      => 'Estonia',
+    'lt_name'      => 'Lithuania',
+    'sk_name'      => 'Slovakia',
+    'fi_name'      => 'Finland',
+    'cy_name'      => 'Cyprus',
+    'mt_name'      => 'Malta',
 
     'foot'         => 'Public spending calculator',
     'coming'       => 'Soon available',
+    'work_progress' => 'Work in progress',
   ),
 );
 
@@ -222,31 +248,139 @@ if (!function_exists('tpm_e')) {
           <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
-        <!-- Danimarca (coming soon) -->
-        <div class="nation-card is-soon" aria-disabled="true">
-          <span class="nation-flag" style="background-image:url('denmark/flagdenmark.png')" aria-hidden="true"></span>
+        <!-- Bulgaria -->
+        <a href="/calculator/bulgaria/bulgaria.php" class="nation-card">
+          <span class="nation-flag flag-bulgaria" aria-hidden="true"></span>
           <div class="nation-header">
-            <h3 class="nation-name"><?php echo tpm_e('dk_name'); ?></h3>
+            <h3 class="nation-name"><?php echo tpm_e('bg_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('coming'); ?></div>
-        </div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
 
-        <!-- Irlanda (coming soon) -->
-        <div class="nation-card is-soon" aria-disabled="true">
-          <span class="nation-flag" style="background-image:url('ireland/flagireland.png')" aria-hidden="true"></span>
-          <div class="nation-header">
-            <h3 class="nation-name"><?php echo tpm_e('ie_name'); ?></h3>
-          </div>
-          <div class="nation-foot"><?php echo tpm_e('coming'); ?></div>
-        </div>
-
-        <!-- Repubblica Ceca (coming soon) -->
-        <div class="nation-card is-soon" aria-disabled="true">
-          <span class="nation-flag" style="background-image:url('czech/flagczech.png')" aria-hidden="true"></span>
+        <!-- Cechia -->
+        <a href="/calculator/czech/czech.php" class="nation-card">
+          <span class="nation-flag flag-czech" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('cz_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('coming'); ?></div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
+
+        <!-- Danimarca -->
+        <a href="/calculator/denmark/denmark.php" class="nation-card">
+          <span class="nation-flag flag-denmark" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('dk_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
+
+        <!-- Grecia -->
+        <a href="/calculator/greece/greece.php" class="nation-card">
+          <span class="nation-flag flag-greece" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('gr_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
+
+        <!-- Ungheria -->
+        <a href="/calculator/hungary/hungary.php" class="nation-card">
+          <span class="nation-flag flag-hungary" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('hu_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
+
+        <!-- Irlanda -->
+        <a href="/calculator/ireland/ireland.php" class="nation-card">
+          <span class="nation-flag flag-ireland" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('ie_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
+
+        <!-- Romania -->
+        <a href="/calculator/romania/romania.php" class="nation-card">
+          <span class="nation-flag flag-romania" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('ro_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
+
+        <!-- Svezia -->
+        <a href="/calculator/sweden/sweden.php" class="nation-card">
+          <span class="nation-flag flag-sweden" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('se_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
+        </a>
+
+        <!-- Lettonia (lavori in corso) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag flag-latvia" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('lv_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
+        </div>
+
+        <!-- Estonia (lavori in corso) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag flag-estonia" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('ee_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
+        </div>
+
+        <!-- Lituania (lavori in corso) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag flag-lithuania" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('lt_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
+        </div>
+
+        <!-- Slovacchia (lavori in corso) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag flag-slovakia" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('sk_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
+        </div>
+
+        <!-- Finlandia (lavori in corso) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag flag-finland" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('fi_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
+        </div>
+
+        <!-- Cipro (lavori in corso) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag flag-cyprus" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('cy_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
+        </div>
+
+        <!-- Malta (lavori in corso) -->
+        <div class="nation-card is-soon" aria-disabled="true">
+          <span class="nation-flag flag-malta" aria-hidden="true"></span>
+          <div class="nation-header">
+            <h3 class="nation-name"><?php echo tpm_e('mt_name'); ?></h3>
+          </div>
+          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
         </div>
 
       </div>

@@ -198,7 +198,7 @@ if (!function_exists('itlp_e')) {
       </section>
 
       <div class="cta-row" style="text-align: center;">
-        <a class="btn btn-primary" href="/tools/comparison.php?a=PT"><?php echo itlp_e('comparison_btn'); ?></a>
+        <a class="btn btn-primary" href="/tools/comparison.php?a=IE"><?php echo itlp_e('comparison_btn'); ?></a>
       </div><br>
 
       <!-- BOX UE -->

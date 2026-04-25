@@ -134,9 +134,69 @@
   background-image:url("slovenia/flagslovenia.png");
 }
 
+.flag-bulgaria{
+  background-image:url("bulgaria/flagbulgaria.png");
+}
+
+.flag-czech{
+  background-image:url("czech/flagczech.png");
+}
+
+.flag-denmark{
+  background-image:url("denmark/flagdenmark.png");
+}
+
+.flag-greece{
+  background-image:url("greece/flaggreece.png");
+}
+
+.flag-hungary{
+  background-image:url("hungary/flaghungary.png");
+}
+
+.flag-ireland{
+  background-image:url("ireland/flagireland.png");
+}
+
+.flag-romania{
+  background-image:url("romania/flagromania.png");
+}
+
+.flag-sweden{
+  background-image:url("sweden/flagsweden.png");
+}
+
+.flag-latvia{
+  background-image:url("latvia/flaglatvia.png");
+}
+
+.flag-estonia{
+  background-image:url("estonia/flagestonia.png");
+}
+
+.flag-lithuania{
+  background-image:url("lithuania/flaglithuania.png");
+}
+
+.flag-slovakia{
+  background-image:url("slovakia/flagslovakia.png");
+}
+
+.flag-finland{
+  background-image:url("finland/flagfinland.png");
+}
+
+.flag-cyprus{
+  background-image:url("cyprus/flagcyprus.png");
+}
+
+.flag-malta{
+  background-image:url("malta/flagmalta.png");
+}
+
 /* Stati */
 .nation-card.is-active .nation-foot{ color:var(--brand); }
-.nation-card.is-soon{ background:linear-gradient(180deg,#f8fafc,#fff); border-style:dashed; opacity:.92; }
+.nation-card.is-soon{ background:linear-gradient(180deg,#f8fafc,#fff); border-style:dashed; opacity:.92; cursor:default; }
 .nation-card.is-soon .nation-name{ color:#334155; }
 .nation-card.is-soon .nation-foot{ color:#64748b; }
 
