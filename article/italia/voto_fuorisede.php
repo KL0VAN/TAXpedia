@@ -38,6 +38,9 @@ $PONTE_I18N = array(
   
     'p2' => 'A pesare sui portafogli dei fuorisede sono principalmente gli spostamenti di qualsivoglia natura, nonostante diverse compagnie abbiano provveduto a fornire sconti specifici per i weekend di voto -  fino al 60%-70% per Trenitalia, per la Compagnia Italiana di Navigazione; ITA Airways ha rivisto le sue tariffe, così come  i pedaggi autostradali sono stati ridotti, se non addirittura aboliti. Se, come esempio, applichiamo tali incentivi al Referendum del 2025, ipotizzando che tutti i 67.300 fuorisede votanti li abbiano sfruttati, questi sarebbero i dati: se un rientro “tipo” costa a prezzo pieno tra gli 80 e i 120 € A/R in treno, e se gli sconti ammontano tra il 60 e il 70%, dunque l’incentivo vale tra i 50 e gli 80 € per ogni viaggio elettorale, allora si avrebbe che il valore complessivo degli incentivi sarebbe nell’ordine dei 4 milioni di euro. Estendendo il calcolo a tutti 4,5–5 milioni di fuorisede, si parlerebbe potenzialmente di circa 250–300 milioni di euro di sconti complessivi su una singola tornata elettorale (5.000.000 × 60 € = 300 mln). Cifre decisamente insostenibili per la spesa statale considerando che in media una tornata elettorale costa meno della metà. Tuttavia, nonostante il calo dei prezzi, ancora solo una piccolissima fetta di fuorisede decide di fare questo sforzo, abbassando così la percentuale di votanti. Non sarebbe, dunque, più conveniente per ambo le parti, stato e cittadini, istituire il voto per i fuorisede da remoto? Evitando così che gli Italiani affrontino spese inutili, si prendano ferie o saltino ore di studio per votare, o che addirittura decidano di desistere?',
     
+    'read' => 'Leggi anche: ',
+    'article' => 'Quanto costa votare?',
+
     'p3' => 'Conseguentemente, alcune proposte più strutturate, per trovare una soluzione al problema, sono state presentate da associazioni come The Good Lobby e campagne come “Voto dove vivo”: si potrebbe infatti considerare l’opzione di inviare a domicilio la scheda elettorale, (come avviene per i residenti all’estero), da rispedire poi per posta, oppure votazioni anticipate per i fuorisede, così che le schede possano essere poi reindirizzate per tempo ai comuni di riferimento, tralasciando soluzioni più radicali come il voto digitale che porta con sé ancora molte incognite come la sicurezza, l’anonimato e l’affidabilità.',
 
     'author' => 'A cura di Ottilia Ogliari',
@@ -58,6 +61,9 @@ $PONTE_I18N = array(
     'p1' => 'Article 48 of the Italian Constitution states that all citizens, men and women, who have reached the age of majority are entitled to vote. But are we really sure about that? There is no doubt that voting is one of the fundamental rights at the core of our democracy, but it is equally true that not everyone is actually able to exercise it, and the 22-23 March 2026 referendum on justice is the most recent proof of this. As of today, there are an estimated 4.5 to 5 million non-resident voters in Italy, including workers, students, and patients staying in hospital facilities. In order to fulfill both a right and a civic duty, they are forced to return to their home municipalities, facing considerable expenses that often lead most of them to give up.',
 
     'p2' => 'What weighs most heavily on the wallets of non-resident voters is travel of any kind, despite the fact that several companies have offered specific discounts for voting weekends - up to 60%-70% for Trenitalia and the Italian Navigation Company; ITA Airways has revised its fares, and motorway tolls have also been reduced, if not completely waived. If, for example, we apply these incentives to the 2025 referendum, assuming that all 67,300 non-resident voters made use of them, these would be the figures: if a “typical” round trip costs between €80 and €120 at full price by train, and if the discounts amount to between 60% and 70%, then the incentive would be worth between €50 and €80 for each electoral journey, meaning that the overall value of the incentives would be in the region of €4 million. Extending the calculation to all 4.5-5 million non-resident voters, this would potentially amount to around €250-300 million in total discounts for a single election round (5,000,000 × €60 = €300 million). These figures are clearly unsustainable for public spending, considering that an average election round costs less than half that amount. However, despite the drop in prices, only a very small share of non-resident voters still decides to make this effort, thus lowering voter turnout. Would it not, therefore, be more convenient for both parties, the state and the citizens, to establish remote voting for non-resident voters? This would prevent Italians from facing unnecessary expenses, taking time off work, missing hours of study in order to vote, or even deciding not to vote at all.',
+
+    'read' => 'Read also: ',
+    'article' => 'How much does it cost to vote?',
 
     'p3' => 'Consequently, some more structured proposals to find a solution to the problem have been put forward by associations such as The Good Lobby and campaigns such as “I vote where I live”: one option could be to send the ballot paper directly to voters’ homes (as already happens for residents abroad), to then be returned by post, or to introduce early voting for non-resident voters, so that the ballots can then be redirected in time to the relevant municipalities, setting aside more radical solutions such as digital voting, which still raises many uncertainties regarding security, anonymity, and reliability.',
 
@@ -115,33 +121,30 @@ if (!function_exists('ponte_e')) {
       </header>
 
       <p><?php echo ponte_e('p1'); ?></p>
-
       <p><?php echo ponte_e('p2'); ?></p>
 
-      <p><?php echo ponte_e('p3'); ?></p>
-<!--
       <figure class="media" style="margin:1.25rem 0;">
         <img
-          src="../imm/Pista_Stelvio.jpg"
+          src="/article/italia/imm/urna.jpg"
           alt="<?php echo ponte_e('img_alt'); ?>"
           style="display:block; width:100%; height:auto;"
           loading="lazy"
         >
-        <figcaption style="margin-top:.5rem;">
-          <small><?php echo ponte_e('img_cap'); ?></small>
-        </figcaption>
-      </figure> -->
+      </figure> 
+
+      <p style="text-align:center;"><?php echo ponte_e('read'); ?><a href="/article/italia/costo_regionali.php" style="text-decoration: underline;"><?php echo ponte_e('article'); ?></a></p>
+      <p><?php echo ponte_e('p3'); ?></p>
 
       <p><?php echo ponte_e('author'); ?></p>
 
       <hr style="margin:2rem 0; opacity:.25;">
 
       <section aria-label="Collaborazioni e fonti">
-        <p style="text-align:center; margin:0 0 .5rem;"><strong><?php echo ponte_e('sources'); ?></strong></p>>
+        <p style="text-align:center; margin:0 0 .5rem;"><strong><?php echo ponte_e('sources'); ?></strong></p>
         <p style="text-align:center; margin:0;">Ministero dell'Università e della Ricerca</p>
         <p style="text-align:center; margin:0;">Ministero dell'Interno</p>
         <p style="text-align:center; margin:0;">Campagna “Voglio votare fuorisede”</p>
-        <p style="text-align:center; margin:0;">ANVUR</p
+        <p style="text-align:center; margin:0;">ANVUR</p>
       </section>
 
     </article>

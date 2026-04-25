@@ -1,59 +1,39 @@
-/* calculatorItalia.js
-   Versione completa aggiornata — doppio grafico, legenda colonna, hover slice più pronunciato
-   Assicurati che Chart.js sia incluso nel HTML (script tag con defer) e che gli id HTML corrispondano:
-   - input id="reddito"
-   - form id="calc-form"
-   - btn id="btn-calcola"
-   - risultati id="risultati"
-   - totale id="totaleTasse"
-   - tabellaDati id="tabellaDati" (opzionale; la legenda sostituisce la tabella)
-   - tabellaUE id="tabellaUE"
-   - canvas grafico Italia id="graficoItalia"
-   - canvas grafico UE id="graficoUE"
-   - legend containers id="legend-italia" e id="legend-ue"
-   - explanation boxes id="explanation-it" e id="explanation-ue"
-*/
-
 /* ========================= CONFIG ========================= */
 const TAX_BRACKETS = [
-  { upper: 8342,  rate: 0.125 },
-  { upper: 12587, rate: 0.157 },
-  { upper: 17838, rate: 0.212 },
-  { upper: 23089, rate: 0.241 },
-  { upper: 29397, rate: 0.311 },
-  { upper: 43090, rate: 0.349 },
-  { upper: 46566, rate: 0.431 },
-  { upper: 86634, rate: 0.446 },
+  { upper: 12012,  rate: 0.205 },
+  { upper: 28700,  rate: 0.22 },
+  { upper: 44000,  rate: 0.23 },
+  { upper: 70044,  rate: 0.43 },
   { upper: Infinity, rate: 0.48 },
 ];
 
 // Percorsi ai file di testo - aggiornare i nomi/file se necessario
 const SETTORI = [
-  { id: 'welf', nome:'Protezione sociale',               percentuale:0.395, link:'' },
-  { id: 'san',  nome:'Sanità',                           percentuale:0.182, link:'' },
-  { id: 'edu',  nome:'Istruzione e ricerca',             percentuale:0.055, link:'' },
-  { id: 'inf',  nome:'Infrastrutture e trasporti',       percentuale:0.027, link:'' },
-  { id: 'eco',  nome:'Politiche economiche',             percentuale:0.063, link:'' },
-  { id: 'pa',   nome:'Pubblica amministrazione',         percentuale:0.141, link:'' },
-  { id: 'cul',  nome:'Cultura e sport',                  percentuale:0.005, link:'' },
-  { id: 'def',  nome:'Difesa',                           percentuale:0.013, link:'' },
-  { id: 'int',  nome:'Interessi',                        percentuale:0.048, link:'' },
-  { id: 'sic',  nome:'Sicurezza e ordine pubblico',      percentuale:0.012, link:'' },
-  { id: 'ue',   nome:'Bilancio UE',                      percentuale:0.018, link:'' },
-  { id: 'amb',  nome:'Protezione ambientale',            percentuale:0.030, link:'' },
-  { id: 'giu',  nome:'Giustizia',                        percentuale:0.011, link:'' },
-  { id: 'alt',  nome:'Altro',                            percentuale:0.000, link:'' },
+  { id: 'welf', nome:'Protezione sociale',         percentuale:0.2698, link:'' },
+  { id: 'san',  nome:'Sanità',                     percentuale:0.2052, link:'' },
+  { id: 'edu',  nome:'Istruzione e ricerca',       percentuale:0.1351, link:'' },
+  { id: 'inf',  nome:'Infrastrutture e trasporti', percentuale:0.0891, link:'' },
+  { id: 'eco',  nome:'Politiche economiche',       percentuale:0.0392, link:'' },
+  { id: 'ue',   nome:'Bilancio UE',                percentuale:0.0327, link:'' },
+  { id: 'pa',   nome:'Pubblica amministrazione',   percentuale:0.0253, link:'' },
+  { id: 'sic',  nome:'Sicurezza e ordine pubblico',percentuale:0.0238, link:'' },
+  { id: 'giu',  nome:'Giustizia',                  percentuale:0.0238, link:'' },
+  { id: 'amb',  nome:'Protezione ambientale',      percentuale:0.0232, link:'' },
+  { id: 'int',  nome:'Interessi',                  percentuale:0.0228, link:'' },
+  { id: 'cul',  nome:'Cultura e sport',            percentuale:0.0145, link:'' },
+  { id: 'def',  nome:'Difesa',                     percentuale:0.0112, link:'' },
+  { id: 'alt',  nome:'Altro',                      percentuale:0.0842, link:'' },
 ];
 
 const SETTORI_UE = [
-  { nome:'Coesione, resilienza e valori',                percentuale:0.0071, link:'/article/europe/coesione.php' },
-  { nome:'Risorse naturali e ambiente',                  percentuale:0.0051, link:'/article/europe/risorse_naturali.php' },
-  { nome:'Mercato unico, innovazione e agenda digitale', percentuale:0.0019, link:'/article/europe/mercato_unico.php' },
-  { nome:'Rapporti con il vicinato e con il mondo',      percentuale:0.0015, link:'/article/europe/rapporti_vicinato.php' },
-  { nome:'Pubblica amministrazione europea',             percentuale:0.0012, link:'/article/europe/pubblica_amm_ue.php' },
-  { nome:'Strumenti speciali',                           percentuale:0.0005, link:'/article/europe/strumenti_speciali.php' },
-  { nome:'Migrazione e gestione delle frontiere',        percentuale:0.0004, link:'/article/europe/migrazione_gestione.php' },
-  { nome:'Sicurezza e Difesa',                           percentuale:0.0003, link:'/article/europe/sicurezza_difesa.php' },
+  { nome:'Coesione, resilienza e valori',                percentuale:0.014315, link:'/article/europe/coesione.php' },
+  { nome:'Risorse naturali e ambiente',                  percentuale:0.010281, link:'/article/europe/risorse_naturali.php' },
+  { nome:'Mercato unico, innovazione e agenda digitale', percentuale:0.003833, link:'/article/europe/mercato_unico.php' },
+  { nome:'Rapporti con il vicinato e con il mondo',      percentuale:0.003021, link:'/article/europe/rapporti_vicinato.php' },
+  { nome:'Pubblica amministrazione europea',             percentuale:0.002425, link:'/article/europe/pubblica_amm_ue.php' },
+  { nome:'Strumenti speciali',                           percentuale:0.001002, link:'/article/europe/strumenti_speciali.php' },
+  { nome:'Migrazione e gestione delle frontiere',        percentuale:0.000813, link:'/article/europe/migrazione_gestione.php' },
+  { nome:'Sicurezza e Difesa',                           percentuale:0.000610, link:'/article/europe/sicurezza_difesa.php' },
 ];
 
 /* ========================= i18n helper ========================= */
