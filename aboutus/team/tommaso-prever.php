@@ -487,7 +487,7 @@ $FP_AUTHOR_ARTICLES = fp_filter_author_articles($FP_ARTICLES, $FP_AUTHOR_SLUG, $
 
       <section class="profile-hero" aria-label="Tommaso Prever">
         <div class="profile-photo-wrap">
-          <img src="../imm/" alt="Tommaso Prever" class="profile-photo">
+          <div class="profile-photo profile-photo-placeholder" role="img" aria-label="Tommaso Prever"><span aria-hidden="true">TP</span></div>
         </div>
 
         <div class="profile-copy">

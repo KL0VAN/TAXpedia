@@ -487,7 +487,7 @@ $FP_AUTHOR_ARTICLES = fp_filter_author_articles($FP_ARTICLES, $FP_AUTHOR_SLUG, $
 
       <section class="profile-hero" aria-label="Ottilia Ogliari">
         <div class="profile-photo-wrap">
-          <img src="../imm/" alt="Ottilia Ogliari" class="profile-photo">
+          <img src="../imm/people/ottilia.jpg" alt="Ottilia Ogliari" class="profile-photo">
         </div>
 
         <div class="profile-copy">

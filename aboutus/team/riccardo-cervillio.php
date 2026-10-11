@@ -291,7 +291,7 @@ if (!function_exists('fp_e')) {
 
       <section class="profile-hero" aria-label="Riccardo Francesco Cervillio">
         <div class="profile-photo-wrap">
-          <img src="../imm/cervillio.jpg" alt="Riccardo Francesco Cervillio" class="profile-photo">
+          <img src="../imm/people/cervillio.jpg" alt="Riccardo Francesco Cervillio" class="profile-photo">
         </div>
 
         <div class="profile-copy">

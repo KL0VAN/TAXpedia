@@ -60,6 +60,8 @@ $ABU_I18N = array(
     'area_research' => 'Ricerca e documentazione',
 
     'collab_h2'  => 'Abbiamo collaborato con:',
+    'pause_logos' => 'Pausa scorrimento',
+    'resume_logos' => 'Riprendi scorrimento',
   ),
 
   // =========================
@@ -107,6 +109,8 @@ $ABU_I18N = array(
     'area_research' => 'Research and documentation',
 
     'collab_h2'  => 'We collaborated with:',
+    'pause_logos' => 'Pause scrolling',
+    'resume_logos' => 'Resume scrolling',
   ),
 );
 
@@ -170,21 +174,21 @@ if (!function_exists('abu_profile_href')) {
 $ABU_FOUNDERS = array(
   array(
     'name' => 'Francesco Calabrese Vallino',
-    'image' => 'imm/calabrese.jpg',
+    'image' => 'imm/people/calabrese.jpg',
     'alt' => 'Francesco Calabrese Vallino',
     'role_key' => 'role_1',
     'profile' => '/aboutus/team/francesco-calabrese-vallino.php',
   ),
   array(
     'name' => 'Luka Ribić',
-    'image' => 'imm/ribic.jpg',
+    'image' => 'imm/people/ribic.jpg',
     'alt' => 'Luka Ribić',
     'role_key' => 'role_2',
     'profile' => '/aboutus/team/luka-ribic.php',
   ),
   array(
     'name' => 'Riccardo Francesco Cervillio',
-    'image' => 'imm/cervillio.jpg',
+    'image' => 'imm/people/cervillio.jpg',
     'alt' => 'Riccardo Francesco Cervillio',
     'role_key' => 'role_3',
     'profile' => '/aboutus/team/riccardo-cervillio.php',
@@ -233,6 +237,15 @@ $ABU_EDITORIAL = array(
   ),
   
 );
+
+// Keep official artwork and the existing organization destinations together.
+$ABU_PARTNERS = array(
+  array('name' => 'DemocraSeeds', 'image' => 'logo_democraseeds.jpg', 'width' => 500, 'height' => 500, 'href' => 'https://democraseeds.it/'),
+  array('name' => 'rethink_uni', 'image' => 'logo_rethink.png', 'width' => 871, 'height' => 463, 'href' => 'https://www.instagram.com/rethink_uni/'),
+  array('name' => 'Gioventù Federalista Europea', 'image' => 'logo-gfe.webp', 'width' => 512, 'height' => 234, 'href' => 'https://giovanifederalisti.eu/'),
+  array('name' => 'Trasporta Milano', 'image' => 'logo-tm.jpg', 'width' => 2000, 'height' => 2000, 'href' => 'https://www.instagram.com/trasportamilano/'),
+  array('name' => 'Controverso (CVN)', 'image' => 'logo-cvn.png', 'width' => 1280, 'height' => 1229, 'href' => ''),
+);
 ?>
 <!doctype html>
 <html lang="<?php echo htmlspecialchars($ABU_LANG, ENT_QUOTES, 'UTF-8'); ?>">
@@ -246,6 +259,7 @@ $ABU_EDITORIAL = array(
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styleIndex.css" />
   <link rel="stylesheet" href="AboutUs.css" />
+  <script defer src="partner-carousel.js"></script>
 </head>
 <body>
   <?php include $_SERVER['DOCUMENT_ROOT'] . '/partials/header.php'; ?>
@@ -357,19 +371,25 @@ $ABU_EDITORIAL = array(
       <header class="page-head collab-head">
         <h2 id="collab-title"><?php echo abu_e('collab_h2'); ?></h2>
       </header>
-      <div class="collab">
-        <a href="https://democraseeds.it/" target="_blank" rel="noopener noreferrer" aria-label="DemocraSeeds">
-          <img src="/article/italia/imm/logo_democraseeds.jpg" alt="DemocraSeeds" width="160" height="160" loading="lazy">
-        </a>
-        <a href="https://www.instagram.com/rethink_uni/" target="_blank" rel="noopener noreferrer" aria-label="rethink_uni">
-          <img src="/article/italia/imm/logo_rethink.png" alt="rethink_uni" width="160" height="160" loading="lazy">
-        </a>
-        <a href="https://giovanifederalisti.eu/" target="_blank" rel="noopener noreferrer" aria-label="GFE">
-          <img src="/aboutus/imm/logo-gfe.webp" alt="Gioventù Federalista Europea" width="160" height="100%" loading="lazy">
-        </a>
-        <a href="https://www.instagram.com/trasportamilano/" target="_blank" rel="noopener noreferrer" aria-label="TM">
-          <img src="/aboutus/imm/logo-tm.jpg" alt="Trasporta Milano" width="160" height="100%" loading="lazy">
-        </a>
+      <div class="partner-carousel" data-partner-carousel>
+        <div class="partner-viewport" id="partner-viewport" aria-live="off">
+          <div class="partner-track">
+            <ul class="partner-group">
+              <?php foreach ($ABU_PARTNERS as $partner): ?>
+                <li class="partner-item">
+                  <?php if ($partner['href'] !== ''): ?>
+                    <a class="partner-logo" href="<?php echo htmlspecialchars($partner['href'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer">
+                  <?php else: ?>
+                    <span class="partner-logo">
+                  <?php endif; ?>
+                    <img src="imm/logo/<?php echo htmlspecialchars($partner['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($partner['name'], ENT_QUOTES, 'UTF-8'); ?>" width="<?php echo (int)$partner['width']; ?>" height="<?php echo (int)$partner['height']; ?>" loading="lazy" decoding="async">
+                  <?php if ($partner['href'] !== ''): ?></a><?php else: ?></span><?php endif; ?>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        </div>
+        <button class="partner-toggle" type="button" aria-controls="partner-viewport" aria-pressed="false" data-pause-label="<?php echo abu_e('pause_logos'); ?>" data-resume-label="<?php echo abu_e('resume_logos'); ?>" hidden><?php echo abu_e('pause_logos'); ?></button>
       </div>
     </section>
   </main>

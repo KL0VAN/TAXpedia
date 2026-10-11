@@ -196,6 +196,7 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
    ========================================================= */
 
 .about-container{
+  width: 100%;
   max-width: 1120px;
 }
 
@@ -465,76 +466,154 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
   }
 }
 
-/* Collaborazioni: righe flessibili, sempre centrate, senza card. */
-.collaborations .collab{
+/* Partner gallery: stationary by default; JS enables the continuous strip. */
+.partner-carousel{
+  --partner-width:200px;
+  --partner-height:128px;
+  --partner-gap:24px;
+  margin:1.5rem auto 0;
+  width:100%;
+  min-width:0;
+}
+
+.partner-viewport{
+  padding-block:12px;
+  border-block:1px solid var(--line);
+}
+
+.partner-group{
   display:flex;
   flex-wrap:wrap;
   justify-content:center;
   align-items:center;
-  gap:2rem;
-  width:100%;
-  max-width:816px;
-  margin:1.5rem auto 0;
+  gap:var(--partner-gap);
+  list-style:none;
   padding:0;
-  box-sizing:border-box;
+  margin:0;
 }
 
-.collaborations .collab > a{
+.partner-group[aria-hidden="true"]{display:none}
+
+.partner-item{
+  flex:0 0 var(--partner-width);
+  width:var(--partner-width);
+  max-width:100%;
+  height:var(--partner-height);
+}
+
+.partner-logo{
   display:flex;
-  flex:0 0 180px;
   align-items:center;
   justify-content:center;
-  width:180px;
-  max-width:100%;
-  min-width:0;
-  height:160px;
-  margin:0;
-  padding:0;
-  border:0;
-  border-radius:0;
-  background:transparent;
-  box-shadow:none;
+  width:100%;
+  height:100%;
+  padding:12px 18px;
+  border-radius:10px;
+  background:var(--card);
   text-decoration:none;
-  box-sizing:border-box;
 }
 
-.collaborations .collab > a:hover{
-  background:transparent;
-  box-shadow:none;
-}
-
-.collaborations .collab > a:focus-visible{
-  outline:2px solid var(--brand, #003399);
-  outline-offset:6px;
-}
-
-.collaborations .collab img{
+.partner-logo img{
   display:block;
-  width:160px;
-  height:160px;
-  max-width:100%;
+  width:100%;
+  height:100%;
   object-fit:contain;
-  margin:0;
-  padding:0;
-  border:0;
   border-radius:0;
   box-shadow:none;
-  background:transparent;
 }
 
-/* Due loghi sui telefoni; una colonna se lo spazio non basta. */
+.partner-logo:focus-visible,
+.partner-toggle:focus-visible{
+  outline:2px solid var(--brand);
+  outline-offset:3px;
+}
+
+.partner-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  margin-top:.75rem;
+  padding:.5rem 1rem;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--card);
+  color:var(--brand);
+  font:inherit;
+  font-size:.85rem;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.partner-toggle:hover{border-color:var(--brand)}
+.partner-toggle[hidden]{display:none}
+
+.partner-carousel.is-animated:not(.has-focus) .partner-viewport{overflow:hidden}
+
+.partner-carousel.is-animated:not(.has-focus) .partner-track{
+  display:flex;
+  width:max-content;
+  animation-name:partner-scroll;
+  animation-duration:48s;
+  animation-timing-function:linear;
+  animation-iteration-count:infinite;
+}
+
+.partner-carousel.is-animated:not(.has-focus) .partner-group{
+  display:flex;
+  flex:none;
+  flex-wrap:nowrap;
+  padding-right:var(--partner-gap);
+}
+
+.partner-carousel.is-paused .partner-track{animation-play-state:paused}
+
+@media (hover:hover){
+  .partner-carousel:hover .partner-track{animation-play-state:paused}
+}
+
+@keyframes partner-scroll{
+  to{transform:translateX(-50%)}
+}
+
 @media (max-width:640px){
-  .collaborations .collab{
-    max-width:360px;
-    gap:1.5rem;
+  .partner-carousel{
+    --partner-width:132px;
+    --partner-height:104px;
+    --partner-gap:16px;
   }
-  .collaborations .collab > a{
-    flex-basis:132px;
-    width:132px;
-    height:132px;
+  .partner-logo{padding:10px 12px}
+  .partner-carousel.is-animated:not(.has-focus) .partner-track{animation-duration:36s}
+}
+
+/* Keep the existing footer columns inside the About Us mobile viewport. */
+@media (max-width:520px){
+  .about-container ~ .site-footer .footer-grid{grid-template-columns:1fr}
+}
+
+/* CSS safeguard as well as the JS preference listener. */
+@media (prefers-reduced-motion:reduce){
+  .partner-carousel.is-animated:not(.has-focus) .partner-track{
+    display:block;
+    width:100%;
+    animation:none;
+    transform:none;
   }
-  .collaborations .collab img{
-    width:132px;
-    height:132px;
+  .partner-carousel.is-animated:not(.has-focus) .partner-group{
+    flex-wrap:wrap;
+    padding-right:0;
   }
+  .partner-carousel.is-animated:not(.has-focus) .partner-group[aria-hidden="true"]{display:none}
+  .partner-toggle{display:none}
+}
+
+/* No supplied Tommaso portrait: a named fallback, never another person's photo. */
+.profile-photo.profile-photo-placeholder{
+  display:grid;
+  place-items:center;
+  background:var(--line);
+  color:var(--brand);
+  font-family:Merriweather,serif;
+  font-size:3rem;
+  font-weight:700;
 }

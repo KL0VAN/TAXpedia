@@ -291,7 +291,7 @@ if (!function_exists('fp_e')) {
 
       <section class="profile-hero" aria-label="Luka Ribić">
         <div class="profile-photo-wrap">
-          <img src="../imm/ribic.jpg" alt="Luka Ribić" class="profile-photo">
+          <img src="../imm/people/ribic.jpg" alt="Luka Ribić" class="profile-photo">
         </div>
 
         <div class="profile-copy">

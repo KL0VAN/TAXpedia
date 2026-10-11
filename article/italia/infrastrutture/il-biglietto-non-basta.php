@@ -502,7 +502,7 @@ if (!function_exists('tpl_article_e')) {
         <figure style="text-align:center; margin:0 0 1rem;">
           <a href="https://www.instagram.com/trasportamilano/" target="_blank" rel="noopener noreferrer">
             <img
-              src="/aboutus/imm/logo-tm.jpg"
+              src="/aboutus/imm/logo/logo-tm.jpg"
               alt="<?php echo tpl_article_e('partner_alt'); ?>"
               width="160"
               height="160"

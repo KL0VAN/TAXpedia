@@ -289,7 +289,7 @@ if (!function_exists('fp_e')) {
 
       <section class="profile-hero" aria-label="Ludovico Prunster">
         <div class="profile-photo-wrap">
-          <img src="../imm/" alt="Ludovico Prunster" class="profile-photo">
+          <img src="../imm/people/Ludovico.jpg" alt="Ludovico Prunster" class="profile-photo">
         </div>
 
         <div class="profile-copy">

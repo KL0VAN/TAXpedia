@@ -287,7 +287,7 @@ if (!function_exists('fp_e')) {
 
       <section class="profile-hero" aria-label="Alessandro Marangoni">
         <div class="profile-photo-wrap">
-          <img src="../imm/" alt="Alessandro Marangoni" class="profile-photo">
+          <img src="../imm/people/Alessandro.jpg" alt="Alessandro Marangoni" class="profile-photo">
         </div>
 
         <div class="profile-copy">

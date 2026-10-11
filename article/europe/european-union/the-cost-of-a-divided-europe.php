@@ -174,7 +174,7 @@ if (!function_exists('ponte_article_text')) {
         <figure style="text-align:center; margin:0 0 1rem;">
           <a href="https://giovanifederalisti.eu/" target="_blank" rel="noopener noreferrer">
             <img
-              src="/aboutus/imm/logo-gfe.webp"
+              src="/aboutus/imm/logo/logo-gfe.webp"
               alt="<?php echo ponte_e('partner_alt'); ?>"
               width="160"
               height="100"

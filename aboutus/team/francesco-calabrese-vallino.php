@@ -101,7 +101,7 @@ if (!function_exists('fp_e')) {
 }
 
 $FP_CANONICAL_URL = 'https://www.taxpedia.eu/aboutus/team/francesco-calabrese-vallino.php?lang=' . rawurlencode($FP_LANG);
-$FP_PROFILE_IMAGE_URL = 'https://www.taxpedia.eu/aboutus/imm/calabrese.jpg';
+$FP_PROFILE_IMAGE_URL = 'https://www.taxpedia.eu/aboutus/imm/people/calabrese.jpg';
 $FP_PROFILE_DESCRIPTION = fp_t('meta_desc');
 $FP_IS_EN = ($FP_LANG === 'en');
 
@@ -572,7 +572,7 @@ $FP_PROFILE_JSON_LD = array(
 
       <section class="profile-hero" aria-label="Francesco Calabrese Vallino">
         <div class="profile-photo-wrap">
-          <img src="/aboutus/imm/calabrese.jpg" alt="Francesco Calabrese Vallino" class="profile-photo">
+          <img src="/aboutus/imm/people/calabrese.jpg" alt="Francesco Calabrese Vallino" class="profile-photo">
         </div>
 
         <div class="profile-copy">

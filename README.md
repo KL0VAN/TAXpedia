@@ -1,15 +1,33 @@
+# TAXpedia
 
+PHP, HTML, CSS and native JavaScript; local development on Windows, production hosting on Linux.
+
+## Local preview
+
+Run from this directory:
+
+```powershell
+php -S 127.0.0.1:8000
 ```
+
+Open http://127.0.0.1:8000/aboutus/aboutus.php?lang=it (or `lang=en`).
+Use the existing server if port 8000 is already occupied. Current local PHP: 8.5.11.
+
+## Project guidance
+
+See [AGENTS.md](AGENTS.md) for standards and safety rules, [PLAN.md](PLAN.md) for the audit and future tasks, and [TASK1_REPORT.md](TASK1_REPORT.md) for changes and validation.
+
+About Us logos live in `aboutus/imm/logo/`; portraits live in `aboutus/imm/people/`.
+The two article-owned logo copies remain in `article/italia/imm/` to preserve existing article URLs.
+`aboutus/imm/map.png` is retained. `1.TESTER/` is currently empty; Git cannot record an empty directory.
+
+## File structure
+
+```text
 www.taxpedia.eu-14(5)
 ├─ 1.TESTER
 ├─ aboutus
-│  ├─ AboutUs.css
-│  ├─ aboutus.php
-│  ├─ disclaimer.php
 │  ├─ imm
-│  │  ├─ Alessandro.jpg
-│  │  ├─ calabrese.jpg
-│  │  ├─ cervillio.jpg
 │  │  ├─ logo
 │  │  │  ├─ logo-cvn.png
 │  │  │  ├─ logo-gfe.png
@@ -17,14 +35,6 @@ www.taxpedia.eu-14(5)
 │  │  │  ├─ logo-tm.jpg
 │  │  │  ├─ logo_democraseeds.jpg
 │  │  │  └─ logo_rethink.png
-│  │  ├─ logo-cvn.png
-│  │  ├─ logo-gfe.png
-│  │  ├─ logo-gfe.webp
-│  │  ├─ logo-tm.jpg
-│  │  ├─ lorenzo.jpg
-│  │  ├─ Ludovico.jpg
-│  │  ├─ map.png
-│  │  ├─ ottilia.jpg
 │  │  ├─ people
 │  │  │  ├─ Alessandro.jpg
 │  │  │  ├─ calabrese.jpg
@@ -33,9 +43,7 @@ www.taxpedia.eu-14(5)
 │  │  │  ├─ Ludovico.jpg
 │  │  │  ├─ ottilia.jpg
 │  │  │  └─ ribic.jpg
-│  │  └─ ribic.jpg
-│  ├─ impact.php
-│  ├─ privacy.php
+│  │  └─ map.png
 │  ├─ team
 │  │  ├─ alessandro-marangoni.php
 │  │  ├─ francesco-calabrese-vallino.php
@@ -44,20 +52,24 @@ www.taxpedia.eu-14(5)
 │  │  ├─ ottilia-ogliari.php
 │  │  ├─ riccardo-cervillio.php
 │  │  └─ tommaso-prever.php
+│  ├─ AboutUs.css
+│  ├─ aboutus.php
+│  ├─ disclaimer.php
+│  ├─ impact.php
+│  ├─ partner-carousel.js
+│  ├─ privacy.php
 │  └─ work-with-us.php
 ├─ article
-│  ├─ article_data.php
-│  ├─ articoli.php
 │  ├─ belgium
 │  │  └─ belgium.php
 │  ├─ europe
-│  │  ├─ coesione.php
 │  │  ├─ european-union
 │  │  │  ├─ eu-economic-growth.php
 │  │  │  ├─ populism-and-economic-growth-in-europe.php
 │  │  │  └─ the-cost-of-a-divided-europe.php
 │  │  ├─ infrastructure
 │  │  │  └─ rail-baltica.php
+│  │  ├─ coesione.php
 │  │  ├─ mercato_unico.php
 │  │  ├─ migrazione_gestione.php
 │  │  ├─ pubblica_amm_ue.php
@@ -66,19 +78,12 @@ www.taxpedia.eu-14(5)
 │  │  ├─ sicurezza_difesa.php
 │  │  └─ strumenti_speciali.php
 │  ├─ france
-│  │  ├─ france.php
-│  │  └─ imm
-│  │     └─ french-flag.jpg
+│  │  ├─ imm
+│  │  │  └─ french-flag.jpg
+│  │  └─ france.php
 │  ├─ germany
 │  │  └─ germany.php
 │  ├─ italia
-│  │  ├─ altro.php
-│  │  ├─ articolo_prova_standard.php
-│  │  ├─ bilancio_ue.php
-│  │  ├─ costo_regionali.php
-│  │  ├─ cultura_sport.php
-│  │  ├─ difesa.php
-│  │  ├─ giustizia.php
 │  │  ├─ imm
 │  │  │  ├─ amministrazione.png
 │  │  │  ├─ difesa.png
@@ -96,10 +101,17 @@ www.taxpedia.eu-14(5)
 │  │  │  ├─ il-biglietto-non-basta.php
 │  │  │  ├─ olimpiadi_2026.php
 │  │  │  └─ ponte.php
-│  │  ├─ infrastrutture_trasporti.php
-│  │  ├─ interessi.php
 │  │  ├─ istruzione
 │  │  │  └─ ricerca.php
+│  │  ├─ altro.php
+│  │  ├─ articolo_prova_standard.php
+│  │  ├─ bilancio_ue.php
+│  │  ├─ costo_regionali.php
+│  │  ├─ cultura_sport.php
+│  │  ├─ difesa.php
+│  │  ├─ giustizia.php
+│  │  ├─ infrastrutture_trasporti.php
+│  │  ├─ interessi.php
 │  │  ├─ istruzione_ricerca.php
 │  │  ├─ italy.php
 │  │  ├─ politiche_economiche.php
@@ -115,38 +127,40 @@ www.taxpedia.eu-14(5)
 │  │  ├─ articolo_prova_standard.php
 │  │  ├─ STANDARD_README_INSERIMENTO_ARTICOLI.md
 │  │  └─ STANDARD_template_articolo_base.php
-│  ├─ stylearticoli.css
-│  └─ thumbs
-│     ├─ ambiente.jpeg
-│     ├─ Coesione  resilienza dei Valori europei.jpg
-│     ├─ Cosa sono gli Strumenti Speciali europei.jpg
-│     ├─ cultura.jpg
-│     ├─ difesa.jpg
-│     ├─ ep-strasbourg.jpg
-│     ├─ europa.jpg
-│     ├─ giustizia.jpg
-│     ├─ glossario.png
-│     ├─ infrastrutture.jpg
-│     ├─ interessi.jpg
-│     ├─ istruzione.jpg
-│     ├─ italia-flag.jpg
-│     ├─ Mercato Unico, innovazione e Agenda digitale.jpg
-│     ├─ Migrazione e gestione delle frontiere.jpg
-│     ├─ Pista_Stelvio.jpg
-│     ├─ politiche-economiche.jpg
-│     ├─ ponte.jpg
-│     ├─ protezione-sociale.jpg
-│     ├─ Pubblica Amministrazione nell unione.jpg
-│     ├─ pubblica-amministrazione.jpg
-│     ├─ Quanto cosa la diplomazia europea.jpg
-│     ├─ Quanto costa l'unione Europea.jpg
-│     ├─ ricerca.jpg
-│     ├─ risorse Naturali e Ambiente.jpg
-│     ├─ sanità.jpg
-│     ├─ sicurezza e difesa europea.jpg
-│     ├─ sicurezza.jpg
-│     ├─ trasporti.png
-│     └─ urna.jpg
+│  ├─ thumbs
+│  │  ├─ ambiente.jpeg
+│  │  ├─ Coesione  resilienza dei Valori europei.jpg
+│  │  ├─ Cosa sono gli Strumenti Speciali europei.jpg
+│  │  ├─ cultura.jpg
+│  │  ├─ difesa.jpg
+│  │  ├─ ep-strasbourg.jpg
+│  │  ├─ europa.jpg
+│  │  ├─ giustizia.jpg
+│  │  ├─ glossario.png
+│  │  ├─ infrastrutture.jpg
+│  │  ├─ interessi.jpg
+│  │  ├─ istruzione.jpg
+│  │  ├─ italia-flag.jpg
+│  │  ├─ Mercato Unico, innovazione e Agenda digitale.jpg
+│  │  ├─ Migrazione e gestione delle frontiere.jpg
+│  │  ├─ Pista_Stelvio.jpg
+│  │  ├─ politiche-economiche.jpg
+│  │  ├─ ponte.jpg
+│  │  ├─ protezione-sociale.jpg
+│  │  ├─ Pubblica Amministrazione nell unione.jpg
+│  │  ├─ pubblica-amministrazione.jpg
+│  │  ├─ Quanto cosa la diplomazia europea.jpg
+│  │  ├─ Quanto costa l'unione Europea.jpg
+│  │  ├─ ricerca.jpg
+│  │  ├─ risorse Naturali e Ambiente.jpg
+│  │  ├─ sanità.jpg
+│  │  ├─ sicurezza e difesa europea.jpg
+│  │  ├─ sicurezza.jpg
+│  │  ├─ trasporti.png
+│  │  └─ urna.jpg
+│  ├─ article_data.php
+│  ├─ articoli.php
+│  └─ stylearticoli.css
 ├─ calculator
 │  ├─ austria
 │  │  ├─ austria.php
@@ -160,14 +174,13 @@ www.taxpedia.eu-14(5)
 │  │  ├─ bulgaria.php
 │  │  ├─ calculatorBulgaria.js
 │  │  └─ flagbulgaria.png
-│  ├─ CalculatorStyle.css
 │  ├─ croatia
-│  │  ├─ calculatorCroatia.js
 │  │  ├─ CROATIA SVG
 │  │  │  ├─ croatia-map.css
 │  │  │  ├─ croatia-map.js
 │  │  │  ├─ croatia-map.php
 │  │  │  └─ croatiaHigh.svg
+│  │  ├─ calculatorCroatia.js
 │  │  ├─ croatia.php
 │  │  └─ flagcroatia.png
 │  ├─ cyprus
@@ -211,13 +224,13 @@ www.taxpedia.eu-14(5)
 │  │  ├─ flagireland.png
 │  │  └─ ireland.php
 │  ├─ italia
-│  │  ├─ calculatorItalia.js
-│  │  ├─ flagitaly.png
 │  │  ├─ ITALIA SVG
 │  │  │  ├─ italia-map.css
 │  │  │  ├─ italia-map.js
 │  │  │  ├─ italia-map.php
 │  │  │  └─ italyHigh.svg
+│  │  ├─ calculatorItalia.js
+│  │  ├─ flagitaly.png
 │  │  └─ italia.php
 │  ├─ js
 │  │  ├─ lang
@@ -238,9 +251,6 @@ www.taxpedia.eu-14(5)
 │  │  ├─ calculatorMalta.js
 │  │  ├─ flagmalta.png
 │  │  └─ malta.php
-│  ├─ menu.php
-│  ├─ NazioniController.js
-│  ├─ NazioniStyle.css
 │  ├─ netherlands
 │  │  ├─ calculatorNetherlands.js
 │  │  ├─ flagnetherlands.png
@@ -269,10 +279,14 @@ www.taxpedia.eu-14(5)
 │  │  ├─ calculatorSpain.js
 │  │  ├─ flagspain.png
 │  │  └─ spain.php
-│  └─ sweden
-│     ├─ calculatorSweden.js
-│     ├─ flagsweden.png
-│     └─ sweden.php
+│  ├─ sweden
+│  │  ├─ calculatorSweden.js
+│  │  ├─ flagsweden.png
+│  │  └─ sweden.php
+│  ├─ CalculatorStyle.css
+│  ├─ menu.php
+│  ├─ NazioniController.js
+│  └─ NazioniStyle.css
 ├─ glossary
 │  └─ glossario.php
 ├─ i18n
@@ -280,8 +294,6 @@ www.taxpedia.eu-14(5)
 │  ├─ i18n.php
 │  └─ it.php
 ├─ imm
-│  ├─ eu-map.svg
-│  ├─ eu-web-awards-finalist-2026.png
 │  ├─ flags
 │  │  ├─ at.png
 │  │  ├─ be.png
@@ -295,40 +307,45 @@ www.taxpedia.eu-14(5)
 │  │  ├─ pl.png
 │  │  ├─ pt.png
 │  │  └─ si.png
+│  ├─ eu-map.svg
+│  ├─ eu-web-awards-finalist-2026.png
 │  ├─ instagram.png
 │  ├─ linkedin.png
 │  ├─ logoT.png
 │  └─ threads.png
-├─ index.php
-├─ jsIndex.js
-├─ LICENSE
 ├─ partials
 │  ├─ footer.php
 │  ├─ header.php
 │  ├─ header.txt
 │  ├─ new-article.php
 │  └─ web-awards.php
-├─ sitemap.xml
 ├─ style
 │  ├─ StyleGlossario
 │  ├─ StyleGlossario.css
 │  └─ StyleTesti.css
+├─ tools
+│  ├─ downloads
+│  │  ├─ TAXpedia_Bilancio_UE.pdf
+│  │  ├─ TAXpedia_EU_Budget.pdf
+│  │  ├─ TAXpedia_IRPEF.pdf
+│  │  ├─ TAXpedia_IVA.pdf
+│  │  └─ TAXpedia_Tasse101.pdf
+│  ├─ chart-preview.css
+│  ├─ chart-preview.js
+│  ├─ chart-preview.php
+│  ├─ comparison.js
+│  ├─ comparison.php
+│  ├─ comparison_data.php
+│  ├─ country_data.php
+│  ├─ education.php
+│  └─ stylecomparison.css
+├─ AGENTS.md
+├─ index.php
+├─ jsIndex.js
+├─ LICENSE
+├─ PLAN.md
+├─ README.md
+├─ sitemap.xml
 ├─ styleIndex.css
-└─ tools
-   ├─ chart-preview.css
-   ├─ chart-preview.js
-   ├─ chart-preview.php
-   ├─ comparison.js
-   ├─ comparison.php
-   ├─ comparison_data.php
-   ├─ country_data.php
-   ├─ downloads
-   │  ├─ TAXpedia_Bilancio_UE.pdf
-   │  ├─ TAXpedia_EU_Budget.pdf
-   │  ├─ TAXpedia_IRPEF.pdf
-   │  ├─ TAXpedia_IVA.pdf
-   │  └─ TAXpedia_Tasse101.pdf
-   ├─ education.php
-   └─ stylecomparison.css
-
+└─ TASK1_REPORT.md
 ```
