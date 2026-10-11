@@ -74,6 +74,139 @@
 
   .hero-copy{position:relative;z-index:2}
 
+  /* ===================== .EU WEB AWARDS ===================== */
+  .web-awards-banner{
+    position:relative;
+    overflow:hidden;
+    padding:1.5rem 0;
+    color:#fff;
+    background:
+      radial-gradient(circle at 88% 20%, rgba(255,204,0,.18), transparent 24rem),
+      linear-gradient(120deg,#002b73 0%,var(--eu-blue) 58%,#174fb5 100%);
+    border-top:1px solid rgba(255,204,0,.5);
+    border-bottom:1px solid rgba(255,204,0,.5);
+  }
+  .web-awards-banner::after{
+    content:"\2605";
+    position:absolute;
+    right:2.5%;
+    top:50%;
+    color:rgba(255,204,0,.08);
+    font-size:12rem;
+    line-height:1;
+    transform:translateY(-50%) rotate(10deg);
+    pointer-events:none;
+  }
+  .web-awards-banner__inner{
+    position:relative;
+    z-index:1;
+    display:grid;
+    grid-template-columns:minmax(190px,250px) minmax(0,1fr) auto;
+    align-items:center;
+    gap:clamp(1.25rem,3vw,2.5rem);
+  }
+  .web-awards-banner__logo{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .web-awards-banner__eyebrow{
+    margin:0 0 .3rem;
+    color:var(--eu-gold);
+    font-size:.76rem;
+    font-weight:800;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+  }
+  .web-awards-banner__title{
+    margin:0 0 .35rem;
+    color:#fff;
+    font-size:clamp(1.35rem,2.3vw,1.85rem);
+  }
+  .web-awards-banner__text{
+    max-width:62ch;
+    margin:0;
+    color:#e8efff;
+    font-size:.98rem;
+    line-height:1.55;
+  }
+  .web-awards-banner__actions{
+    display:flex;
+    min-width:180px;
+    flex-direction:column;
+    align-items:stretch;
+    gap:.45rem;
+    text-align:center;
+  }
+  .web-awards-banner__button{
+    display:inline-flex;
+    min-height:48px;
+    align-items:center;
+    justify-content:center;
+    gap:.45rem;
+    padding:.75rem 1.05rem;
+    border:1px solid #e6b800;
+    border-radius:.9rem;
+    background:var(--eu-gold);
+    box-shadow:0 8px 20px rgba(0,0,0,.2);
+    color:#0b1020;
+    font-weight:800;
+    text-decoration:none;
+    transition:transform .15s ease,filter .2s ease;
+  }
+  .web-awards-banner__button:hover{
+    filter:brightness(1.06);
+    transform:translateY(-1px);
+  }
+  .web-awards-banner__button:focus-visible{
+    outline:3px solid #fff;
+    outline-offset:3px;
+  }
+  .web-awards-banner__deadline{
+    margin:0;
+    color:#dbe7ff;
+    font-size:.78rem;
+  }
+
+  @media (max-width:820px){
+    .web-awards-banner__inner{
+      grid-template-columns:180px minmax(0,1fr);
+    }
+    .web-awards-banner__actions{
+      grid-column:1 / -1;
+      min-width:0;
+      flex-direction:row;
+      align-items:center;
+      justify-content:center;
+      gap:.85rem;
+    }
+  }
+
+  @media (max-width:560px){
+    .web-awards-banner{padding:1.65rem 0}
+    .web-awards-banner__inner{
+      grid-template-columns:1fr;
+      gap:1rem;
+      text-align:center;
+    }
+    .web-awards-banner__logo{
+      width:min(250px,78vw);
+      margin-inline:auto;
+    }
+    .web-awards-banner__text{margin-inline:auto}
+    .web-awards-banner__actions{
+      grid-column:auto;
+      flex-direction:column;
+      width:min(100%,280px);
+      margin-inline:auto;
+    }
+    .web-awards-banner__button{width:100%}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    .web-awards-banner__button{transition:none}
+  }
+
 
   /* ===================== HERO MAP (decorative EU map) ===================== */
   .hero-map{
@@ -594,3 +727,220 @@ main.container {
     .edu-grid{grid-template-columns:1fr}
     .edu-card{min-height:auto}
   }
+
+/* ===================== HOME: COME FUNZIONA IL CALCOLATORE =====================
+   Classi dedicate alla homepage per evitare effetti sulle altre pagine che
+   condividono styleIndex.css. */
+.home-page .home-calc-flow{
+  padding:clamp(4rem,7vw,6rem) 0;
+  background:
+    radial-gradient(circle at 100% 0, rgba(0,51,153,.07), transparent 34rem),
+    #fff;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.home-page .home-calc-flow__head{
+  max-width:760px;
+  margin:0 auto clamp(2.4rem,5vw,3.6rem);
+  text-align:center;
+}
+
+.home-page .home-calc-flow__eyebrow{
+  margin:0 0 .55rem;
+  color:var(--brand);
+  font-size:.8rem;
+  font-weight:800;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.home-page .home-calc-flow__head h2{
+  margin:0;
+  color:var(--ink);
+  font-size:clamp(1.75rem,3.2vw,2.55rem);
+}
+
+.home-page .home-calc-flow__subtitle{
+  max-width:650px;
+  margin:.8rem auto 0;
+  color:var(--muted);
+  font-size:1.05rem;
+}
+
+.home-page .home-calc-steps{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(1.4rem,2.7vw,2.2rem);
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+
+.home-page .home-calc-step{
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  gap:.9rem;
+  min-width:0;
+}
+
+.home-page .home-calc-step:not(:last-child)::after{
+  content:"→";
+  position:absolute;
+  top:.7rem;
+  right:-1.55rem;
+  color:rgba(0,51,153,.36);
+  font-family:"Inter",system-ui,sans-serif;
+  font-size:1.2rem;
+  font-weight:800;
+  line-height:1;
+}
+
+.home-page .home-calc-step__number{
+  flex:0 0 3rem;
+  width:3rem;
+  height:3rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid var(--brand);
+  border-radius:999px;
+  background:#fff;
+  color:var(--brand);
+  box-shadow:0 7px 18px rgba(0,51,153,.12);
+  font-size:1.1rem;
+  font-weight:900;
+  line-height:1;
+}
+
+.home-page .home-calc-step--compare .home-calc-step__number{
+  border-color:#e6b800;
+  background:var(--accent);
+  color:#0b1020;
+}
+
+.home-page .home-calc-step__content{
+  min-width:0;
+  padding-top:.15rem;
+}
+
+.home-page .home-calc-step__content h3{
+  margin:0 0 .45rem;
+  color:var(--brand);
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:1rem;
+  font-weight:800;
+  line-height:1.35;
+}
+
+.home-page .home-calc-step__content p{
+  margin:0;
+  color:var(--muted);
+  font-size:.93rem;
+  line-height:1.55;
+}
+
+@media (max-width:960px){
+  .home-page .home-calc-steps{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    row-gap:2.25rem;
+  }
+
+  .home-page .home-calc-step::after{
+    display:none;
+  }
+}
+
+@media (max-width:600px){
+  .home-page .home-calc-flow{
+    padding:3.5rem 0;
+  }
+
+  .home-page .home-calc-flow__head{
+    margin-bottom:2.35rem;
+    text-align:left;
+  }
+
+  .home-page .home-calc-flow__subtitle{
+    margin-left:0;
+  }
+
+  .home-page .home-calc-steps{
+    grid-template-columns:1fr;
+    gap:1.8rem;
+  }
+
+  .home-page .home-calc-step{
+    gap:1rem;
+  }
+
+  .home-page .home-calc-step__number{
+    flex-basis:2.8rem;
+    width:2.8rem;
+    height:2.8rem;
+  }
+}
+
+/* ===================== HOME: ARTICOLI A SCORRIMENTO =====================
+   Le regole sono limitate alla homepage: le altre pagine che condividono
+   styleIndex.css conservano il normale layout di .posts-grid.
+   Lo scorrimento e lo snap sono nativi, senza librerie JavaScript. */
+.home-page .posts-grid{
+  grid-template-columns:none;
+  grid-auto-flow:column;
+  grid-auto-columns:calc((100% - 2rem) / 3);
+  align-items:stretch;
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  scroll-snap-type:inline mandatory;
+  scroll-padding-inline:.15rem;
+  -webkit-overflow-scrolling:touch;
+  padding:.25rem .15rem 1rem;
+  scrollbar-width:thin;
+  scrollbar-color:var(--brand) var(--line);
+}
+
+.home-page .posts-grid > *{
+  min-width:0;
+  scroll-snap-align:start;
+}
+
+/* La miniatura e' un'immagine reale: puo' usare lazy loading e non viene
+   scaricata automaticamente come accadrebbe con un background CSS. */
+.home-page img.post-thumb{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16 / 9;
+  object-fit:cover;
+  background:#eef2f8;
+}
+
+.home-page .posts-grid::-webkit-scrollbar{
+  height:8px;
+}
+
+.home-page .posts-grid::-webkit-scrollbar-track{
+  background:var(--line);
+  border-radius:999px;
+}
+
+.home-page .posts-grid::-webkit-scrollbar-thumb{
+  background:var(--brand);
+  border-radius:999px;
+}
+
+/* Telefono orizzontale e tablet: due card visibili. */
+@media (min-width:601px) and (max-width:960px){
+  .home-page .posts-grid{
+    grid-auto-columns:calc((100% - 1rem) / 2);
+  }
+}
+
+/* Telefono verticale: una card quasi intera e un accenno della successiva. */
+@media (max-width:600px){
+  .home-page .posts-grid{
+    grid-auto-columns:88%;
+  }
+}

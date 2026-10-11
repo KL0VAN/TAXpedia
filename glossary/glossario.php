@@ -1,23 +1,4 @@
 <?php
-/**
- * Glossario — TAXpedia
- *
- * Obiettivi UX/UI:
- * - chiarezza per non tecnici + credibilità (registro istituzionale)
- * - navigazione A–Z immediata
- * - termini linkabili (permalink)
- * - ricerca client-side
- *
- * i18n:
- * - cookie tp_lang (fallback IT)
- * - ?lang= ha priorità
- *
- * NOTE FUTURE:
- * - A–Z e sezioni sono generate dinamicamente in base alla lingua:
- *   in EN i termini iniziano con lettere diverse (Tax rate -> T, Public debt -> P, ...).
- * - Gli anchor (#letter-* / #term) vengono “corretti” con uno scroll offset calcolato
- *   (header sticky/fixed + barra A–Z sticky), evitando che le lettere risultino coperte.
- */
 require_once __DIR__ . '/../i18n/i18n.php';
 
 if (!function_exists('glos_get_lang')) {
@@ -114,6 +95,13 @@ $GLOSSARY = array(
       'term_en' => 'Tax rate',
       'def_en'  => 'Percentage applied to the taxable base to compute the tax due.',
     ),
+    array(
+      'id' => 'avanzo-di-bilancio',
+      'term_it' => 'Avanzo di bilancio',
+      'def_it'  => 'Situazione in cui le entrate di un bilancio superano le spese in un determinato periodo.',
+      'term_en' => 'Budget surplus',
+      'def_en'  => 'Situation in which budget revenues exceed expenditures over a given period.',
+    ),
   ),
   'B' => array(
     array(
@@ -133,11 +121,25 @@ $GLOSSARY = array(
   ),
   'C' => array(
     array(
+      'id' => 'capacita-contributiva',
+      'term_it' => 'Capacità contributiva',
+      'def_it'  => 'Principio secondo cui ciascun contribuente partecipa al finanziamento della spesa pubblica in base alla propria forza economica.',
+      'term_en' => 'Ability to pay',
+      'def_en'  => 'Principle according to which each taxpayer contributes to public expenditure according to their economic capacity.',
+    ),
+    array(
       'id' => 'contribuente',
       'term_it' => 'Contribuente',
       'def_it'  => 'Persona fisica o giuridica su cui grava l’obbligazione tributaria.',
       'term_en' => 'Taxpayer',
       'def_en'  => 'Natural or legal person who is legally liable for a tax obligation.',
+    ),
+    array(
+      'id' => 'contributi-sociali',
+      'term_it' => 'Contributi sociali',
+      'def_it'  => 'Versamenti obbligatori destinati a finanziare il sistema previdenziale e assistenziale, come pensioni, disoccupazione e altre prestazioni sociali.',
+      'term_en' => 'Social contributions',
+      'def_en'  => 'Mandatory payments used to finance the social security and welfare system, including pensions, unemployment benefits and other social benefits.',
     ),
     array(
       'id' => 'credito_d_imposta',
@@ -170,6 +172,13 @@ $GLOSSARY = array(
       'def_en'  => 'Expenses that can be subtracted from total income before calculating tax, reducing the taxable base.',
     ),
     array(
+      'id' => 'deficit-pubblico',
+      'term_it' => 'Deficit pubblico',
+      'def_it'  => 'Situazione in cui le spese dello Stato e delle amministrazioni pubbliche superano le entrate in un determinato periodo.',
+      'term_en' => 'Public deficit',
+      'def_en'  => 'Situation in which government and public administration expenditure exceeds revenues over a given period.',
+    ),
+    array(
       'id' => 'detrazioni',
       'term_it' => 'Detrazioni',
       'def_it'  => 'Importi che riducono l’imposta lorda e concorrono a determinare l’imposta netta.',
@@ -182,6 +191,13 @@ $GLOSSARY = array(
       'def_it'  => 'Dichiarazione con cui il contribuente comunica all’amministrazione finanziaria redditi e altri elementi rilevanti per la determinazione dell’imposta.',
       'term_en' => 'Income tax return',
       'def_en'  => 'Formal filing through which a taxpayer reports income and other relevant information to the tax authority.',
+    ),
+    array(
+      'id' => 'disavanzo',
+      'term_it' => 'Disavanzo',
+      'def_it'  => 'Differenza negativa tra entrate e uscite di un bilancio, quando le spese risultano superiori alle entrate.',
+      'term_en' => 'Budget deficit',
+      'def_en'  => 'Negative difference between revenues and expenditures in a budget, when spending is higher than income.',
     ),
   ),
   'E' => array(
@@ -198,6 +214,15 @@ $GLOSSARY = array(
       'def_it'  => 'Inadempimento illecito degli obblighi tributari che comporta il mancato versamento di imposte dovute mediante occultamento o alterazione della base imponibile.',
       'term_en' => 'Tax evasion',
       'def_en'  => 'Illegal non-compliance that results in unpaid taxes, typically through concealment or misreporting of the tax base.',
+    ),
+  ),
+  'F' => array(
+    array(
+      'id' => 'fiscal-drag',
+      'term_it' => 'Fiscal drag',
+      'def_it'  => 'Aumento del peso fiscale dovuto all’inflazione o alla crescita nominale dei redditi, quando scaglioni e detrazioni non vengono aggiornati di conseguenza.',
+      'term_en' => 'Fiscal drag',
+      'def_en'  => 'Increase in the tax burden caused by inflation or nominal income growth when tax brackets and deductions are not adjusted accordingly.',
     ),
   ),
   'G' => array(
@@ -232,6 +257,20 @@ $GLOSSARY = array(
       'def_en'  => 'Taxes applied to the consumption or exchange of goods and services, regardless of the taxpayer’s income, such as VAT.',
     ),
     array(
+      'id' => 'imposta-lorda',
+      'term_it' => 'Imposta lorda',
+      'def_it'  => 'Importo dell’imposta calcolato sul reddito imponibile prima dell’applicazione di detrazioni, crediti d’imposta o altri benefici fiscali.',
+      'term_en' => 'Gross tax',
+      'def_en'  => 'The amount of tax calculated on taxable income before deductions, tax credits or other tax benefits are applied.',
+    ),
+    array(
+      'id' => 'imposta-netta',
+      'term_it' => 'Imposta netta',
+      'def_it'  => 'Importo finale dell’imposta dovuta dopo l’applicazione di detrazioni, crediti d’imposta e altri benefici fiscali.',
+      'term_en' => 'Net tax',
+      'def_en'  => 'The final amount of tax due after deductions, tax credits and other tax benefits have been applied.',
+    ),
+    array(
       'id' => 'ires',
       'term_it' => 'IRES',
       'def_it'  => 'Imposta sul Reddito delle Società, applicata al reddito prodotto da società ed enti soggetti a imposizione.',
@@ -253,6 +292,15 @@ $GLOSSARY = array(
       'def_en'  => 'General consumption tax levied on value added, harmonised across the European Union.',
     ),
   ),
+  'N' => array(
+    array(
+      'id' => 'no-tax-area',
+      'term_it' => 'No tax area',
+      'def_it'  => 'Fascia di reddito entro la quale l’imposta dovuta è pari a zero o viene annullata tramite detrazioni fiscali.',
+      'term_en' => 'No tax area',
+      'def_en'  => 'Income range within which the tax due is zero or is eliminated through tax deductions.',
+    ),
+  ),
   'P' => array(
     array(
       'id' => 'partita-iva',
@@ -267,6 +315,13 @@ $GLOSSARY = array(
       'def_it'  => 'Rapporto tra entrate tributarie e contributive e PIL, espresso in percentuale.',
       'term_en' => 'Tax-to-GDP ratio',
       'def_en'  => 'Ratio of tax and social contribution revenues to GDP, expressed as a percentage.',
+    ),
+    array(
+      'id' => 'progressivita-fiscale',
+      'term_it' => 'Progressività fiscale',
+      'def_it'  => 'Principio secondo cui l’aliquota o il peso dell’imposta aumenta al crescere della capacità economica del contribuente.',
+      'term_en' => 'Tax progressivity',
+      'def_en'  => 'Principle according to which the tax rate or tax burden increases as the taxpayer’s economic capacity rises.',
     ),
     array(
       'id' => 'pil',
@@ -292,6 +347,34 @@ $GLOSSARY = array(
       'def_en'  => 'Public debt divided by nominal GDP, expressed as a percentage.',
     ),
     array(
+      'id' => 'reddito-imponibile',
+      'term_it' => 'Reddito imponibile',
+      'def_it'  => 'Parte del reddito su cui vengono calcolate le imposte, dopo l’applicazione di eventuali deduzioni previste dalla legge.',
+      'term_en' => 'Taxable income',
+      'def_en'  => 'The portion of income on which taxes are calculated, after any legally allowed deductions have been applied.',
+    ),
+    array(
+      'id' => 'reddito-lordo',
+      'term_it' => 'Reddito lordo',
+      'def_it'  => 'Reddito complessivo percepito prima dell’applicazione di imposte, contributi e altre trattenute.',
+      'term_en' => 'Gross income',
+      'def_en'  => 'Total income received before taxes, contributions and other deductions are applied.',
+    ),
+    array(
+      'id' => 'reddito-netto',
+      'term_it' => 'Reddito netto',
+      'def_it'  => 'Reddito effettivamente disponibile dopo il pagamento di imposte, contributi e altre trattenute.',
+      'term_en' => 'Net income',
+      'def_en'  => 'Income actually available after taxes, contributions and other deductions have been paid.',
+    ),
+    array(
+      'id' => 'regressivita-fiscale',
+      'term_it' => 'Regressività fiscale',
+      'def_it'  => 'Situazione in cui il peso di un’imposta incide proporzionalmente di più sui redditi bassi rispetto ai redditi alti.',
+      'term_en' => 'Tax regressivity',
+      'def_en'  => 'Situation in which a tax burden weighs proportionally more on lower incomes than on higher incomes.',
+    ),
+    array(
       'id' => 'ritenuta_alla_fonte',
       'term_it' => 'Ritenuta alla fonte',
       'def_it'  => 'Meccanismo con cui l’imposta viene trattenuta dal soggetto che paga il reddito e versata allo Stato per conto del contribuente.',
@@ -300,6 +383,13 @@ $GLOSSARY = array(
     ),
   ),
   'S' => array(
+    array(
+      'id' => 'saldo-primario',
+      'term_it' => 'Saldo primario',
+      'def_it'  => 'Differenza tra entrate e spese pubbliche al netto degli interessi pagati sul debito pubblico.',
+      'term_en' => 'Primary balance',
+      'def_en'  => 'Difference between public revenues and public expenditures, excluding interest payments on public debt.',
+    ),
     array(
       'id' => 'scaglione_di_reddito',
       'term_it' => 'Scaglione di reddito',
@@ -315,11 +405,43 @@ $GLOSSARY = array(
       'def_en'  => 'Entity legally required to withhold and pay taxes on behalf of another taxpayer, such as an employer for employees.',
     ),
     array(
+      'id' => 'spesa-corrente',
+      'term_it' => 'Spesa corrente',
+      'def_it'  => 'Spesa pubblica destinata al funzionamento ordinario dello Stato e dei servizi pubblici, come stipendi, pensioni e acquisto di beni e servizi.',
+      'term_en' => 'Current expenditure',
+      'def_en'  => 'Public expenditure used for the ordinary functioning of the state and public services, such as wages, pensions and purchases of goods and services.',
+    ),
+    array(
+      'id' => 'spesa-in-conto-capitale',
+      'term_it' => 'Spesa in conto capitale',
+      'def_it'  => 'Spesa pubblica destinata a investimenti e interventi che producono benefici nel medio-lungo periodo, come infrastrutture e opere pubbliche.',
+      'term_en' => 'Capital expenditure',
+      'def_en'  => 'Public expenditure devoted to investments and measures that generate medium- to long-term benefits, such as infrastructure and public works.',
+    ),
+    array(
       'id' => 'spesa-pubblica',
       'term_it' => 'Spesa pubblica',
       'def_it'  => 'Totale delle uscite delle amministrazioni pubbliche in un periodo, includendo spesa corrente e in conto capitale.',
       'term_en' => 'Public expenditure',
       'def_en'  => 'Total spending of general government over a period, including current and capital expenditure.',
+    ),
+  ),
+  'T' => array(
+    array(
+      'id' => 'trasferimenti-pubblici',
+      'term_it' => 'Trasferimenti pubblici',
+      'def_it'  => 'Risorse erogate dallo Stato o da altre amministrazioni pubbliche a famiglie, imprese o enti senza una controprestazione diretta.',
+      'term_en' => 'Public transfers',
+      'def_en'  => 'Resources provided by the state or other public administrations to households, businesses or institutions without a direct exchange of goods or services.',
+    ),
+  ),
+  'W' => array(
+    array(
+      'id' => 'welfare-state',
+      'term_it' => 'Welfare state',
+      'def_it'  => 'Sistema di politiche pubbliche che mira a garantire protezione sociale, sanità, istruzione, pensioni e sostegno al reddito.',
+      'term_en' => 'Welfare state',
+      'def_en'  => 'System of public policies aimed at providing social protection, healthcare, education, pensions and income support.',
     ),
   ),
 );

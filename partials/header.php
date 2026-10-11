@@ -6,7 +6,7 @@ $tp_main_nav = array(
   array('href' => '/calculator/menu.php', 'label' => e('nav_calculator')),
   array('href' => '/article/articoli.php', 'label' => e('nav_article')),
   array('href' => '/glossary/glossario.php', 'label' => e('nav_glossary')),
-  array('href' => '/tools/program.php', 'label' => e('nav_lessons')),
+  array('href' => '/tools/education.php', 'label' => e('nav_lessons')),
   array('href' => '/aboutus/aboutus.php', 'label' => e('nav_about')),
 );
 

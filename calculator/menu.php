@@ -11,7 +11,7 @@ $TPM_I18N = array(
   'it' => array(
     'meta_title'   => 'Menu Calcolatori per Nazione - TAXpedia',
     'h1'           => 'Calcolatori per Nazione',
-    'sub'          => 'Scegli un calcolatore nazionale e scopri come si divide la spesa pubblica nei diversi paesi europei. Nuovi paesi presto in arrivo.',
+    'sub'          => 'Scegli un calcolatore nazionale e scopri come si divide la spesa pubblica nei diversi paesi europei.',
     'aria_select'  => 'Seleziona un calcolatore nazionale',
     'btn_conf'     => 'Confronta diversi paesi Europei',
 
@@ -42,16 +42,12 @@ $TPM_I18N = array(
     'fi_name'      => 'Finlandia',
     'cy_name'      => 'Cipro',
     'mt_name'      => 'Malta',
-
-    'foot'         => 'Calcolatore spesa pubblica ',
-    'coming'       => 'Presto disponibile',
-    'work_progress' => 'Lavori in corso',
   ),
 
   'en' => array(
     'meta_title'   => 'Country Calculators Menu - TAXpedia',
     'h1'           => 'Calculators by country',
-    'sub'          => 'Choose a national calculator and see how public spending is divided across European countries. New countries coming soon.',
+    'sub'          => 'Choose a national calculator and see how public spending is divided across European countries.',
     'aria_select'  => 'Select a national calculator',
     'btn_conf'     => 'Compare different European countries',
 
@@ -82,10 +78,6 @@ $TPM_I18N = array(
     'fi_name'      => 'Finland',
     'cy_name'      => 'Cyprus',
     'mt_name'      => 'Malta',
-
-    'foot'         => 'Public spending calculator',
-    'coming'       => 'Soon available',
-    'work_progress' => 'Work in progress',
   ),
 );
 
@@ -146,7 +138,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('it_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Francia -->
@@ -155,7 +146,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('fr_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Germania -->
@@ -164,7 +154,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('de_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Spagna -->
@@ -173,7 +162,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('es_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Belgio -->
@@ -182,7 +170,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('be_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Olanda -->
@@ -191,7 +178,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('nl_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Lussemburgo -->
@@ -200,7 +186,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('lu_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Austria -->
@@ -209,7 +194,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('at_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Croazia -->
@@ -218,7 +202,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('hr_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Polonia -->
@@ -227,7 +210,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('pl_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Portogallo -->
@@ -236,7 +218,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('pt_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Slovenia -->
@@ -245,7 +226,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('si_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Bulgaria -->
@@ -254,7 +234,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('bg_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Cechia -->
@@ -263,7 +242,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('cz_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Danimarca -->
@@ -272,7 +250,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('dk_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Grecia -->
@@ -281,7 +258,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('gr_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Ungheria -->
@@ -290,7 +266,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('hu_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Irlanda -->
@@ -299,7 +274,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('ie_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Romania -->
@@ -308,7 +282,6 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('ro_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
         <!-- Svezia -->
@@ -317,71 +290,63 @@ if (!function_exists('tpm_e')) {
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('se_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('foot'); ?></div>
         </a>
 
-        <!-- Lettonia (lavori in corso) -->
-        <div class="nation-card is-soon" aria-disabled="true">
+        <!-- Lettonia -->
+        <a href="/calculator/latvia/latvia.php" class="nation-card">
           <span class="nation-flag flag-latvia" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('lv_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
-        </div>
+        </a>
 
-        <!-- Estonia (lavori in corso) -->
-        <div class="nation-card is-soon" aria-disabled="true">
+        <!-- Estonia -->
+        <a href="/calculator/estonia/estonia.php" class="nation-card">
           <span class="nation-flag flag-estonia" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('ee_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
-        </div>
+        </a>
 
-        <!-- Lituania (lavori in corso) -->
-        <div class="nation-card is-soon" aria-disabled="true">
+        <!-- Lituania -->
+        <a href="/calculator/lithuania/lithuania.php" class="nation-card">
           <span class="nation-flag flag-lithuania" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('lt_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
-        </div>
+        </a>
 
-        <!-- Slovacchia (lavori in corso) -->
-        <div class="nation-card is-soon" aria-disabled="true">
+        <!-- Slovacchia -->
+        <a href="/calculator/slovakia/slovakia.php" class="nation-card">
           <span class="nation-flag flag-slovakia" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('sk_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
-        </div>
+        </a>
 
-        <!-- Finlandia (lavori in corso) -->
-        <div class="nation-card is-soon" aria-disabled="true">
+        <!-- Finlandia -->
+        <a href="/calculator/finland/finland.php" class="nation-card">
           <span class="nation-flag flag-finland" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('fi_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
-        </div>
+        </a>
 
-        <!-- Cipro (lavori in corso) -->
-        <div class="nation-card is-soon" aria-disabled="true">
+        <!-- Cipro -->
+        <a href="/calculator/cyprus/cyprus.php" class="nation-card">
           <span class="nation-flag flag-cyprus" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('cy_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
-        </div>
+        </a>
 
-        <!-- Malta (lavori in corso) -->
-        <div class="nation-card is-soon" aria-disabled="true">
+        <!-- Malta -->
+        <a href="/calculator/malta/malta.php" class="nation-card">
           <span class="nation-flag flag-malta" aria-hidden="true"></span>
           <div class="nation-header">
             <h3 class="nation-name"><?php echo tpm_e('mt_name'); ?></h3>
           </div>
-          <div class="nation-foot"><?php echo tpm_e('work_progress'); ?></div>
-        </div>
+        </a>
 
       </div>
     </section>

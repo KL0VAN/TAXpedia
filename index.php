@@ -1,14 +1,10 @@
 <?php
 require_once __DIR__ . '/i18n/i18n.php';
 
-/**
- * Traduzioni SOLO per questa pagina (index)
- * (così non devi per forza riempire subito i dizionari globali)
- */
 $lang = tp_lang();
 
 $page_i18n = array(
-  // NAV + FOOTER (così header/footer funzionano anche se i dizionari globali sono incompleti)
+  // NAV + FOOTER
   'lang_label' => ($lang === 'en') ? 'Language' : 'Lingua',
   'nav_home' => 'Home',
   'nav_calculator' => ($lang === 'en') ? 'Calculator' : 'Calcolatore',
@@ -26,21 +22,42 @@ $page_i18n = array(
 
   // HERO
   'hero_h1' => ($lang === 'en')
-    ? 'Your taxes, explained in a <span class="hl">simple</span> and <span class="hl">transparent</span> way.'
-    : 'Le tue tasse, spiegate in modo <span class="hl">semplice</span> e <span class="hl">trasparente</span>.',
+  ? 'Understand taxes.<br><span class="hl">Understand Europe.</span>'
+  : 'Capire le tasse.<br><span class="hl">Capire l’Europa.</span>',
   'hero_subtitle' => ($lang === 'en')
-    ? 'With TAXpedia you understand how public spending is composed and where your contributions go.
-       A <strong>free</strong>, <strong>clear</strong> and <strong>reliable</strong> tool.'
-    : 'Con TAXpedia capisci come è composta la spesa pubblica e dove vengono impiegati i tuoi contributi.
-       Uno strumento <strong>gratuito</strong>, <strong>chiaro</strong> e <strong>affidabile</strong>.',
+  ? 'Discover how much you contribute, how <strong>public resources</strong> are used, and how taxation and public spending differ across the European Union’s <strong>27 Member States</strong>.'
+  : 'Scopri quanto contribuisci, come vengono utilizzate le <strong>risorse pubbliche</strong> e come cambiano tasse e spesa nei <strong>27 Paesi</strong> dell’Unione europea.',
   'cta_calc' => ($lang === 'en') ? 'Try the calculator now' : 'Prova ora il calcolatore',
   'cta_edu' => ($lang === 'en') ? 'Learn with us' : 'Impara con noi',
   'hero_micro' => ($lang === 'en') ? 'Free • official data • no registration' : 'Gratis • dati ufficiali • nessuna registrazione',
   'trust_1' => ($lang === 'en') ? 'Data from <strong>official</strong> sources' : 'Dati da fonti <strong>ufficiali</strong>',
   'trust_2' => ($lang === 'en') ? 'No registration required' : 'Nessuna registrazione richiesta',
 
+  // HOW THE CALCULATOR WORKS
+  'calc_flow_eyebrow' => ($lang === 'en') ? 'How the TAXpedia calculator works' : 'Come funziona il calcolatore TAXpedia',
+  'calc_flow_h2' => ($lang === 'en') ? 'From your income to public spending' : 'Dal tuo reddito alla spesa pubblica',
+  'calc_flow_sub' => ($lang === 'en')
+    ? 'Four simple steps to estimate your contribution and understand how public resources are used.'
+    : 'Quattro passaggi per stimare quanto contribuisci e capire come vengono utilizzate le risorse pubbliche.',
+  'calc_step_1_title' => ($lang === 'en') ? 'Enter your income' : 'Inserisci il tuo reddito',
+  'calc_step_1_text' => ($lang === 'en')
+    ? 'Choose a country and enter your annual gross income.'
+    : 'Scegli il Paese e indica il tuo reddito lordo annuale.',
+  'calc_step_2_title' => ($lang === 'en') ? 'Get a tax estimate' : 'Ottieni una stima fiscale',
+  'calc_step_2_text' => ($lang === 'en')
+    ? 'The calculator estimates your taxes based on the selected tax system.'
+    : 'Il calcolatore stima le imposte in base al sistema fiscale selezionato.',
+  'calc_step_3_title' => ($lang === 'en') ? 'Explore public spending' : 'Scopri dove vanno le risorse',
+  'calc_step_3_text' => ($lang === 'en')
+    ? 'See how public spending is distributed across different sectors.'
+    : 'Visualizza come la spesa pubblica viene distribuita tra i diversi settori.',
+  'calc_step_4_title' => ($lang === 'en') ? 'Compare EU countries' : 'Confronta i Paesi europei',
+  'calc_step_4_text' => ($lang === 'en')
+    ? 'Compare economic indicators and spending priorities across EU Member States.'
+    : 'Confronta indicatori economici e priorità di spesa tra gli Stati membri dell’UE.',
+
   // EDUCATION PROGRAM
-  'program_h2' => ($lang === 'en') ? 'Tools for financial education' : 'Strumenti per l’educazione finanziaria',
+  'program_h2' => ($lang === 'en') ? 'Tools for civic and tax education' : 'Strumenti per l’educazione civica e fiscale',
   'program_p' => ($lang === 'en') ? 'Practical resources for understanding the world of taxes easily.' : 'Risorse pratiche per conoscere il mondo del fisco in modo semplice.',
   'edu-badge_1' => ($lang === 'en') ? 'Program' : 'Programma',
   'edu-text_1' => ($lang === 'en') ? 'Ready-to-use lessons: tax basics, examples, and definitions.' : 'Lezioni pronte da usare: basi sulle tasse, esempi e definizioni.',
@@ -51,37 +68,29 @@ $page_i18n = array(
   'gloss_btn' => ($lang === 'en') ? 'Open the glossary' : 'Usa il glossario',
 
   // ABOUT
-  'about_h2' => ($lang === 'en') ? 'What is TAXpedia?' : 'Cos’è TAXpedia?',
-  'about_sub' => ($lang === 'en')
-    ? 'An initiative started by young students to raise awareness by showing, in a <strong>clear</strong> and <strong>simple</strong> way, where the taxes paid by each taxpayer are used.'
-    : 'Un’iniziativa nata da giovani studenti per cercare di sensibilizzare la popolazione mostrando in modo <strong>chiaro</strong> e <strong>semplice</strong> dove vengono impiegate le tasse versate da ciascun contribuente.',
-  'feat_1_h3' => ($lang === 'en') ? 'Reliability' : 'Affidabilità',
-  'feat_1_p' => ($lang === 'en') ? 'Data collected from official ministerial budgets.' : 'Dati raccolti dai bilanci ufficiali dei Ministeri.',
-  'feat_2_h3' => ($lang === 'en') ? 'Clarity' : 'Chiarezza',
-  'feat_2_p' => ($lang === 'en') ? 'Charts and data simplified into language everyone can understand.' : 'Grafici e dati semplificati in un linguaggio comprensibili a tutti.',
-  'feat_3_h3' => ($lang === 'en') ? 'Impartiality' : 'Imparzialità',
-  'feat_3_p' => ($lang === 'en') ? 'Data analyzed objectively and without political bias.' : 'Dati analizzati in modo oggettivo e apolitico.',
-  'about_btn' => ($lang === 'en') ? 'Find out more about us' : 'Scopri di più su di noi',
-
-
+  'about_h2' => ($lang === 'en') ? 'A European project built by young people' : 'Un progetto europeo costruito da giovani',
+  'about_sub' => ($lang === 'en') ? 'An independent editorial team headquartered in Milan, with additional teams in Zagreb and Edinburgh. We turn technical documents and institutional sources into accessible tools for citizens and students.' : 'Una redazione indipendente con sede principale a Milano e redazioni distaccate a Zagabria ed Edimburgo. Trasformiamo documenti tecnici e fonti istituzionali in strumenti accessibili a cittadini e studenti.',
+  'about_btn' => ($lang === 'en') ? 'Meet the team' : 'Scopri il team',
+  'impact_btn' => ($lang === 'en') ? 'Our impact' : 'Il nostro impatto',
+  'disclaimer_btn' => ($lang === 'en') ? 'How we work' : 'Come lavoriamo',
   'stat' => '5000+ mld',
   'stat_label' => ($lang === 'en') ? 'of public spending<br> analyzed' : 'di spesa pubblica<br> analizzata',
-  'about_stat_1_num' => '20',
+  'about_stat_1_num' => '27',
   'about_stat_1_label' => ($lang === 'en') ? 'Countries covered' : 'Paesi coperti',
-  'about_stat_2_num' => '31',
+  'about_stat_2_num' => '50',
   'about_stat_2_label' => ($lang === 'en') ? 'Glossary entries' : 'Voci di glossario',
-  'about_stat_3_num' => '20+',
+  'about_stat_3_num' => '30+',
   'about_stat_3_label' => ($lang === 'en') ? 'Articles & guides' : 'Articoli e guide',
 
   // SOCIAL + CONTACT
   'social_h2' => ($lang === 'en') ? 'Follow us on social' : 'Seguici sui social',
   'social_sub' => ($lang === 'en')
-    ? 'So you don’t miss updates and always stay informed about public finance.</br></br>'
-    : 'Per non perderti le ultime novità e per restare sempre aggiornato sulla finanza pubblica.</br></br>',
+    ? 'So you don’t miss updates and always stay informed about public finance.<br><br>'
+    : 'Per non perderti le ultime novità e per restare sempre aggiornato sulla finanza pubblica.<br><br>',
   'contact_h2' => ($lang === 'en') ? 'Contact us' : 'Contattaci',
   'contact_sub' => ($lang === 'en')
-    ? 'For any question or deeper dive, we’re here for you.</br></br>'
-    : 'Per qualunque dubbio, domanda o approfondimento siamo a tua disposizione.</br></br>',
+    ? 'For any question or deeper dive, we’re here for you.<br><br>'
+    : 'Per qualunque dubbio, domanda o approfondimento siamo a tua disposizione.<br><br>',
 
   // COOKIE
   'cookie_strong' => ($lang === 'en')
@@ -137,7 +146,7 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
           "https://www.linkedin.com/company/taxpedia-eu",
           "https://www.instagram.com/taxpedia.eu"
         ],
-        "contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"info@taxpedia.eu"}]
+        "contactPoint":[{"@type":"ContactPoint","contactType":"customer service","email":"team@taxpedia.eu"}]
       },
       {
         "@type":"WebSite",
@@ -156,10 +165,10 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
   </script>
 </head>
 
-<body>
+<body class="home-page">
   <?php require_once __DIR__ . '/partials/header.php'; ?>
 
-  <!-- === COOKIE BANNER (minimal, solo tecnici) === -->
+  <!-- COOKIE BANNER -->
   <div id="cookie-banner"
        class="cookie-banner"
        role="region"
@@ -177,6 +186,7 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
     </div>
   </div>
 
+  <main id="main">
   <!-- ===================== HERO ===================== -->
   <section class="hero hero--eu">
     <div class="container hero-grid">
@@ -201,6 +211,9 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
     </div>
   </section>
 
+  <!-- ===================== .EU WEB AWARDS ===================== -->
+  <?php require_once __DIR__ . '/partials/web-awards.php'; ?>
+
   <!-- ===================== I NOSTRI ARTICOLI ===================== -->
   <?php require_once __DIR__ . '/partials/new-article.php'; ?>
 
@@ -221,7 +234,7 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
           <p class="edu-text"><?php echo t('edu-text_1'); ?></p>
         </div>
         <div class="edu-actions">
-          <a class="btn btn-primary" href="/tools/program.php"><?php echo t('download_edu'); ?></a>
+          <a class="btn btn-primary" href="/tools/education.php"><?php echo t('download_edu'); ?></a>
         </div>
       </article>
 
@@ -242,39 +255,67 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
   </section>
 
 
-  <!-- ===================== PRESENTAZIONE ===================== -->
-  <section class="value" id="about">
+  <!-- ===================== COME FUNZIONA - CALCOLATORE ===================== -->
+  <section class="home-calc-flow" aria-labelledby="home-calc-flow-title">
     <div class="container">
-      <div class="section-head">
-        <h2><?php echo t('about_h2'); ?></h2>
-        <p class="section-sub"><?php echo t('about_sub'); ?></p>
+      <div class="home-calc-flow__head">
+        <p class="home-calc-flow__eyebrow"><?php echo t('calc_flow_eyebrow'); ?></p>
+        <h2 id="home-calc-flow-title"><?php echo t('calc_flow_h2'); ?></h2>
+        <p class="home-calc-flow__subtitle"><?php echo t('calc_flow_sub'); ?></p>
       </div>
 
-      <div class="features">
-        <article class="feature">
-          <h3><?php echo t('feat_1_h3'); ?></h3>
-          <p><?php echo t('feat_1_p'); ?></p>
-        </article>
-        <article class="feature">
-          <h3><?php echo t('feat_2_h3'); ?></h3>
-          <p><?php echo t('feat_2_p'); ?></p>
-        </article>
-        <article class="feature">
-          <h3><?php echo t('feat_3_h3'); ?></h3>
-          <p><?php echo t('feat_3_p'); ?></p>
-        </article>
-      </div>
+      <ol class="home-calc-steps">
+        <li class="home-calc-step">
+          <span class="home-calc-step__number" aria-hidden="true">1</span>
+          <div class="home-calc-step__content">
+            <h3><?php echo t('calc_step_1_title'); ?></h3>
+            <p><?php echo t('calc_step_1_text'); ?></p>
+          </div>
+        </li>
 
-      <div class="container final-cta-inner">
-        <div class="cta-row">
-          <a class="btn btn-outline" href="aboutus/aboutus.php"><?php echo t('about_btn'); ?></a>
-        </div>
-      </div>
+        <li class="home-calc-step">
+          <span class="home-calc-step__number" aria-hidden="true">2</span>
+          <div class="home-calc-step__content">
+            <h3><?php echo t('calc_step_2_title'); ?></h3>
+            <p><?php echo t('calc_step_2_text'); ?></p>
+          </div>
+        </li>
+
+        <li class="home-calc-step">
+          <span class="home-calc-step__number" aria-hidden="true">3</span>
+          <div class="home-calc-step__content">
+            <h3><?php echo t('calc_step_3_title'); ?></h3>
+            <p><?php echo t('calc_step_3_text'); ?></p>
+          </div>
+        </li>
+
+        <li class="home-calc-step home-calc-step--compare">
+          <span class="home-calc-step__number" aria-hidden="true">4</span>
+          <div class="home-calc-step__content">
+            <h3><?php echo t('calc_step_4_title'); ?></h3>
+            <p><?php echo t('calc_step_4_text'); ?></p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
   <!-- ===================== DATA ===================== -->
   <section class="final-cta final-cta--eu" aria-label="Invito all’azione">
+    <div class="container">
+      <div class="section-head">
+        <h2><?php echo t('about_h2'); ?></h2>
+        <p style="color:white" class="subtitle"><?php echo t('about_sub'); ?></p>
+      </div>
+
+      <div class="container final-cta-inner">
+        <div class="cta-row">
+          <a class="btn btn-ghost" href="aboutus/disclaimer.php"><?php echo t('disclaimer_btn'); ?></a>  
+          <a class="btn btn-primary" href="aboutus/aboutus.php"><?php echo t('about_btn'); ?></a>
+          <a class="btn btn-ghost" href="aboutus/impact.php"><?php echo t('impact_btn'); ?></a>
+        </div>
+      </div>
+    </div>
     <div class="stats-strip" role="list" aria-label="Numeri chiave">
         <div>
           <div class="stat-pill-num"><?php echo t('about_stat_1_num'); ?></div>
@@ -311,6 +352,7 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
       <a class="btn btn-outline" href="mailto:team@taxpedia.eu">team@taxpedia.eu</a>
     </div>
   </section>
+  </main>
 
   <?php require_once __DIR__ . '/partials/footer.php'; ?>
 

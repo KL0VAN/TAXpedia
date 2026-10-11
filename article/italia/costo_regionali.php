@@ -62,6 +62,8 @@ $CR_I18N = array(
     'h3_method'      => 'Come abbiamo calcolato questi dati',
     'p_method'       => 'Le spese totali sono basate su dati ufficiali dove disponibili e su stime per le restanti regioni, calcolate in proporzione al numero di sezioni elettorali. Gli importi sono arrotondati e potrebbero differire dai consuntivi che saranno pubblicati successivamente.',
 
+    'author'         => 'A cura di <a href="/aboutus/team/francesco-calabrese-vallino.php" style="text-decoration: underline;">Francesco Calabrese Vallino</a>.',
+
     'collab'         => 'Articolo realizzato in collaborazione con',
   ),
 
@@ -115,6 +117,8 @@ $CR_I18N = array(
 
     'h3_method'      => 'How we calculated these figures',
     'p_method'       => 'Total expenses are based on official data where available and on estimates for the remaining regions, calculated in proportion to the number of polling stations. Amounts are rounded and may differ from the final outturn figures that will be published later.',
+
+    'author'         => 'Written by <a href="/aboutus/team/francesco-calabrese-vallino.php" style="text-decoration: underline;">Francesco Calabrese Vallino</a>.',
 
     'collab'         => 'Article produced in collaboration with',
   ),
@@ -194,6 +198,7 @@ if (!function_exists('cr_e')) {
       <p><?php echo cr_e('p_pays'); ?></p>
       <h3><?php echo cr_e('h3_method'); ?></h3>
       <p><?php echo cr_e('p_method'); ?></p>
+      <p><?php echo cr_t('author'); ?></p>
     </section>
       <p align="center"><?php echo cr_e('collab'); ?></p>
       <figure align="center">

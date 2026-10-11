@@ -56,7 +56,7 @@ $ITLP_I18N = array(
     'comparison_btn' => "Confronta i dati con altri paesi europei",
 
     'box_eu_title' => "Spesa europea",
-    'box_eu_desc' => "Distribuzione del contributo svedese al bilancio dell'Unione Europea.",
+    'box_eu_desc' => "Distribuzione del contributo greco al bilancio dell'Unione Europea.",
     'legend_eu_aria' => "Dettaglio (UE)",
     'legend_subtle_eu' => "(UE)",
     'chart_eu_aria' => "Grafico contributo bilancio UE",

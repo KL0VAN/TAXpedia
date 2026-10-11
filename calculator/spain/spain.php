@@ -227,7 +227,7 @@ if (!function_exists('itlp_e')) {
       <h2 class="box-title" id="fonti"><?php echo itlp_e('sources'); ?></h2>
       <ul>
         <li>Ministerio de Economía, Comercio y Empresa</li>
-        <li>Secretaría de Estado de Presupuestos y Gastos/li>
+        <li>Secretaría de Estado de Presupuestos y Gastos</li>
       </ul>
       </section>
     </div>

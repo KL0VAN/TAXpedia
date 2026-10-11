@@ -64,8 +64,8 @@ const CALCIT_I18N = {
     tooltip_label: (label, amount, percent) => `${label}: ${amount} (${percent}%)`,
     legend_title: "Settore — Importo ",
     legend_note: "Clicca per aprire il dettaglio. Hover per evidenziare la fetta.",
-    legend_subtle_reg: "(Lombardia)",
-    chart_reg_aria: "Grafico ripartizione Lombardia",
+    legend_subtle_reg: (regionName) => `(${regionName || 'Regione'})`,
+    chart_reg_aria: (regionName) => `Grafico ripartizione ${regionName || 'regione'}`,
   },
 
   // =========================
@@ -78,8 +78,8 @@ const CALCIT_I18N = {
     tooltip_label: (label, amount, percent) => `${label}: ${amount} (${percent}%)`,
     legend_title: "Sector — Amount ",
     legend_note: "Click to open details. Hover to highlight the slice.",
-    legend_subtle_reg: "(Lombardy)",
-    chart_reg_aria: "Lombardy allocation chart",
+    legend_subtle_reg: (regionName) => `(${regionName || 'Region'})`,
+    chart_reg_aria: (regionName) => `${regionName || 'Regional'} allocation chart`,
   },
 };
 
@@ -88,6 +88,11 @@ function calcit_t(key) {
   if (CALCIT_I18N[L] && Object.prototype.hasOwnProperty.call(CALCIT_I18N[L], key)) return CALCIT_I18N[L][key];
   if (CALCIT_I18N.it && Object.prototype.hasOwnProperty.call(CALCIT_I18N.it, key)) return CALCIT_I18N.it[key];
   return '';
+}
+
+function calcit_tf(key, ...args) {
+  const value = calcit_t(key);
+  return typeof value === 'function' ? value(...args) : value;
 }
 
 /* ========================= CONFIG ========================= */
@@ -155,22 +160,175 @@ const SETTORI_UE = [
 ];
 
 // =========================
-// Spesa Regione (SOLO Lombardia) — placeholder
-// Le percentuali devono sommare a 1.00
-// Quando avrai i dati reali, modifica questi valori.
+// Spesa regionale - placeholder per le regioni abilitate
+// Le percentuali devono sommare a 1.00.
+// Per aggiungere dati reali, sostituisci l'array della singola regione in SETTORI_REGIONALI.
+// Regioni abilitate: Veneto, Campania, Liguria, Sicilia, Toscana, Marche, Lombardia,
+// Puglia, Lazio, Emilia-Romagna, Piemonte.
 // =========================
-const SETTORI_LOMBARDIA = [
-  { nome:{ it:'Sanità',                      en:'Healthcare' },                   percentuale:0.54, link:null },
-  { nome:{ it:'Protezione sociale',          en:'Social protection' },            percentuale:0.148, link:null },
-  { nome:{ it:'Infrastrutture e trasporti',  en:'Infrastructure & transport' },   percentuale:0.075, link:null },
-  { nome:{ it:'Politiche economiche',        en:'Economic policies' },            percentuale:0.07, link:null },
-  { nome:{ it:'Pubblica amministrazione',    en:'Public administration' },        percentuale:0.062, link:null },
-  { nome:{ it:'Istruzione e ricerca',        en:'Education & research' },         percentuale:0.041, link:null },  
-  { nome:{ it:'Sicurezza e ordine pubblico', en:'Public security' },              percentuale:0.021, link:null },
-  { nome:{ it:'Cultura e sport',             en:'Culture & sport' },              percentuale:0.009, link:null },
-  { nome:{ it:'Protezione ambientale',       en:'Environmental protection' },     percentuale:0.008, link:null },
-  { nome:{ it:'Altro',                       en:'Other' },                        percentuale:0.003, link:null },
-];
+const SETTORI_REGIONALI_DATI = {
+'Veneto': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.6212, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.2316, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0563, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0342, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0285, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0106, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0096, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0031, link: null },
+  { nome: { it: 'Interessi sul debito pubblico', en: 'Public debt interest' }, percentuale: 0.0023, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0021, link: null },
+  { nome: { it: 'Ordine pubblico e sicurezza', en: 'Public order & safety' }, percentuale: 0.0005, link: null },
+],
+'Liguria': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.7040, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.0580, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0570, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0550, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0420, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0320, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0210, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0120, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0100, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Interessi', en: 'Interest payments' }, percentuale: 0.0030, link: null },
+],
+'Campania': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.6530, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0780, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0650, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0410, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0210, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0180, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0070, link: null },
+  { nome: { it: 'Interessi', en: 'Interest payments' }, percentuale: 0.0040, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0040, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0040, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.1050, link: null },
+],
+'Sicilia': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.4690, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.2470, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.0850, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0490, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0420, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0400, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0320, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0130, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0110, link: null },
+  { nome: { it: 'Interessi', en: 'Interest payments' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0060, link: null },
+],
+'Toscana': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.6800, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.0890, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0820, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0410, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0330, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0310, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0170, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0100, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0100, link: null },
+  { nome: { it: 'Interessi', en: 'Interest payments' }, percentuale: 0.0050, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0020, link: null },
+],
+'Marche': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.6140, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.1790, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0680, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0530, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0400, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0120, link: null },
+  { nome: { it: 'Interessi/debito pubblico', en: 'Public debt interest' }, percentuale: 0.0110, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0070, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0040, link: null },
+],
+'Lombardia': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.5400, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0750, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0700, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0620, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0410, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0080, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.1480, link: null },
+  { nome: { it: 'Interessi del debito pubblico', en: 'Public debt interest' }, percentuale: 0.0230, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0090, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0210, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.0030, link: null },
+],
+'Puglia': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.5890, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0750, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0480, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0560, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0340, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0100, link: null },
+  { nome: { it: 'Interessi del debito pubblico', en: 'Public debt interest' }, percentuale: 0.0300, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0020, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.1440, link: null },
+],
+'Lazio': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.7260, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0790, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0490, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0860, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0070, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0080, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0130, link: null },
+  { nome: { it: 'Interessi del debito pubblico', en: 'Public debt interest' }, percentuale: 0.0240, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0020, link: null },
+],
+'Emilia-Romagna': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.7650, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0650, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0440, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0530, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0160, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0110, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0110, link: null },
+  { nome: { it: 'Interessi del debito pubblico', en: 'Public debt interest' }, percentuale: 0.0010, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0060, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.0220, link: null },
+],
+'Piemonte': [
+  { nome: { it: 'Sanità', en: 'Healthcare' }, percentuale: 0.6940, link: null },
+  { nome: { it: 'Infrastrutture e trasporti', en: 'Infrastructure & transport' }, percentuale: 0.0520, link: null },
+  { nome: { it: 'Politiche economiche', en: 'Economic affairs' }, percentuale: 0.0680, link: null },
+  { nome: { it: 'Pubblica amministrazione', en: 'Public administration' }, percentuale: 0.0740, link: null },
+  { nome: { it: 'Istruzione e ricerca', en: 'Education & research' }, percentuale: 0.0100, link: null },
+  { nome: { it: 'Protezione ambientale', en: 'Environmental protection' }, percentuale: 0.0190, link: null },
+  { nome: { it: 'Protezione sociale', en: 'Social protection' }, percentuale: 0.0130, link: null },
+  { nome: { it: 'Interessi del debito pubblico', en: 'Public debt interest' }, percentuale: 0.0120, link: null },
+  { nome: { it: 'Cultura e sport', en: 'Culture & sport' }, percentuale: 0.0120, link: null },
+  { nome: { it: 'Sicurezza e ordine pubblico', en: 'Public order & safety' }, percentuale: 0.0040, link: null },
+  { nome: { it: 'Altro', en: 'Other' }, percentuale: 0.0420, link: null },
+],
+};
+
+function cloneSettoriRegionali(settori) {
+  return settori.map((s) => ({
+    nome: { ...s.nome },
+    percentuale: Number(s.percentuale || 0),
+    link: s.link || null,
+  }));
+}
+
+const SETTORI_REGIONALI = Object.fromEntries(
+  Object.entries(SETTORI_REGIONALI_DATI).map(([regione, settori]) => [
+    regione,
+    cloneSettoriRegionali(settori),
+  ])
+);
+
+function getSettoriRegionali(regione) {
+  return SETTORI_REGIONALI[regione] || null;
+}
 
 /* ========================= UTIL ========================= */
 const nfEuro = new Intl.NumberFormat(
@@ -252,7 +410,7 @@ function parseEuroInput(str) {
 /* ========================= CHART HELPERS ========================= */
 let chartItalia = null;
 let chartUE = null;
-// Grafico sezione “Spesa regione” (solo Lombardia)
+// Grafico sezione spesa regione
 let chartRegione = null;
 
 /* palette HSL coerente; hueOffset per differenziare le due palette */
@@ -479,7 +637,8 @@ function runCalcolo() {
 
   const regione = regionSelect ? String(regionSelect.value || '') : '';
 
-  const isLombardia = regione === 'Lombardia';
+  const settoriRegionali = getSettoriRegionali(regione);
+  const hasRegionalBreakdown = Array.isArray(settoriRegionali) && settoriRegionali.length > 0;
 
   const tasseStatali = calcolaIRPEF(reddito);
   const tasseRegionali = regione ? calcolaAddizionaleRegionale(reddito, regione) : 0;
@@ -499,91 +658,99 @@ function runCalcolo() {
     if (titoloRegioneNomeEl) titoloRegioneNomeEl.textContent = regione;
     if (importoRegioneEl) importoRegioneEl.textContent = euro(tasseRegionali);
 
-// Regione: grafico SOLO per Lombardia. Per le altre regioni resta il testo “presto disponibile”.
-if (boxRegioneSoonEl) boxRegioneSoonEl.hidden = isLombardia;
+    // Regione: grafico per le regioni presenti in SETTORI_REGIONALI.
+    // Le altre regioni mantengono il messaggio "presto disponibile".
+    if (boxRegioneSoonEl) boxRegioneSoonEl.hidden = hasRegionalBreakdown;
 
-if (boxRegioneBreakdownEl) {
-  if (isLombardia) {
-    // Inietta (una volta) il markup del grafico/legenda
-    if (!boxRegioneBreakdownEl.querySelector('#graficoRegione')) {
-      boxRegioneBreakdownEl.innerHTML = `
-        <div class="box-grid">
-          <aside id="legend-regione" class="legend-col" aria-label="${calcit_t('chart_reg_aria')}">
-            <div class="legend-header">
-              <h3 class="legend-title">
-                ${calcit_t('legend_title')}
-                <span class="legend-subtle">${calcit_t('legend_subtle_reg')}</span>
-              </h3>
-              <p class="legend-note">${calcit_t('legend_note')}</p>
+    if (boxRegioneBreakdownEl) {
+      if (hasRegionalBreakdown) {
+        const regionalChartAria = calcit_tf('chart_reg_aria', regione);
+        const regionalLegendSubtitle = calcit_tf('legend_subtle_reg', regione);
+
+        // Reinizializza il markup quando cambia regione, cosi titolo e aria-label restano corretti.
+        if (!boxRegioneBreakdownEl.querySelector('#graficoRegione') || boxRegioneBreakdownEl.dataset.regione !== regione) {
+          safeDestroy(chartRegione);
+          chartRegione = null;
+          boxRegioneBreakdownEl.dataset.regione = regione;
+          boxRegioneBreakdownEl.innerHTML = `
+            <div class="box-grid">
+              <aside id="legend-regione" class="legend-col" aria-label="${regionalChartAria}">
+                <div class="legend-header">
+                  <h3 class="legend-title">
+                    ${calcit_t('legend_title')}
+                    <span class="legend-subtle">${regionalLegendSubtitle}</span>
+                  </h3>
+                  <p class="legend-note">${calcit_t('legend_note')}</p>
+                </div>
+              </aside>
+
+              <div class="chart-col">
+                <div class="canvas-wrap">
+                  <canvas id="graficoRegione" role="img" aria-label="${regionalChartAria}" width="300" height="380"></canvas>
+                  <div id="explanation-regione" class="explanation">${calcit_t('expl_default')}</div>
+                </div>
+              </div>
             </div>
-          </aside>
-
-          <div class="chart-col">
-            <div class="canvas-wrap">
-              <canvas id="graficoRegione" role="img" aria-label="${calcit_t('chart_reg_aria')}" width="300" height="380"></canvas>
-              <div id="explanation-regione" class="explanation">${calcit_t('expl_default')}</div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    boxRegioneBreakdownEl.hidden = false;
-
-    const canvasReg = boxRegioneBreakdownEl.querySelector('#graficoRegione');
-    const legendRegContainer = boxRegioneBreakdownEl.querySelector('#legend-regione');
-    const explReg = boxRegioneBreakdownEl.querySelector('#explanation-regione');
-
-    const labelsReg = SETTORI_LOMBARDIA.map(s => pickLabel(s.nome));
-    const valuesReg = SETTORI_LOMBARDIA.map(s => Number((s.percentuale * tasseRegionali).toFixed(2)));
-    const colorsReg = genColors(labelsReg.length, 160);
-
-    safeDestroy(chartRegione);
-    chartRegione = renderPieChart(canvasReg, labelsReg, valuesReg, colorsReg, {
-      existingChart: chartRegione,
-      explanationEl: explReg,
-      defaultExplanation: calcit_t('expl_default')
-    });
-
-    renderLegendInColumn(legendRegContainer, labelsReg, valuesReg, colorsReg, {
-      onHover: (i) => {
-        if (chartRegione && typeof chartRegione.setActiveElements === 'function') {
-          chartRegione.setActiveElements([{ datasetIndex: 0, index: i }]);
-          chartRegione.update();
+          `;
         }
-        if (explReg) {
-          const tot = valuesReg.reduce((a,b)=>a + Number(b || 0), 0) || 1;
-          const percent = ((valuesReg[i] / tot) * 100).toFixed(1);
-          const fn = calcit_t('tooltip_label');
-          explReg.textContent = typeof fn === 'function'
-            ? fn(labelsReg[i], euro(valuesReg[i]), percent)
-            : `${labelsReg[i]}: ${euro(valuesReg[i])} (${percent}%)`;
-        }
-      },
-      onLeave: () => {
-        if (chartRegione && typeof chartRegione.setActiveElements === 'function') {
-          chartRegione.setActiveElements([]);
-          chartRegione.update();
-        }
-        if (explReg) explReg.textContent = calcit_t('expl_default');
-      },
-      onClick: (i) => {
-        const sector = SETTORI_LOMBARDIA[i];
-        if (sector && sector.link) window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
+
+        boxRegioneBreakdownEl.hidden = false;
+
+        const canvasReg = boxRegioneBreakdownEl.querySelector('#graficoRegione');
+        const legendRegContainer = boxRegioneBreakdownEl.querySelector('#legend-regione');
+        const explReg = boxRegioneBreakdownEl.querySelector('#explanation-regione');
+
+        const labelsReg = settoriRegionali.map(s => pickLabel(s.nome));
+        const valuesReg = settoriRegionali.map(s => Number((s.percentuale * tasseRegionali).toFixed(2)));
+        const colorsReg = genColors(labelsReg.length, 160);
+
+        safeDestroy(chartRegione);
+        chartRegione = renderPieChart(canvasReg, labelsReg, valuesReg, colorsReg, {
+          existingChart: chartRegione,
+          explanationEl: explReg,
+          defaultExplanation: calcit_t('expl_default')
+        });
+
+        renderLegendInColumn(legendRegContainer, labelsReg, valuesReg, colorsReg, {
+          onHover: (i) => {
+            if (chartRegione && typeof chartRegione.setActiveElements === 'function') {
+              chartRegione.setActiveElements([{ datasetIndex: 0, index: i }]);
+              chartRegione.update();
+            }
+            if (explReg) {
+              const tot = valuesReg.reduce((a,b)=>a + Number(b || 0), 0) || 1;
+              const percent = ((valuesReg[i] / tot) * 100).toFixed(1);
+              const fn = calcit_t('tooltip_label');
+              explReg.textContent = typeof fn === 'function'
+                ? fn(labelsReg[i], euro(valuesReg[i]), percent)
+                : `${labelsReg[i]}: ${euro(valuesReg[i])} (${percent}%)`;
+            }
+          },
+          onLeave: () => {
+            if (chartRegione && typeof chartRegione.setActiveElements === 'function') {
+              chartRegione.setActiveElements([]);
+              chartRegione.update();
+            }
+            if (explReg) explReg.textContent = calcit_t('expl_default');
+          },
+          onClick: (i) => {
+            const sector = settoriRegionali[i];
+            if (sector && sector.link) window.open(window.tpLangUrl ? window.tpLangUrl(sector.link) : sector.link, '_blank', 'noopener');
+          }
+        });
+
+      } else {
+        // Regione non ancora abilitata: nessun grafico.
+        boxRegioneBreakdownEl.hidden = true;
+        boxRegioneBreakdownEl.innerHTML = '';
+        delete boxRegioneBreakdownEl.dataset.regione;
+        safeDestroy(chartRegione);
+        chartRegione = null;
       }
-    });
-
-  } else {
-    // Non Lombardia: nessun grafico (torna al layout “vecchio”)
-    boxRegioneBreakdownEl.hidden = true;
-    boxRegioneBreakdownEl.innerHTML = '';
-    safeDestroy(chartRegione);
-    chartRegione = null;
-  }
-} else {
-  safeDestroy(chartRegione);
-  chartRegione = null;
-}
+    } else {
+      safeDestroy(chartRegione);
+      chartRegione = null;
+    }
 
   } else {
     if (breakdownEl) breakdownEl.hidden = true;

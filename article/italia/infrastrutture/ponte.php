@@ -83,6 +83,8 @@ $PONTE_I18N = array(
     'h3_amend' => 'L’ultimo emendamento in manovra',
     'p12' => 'A seguito della decisione della Corte, la maggioranza ha approvato un emendamento alla manovra di bilancio che riprogramma il finanziamento dell’opera, riallocando parte delle risorse inizialmente previste per l’avvio dei cantieri nel 2024 – mai avvenuto – e rinviando una quota dei fondi alle future leggi di bilancio.',
 
+    'author' => 'A cura di <a href="/aboutus/team/francesco-calabrese-vallino.php" style="text-decoration: underline;">Francesco Calabrese Vallino</a>.',
+
     'collab' => 'Articolo realizzato in collaborazione con',
     'partner_alt' => 'Democraseeds',
     'sources' => 'Fonti',
@@ -143,6 +145,8 @@ $PONTE_I18N = array(
 
     'h3_amend' => 'The latest budget amendment',
     'p12' => 'Following the Court’s decision, the parliamentary majority approved an amendment to the budget law rescheduling the project’s financing. Part of the funds originally allocated for the start of construction in 2024—which never took place—have been reallocated, while the remaining resources have been deferred to future budget laws.',
+
+    'author' => 'Written by <a href="/aboutus/team/francesco-calabrese-vallino.php" style="text-decoration: underline;">Francesco Calabrese Vallino</a>.',
 
     'collab' => 'Article produced in collaboration with',
     'partner_alt' => 'Democraseeds',
@@ -255,6 +259,8 @@ if (!function_exists('ponte_e')) {
 
       <h3 style="margin-top:1.6rem;"><?php echo ponte_e('h3_amend'); ?></h3>
       <p><?php echo ponte_e('p12'); ?></p>
+
+      <p><?php echo ponte_t('author'); ?></p>
 
       <hr style="margin:2rem 0; opacity:.25;">
 

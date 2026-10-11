@@ -630,10 +630,10 @@ $TP_ITALIA_SVG = tp_load_and_prepare_svg($svgFile, $REGIONS_IT);
               <?php echo itlp_e('box_reg_amount'); ?> <strong><span id="importoRegione"></span></strong>
             </p>
 
-            <!-- Default (tutte le regioni): solo questo testo -->
+            <!-- Default (regioni non ancora abilitate): solo questo testo -->
             <p class="explanation" id="box-regione-soon"><?php echo itlp_e('box_reg_soon'); ?></p>
 
-            <!-- Solo Lombardia: legenda + grafico (iniettati via JS) -->
+            <!-- Regioni abilitate: legenda + grafico (iniettati via JS) -->
             <div id="box-regione-breakdown" hidden></div>
           </section>
 
