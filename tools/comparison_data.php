@@ -1,6 +1,9 @@
 <?php
 declare(strict_types=1);
 
+// Spending-allocation shares in percentage points, not income-tax rates.
+// PT/SI are aligned with SETTORI in their existing country calculators.
+// The comparator does not calculate personal taxes or accept annual income.
 return [
   'schema_version' => 1,
   'metrics' => [
@@ -201,24 +204,26 @@ return [
       ],
     ],
     'PT' => [
+      // calculator/portugal/calculatorPortugal.js: SETTORI fractions * 100.
       'metrics' => [
-        'politiche_economiche' => 6.1,
-        'protezione_sociale' => 36.7,
-        'sanita' => 17.2,
-        'interessi' => 2.7,
-        'pubblica_amministrazione' => 3.9,
-        'istruzione_ricerca' => 13.1,
-        'difesa' => 3.0,
-        'bilancio_ue' => 2.0,
-        'infrastrutture' => 7.1,
-        'sicurezza' => 2.0,
-        'protezione_ambientale' => 1.5,
-        'giustizia' => 1.3,
-        'cultura' => 3.2,
-        'altro' => 0.2,
+        'politiche_economiche' => 6.3,
+        'protezione_sociale' => 39.5,
+        'sanita' => 18.2,
+        'interessi' => 4.8,
+        'pubblica_amministrazione' => 14.1,
+        'istruzione_ricerca' => 5.5,
+        'difesa' => 1.3,
+        'bilancio_ue' => 1.8,
+        'infrastrutture' => 2.7,
+        'sicurezza' => 1.2,
+        'protezione_ambientale' => 3.0,
+        'giustizia' => 1.1,
+        'cultura' => 0.5,
+        'altro' => 0.0,
       ],
     ],
     'SI' => [
+      // Already matches calculator/slovenia/calculatorSlovenia.js: SETTORI * 100.
       'metrics' => [
         'politiche_economiche' => 6.1,
         'protezione_sociale' => 36.7,

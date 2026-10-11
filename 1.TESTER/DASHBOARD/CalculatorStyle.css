@@ -1,0 +1,317 @@
+
+/* CalcolatoreItalia/CalculatorStyle.css — snellito: nessun CSS di header/footer */
+/* ===================== VARIABILI & BASE ===================== */
+/* ===================== CalculatorStyle.css — TAXpedia ===================== */
+/* Palette + typography */
+:root{
+  --eu-blue: #003399;
+  --eu-gold: #FFCC00;
+
+  --brand: var(--eu-blue);
+  --accent: var(--eu-gold);
+
+  --text: #0b1020;
+  --muted: #475569;
+  --surface: #f8fafc;
+}
+
+/* Base text (Inter) */
+@font-face{
+  font-family: Inter;
+  src: local("Inter");
+  font-display: swap;
+}
+html{ font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{
+  font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:#f5f8ff;
+  line-height:1.6;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Limita le regole di layout al SOLO contenuto della calcolatrice
+   per non toccare header/footer (gestiti da styleIndex.css) */
+main.container{
+  /* FIX sticky footer: fa crescere il main per spingere il footer in fondo */
+  flex: 1 0 auto;
+
+  max-width:var(--maxw);
+  margin-inline:auto;
+  padding-left: env(safe-area-inset-left, var(--page-padding));
+  padding-right: env(safe-area-inset-right, var(--page-padding));
+  padding-top:1.25rem;
+  padding-bottom:1.25rem;
+  width:100%;
+}
+
+/* ===================== TIPOGRAFIA PAGINA ===================== */
+.page-title{
+  font-family:"Merriweather",serif;
+  font-size:clamp(1.8rem,2.8vw,2.4rem);
+  margin:.6rem 0 .2rem;
+}
+.subtitle{color:var(--muted);margin-top:0}
+
+/* ===================== FORM ===================== */
+.calc-form{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem 1.25rem;
+  box-shadow:var(--shadow);
+}
+.label{display:block;font-weight:700;margin-bottom:.35rem}
+.input-row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+input[type="text"], input[type="number"]{
+  width:100%;
+  max-width:520px;
+  padding:.75rem .85rem;
+  font-size:1rem;
+  border-radius:.6rem;
+  border:1px solid var(--line);
+}
+select{
+  width:100%;
+  max-width:520px;
+  padding:.75rem .85rem;
+  font-size:1rem;
+  border-radius:.6rem;
+  border:1px solid var(--line);
+  background:#fff;
+}
+select:focus{
+  outline:3px solid var(--accent);
+  outline-offset:2px;
+  border-color:var(--accent);
+}
+input[type="text"]:focus{
+  outline:3px solid var(--accent);
+  outline-offset:2px;
+  border-color:var(--accent);
+}
+.btn{
+  display:inline-block;
+  border-radius:.7rem;
+  border:1px solid transparent;
+  padding:.7rem 1rem;
+  font-weight:800;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+  transition:transform .05s ease, filter .2s ease;
+  min-height:48px;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--accent);color:#0b1020}
+.btn-primary:hover{filter:saturate(110%)}
+.help{color:var(--muted);margin:.4rem 0 0}
+
+/* Link “plain” usato nel disclaimer */
+.foot-plain-link{
+  color:inherit;
+  text-decoration:underline;
+  font-weight:600;
+  transition:opacity .12s ease;
+}
+.foot-plain-link:hover{opacity:.96}
+
+/* ===================== RISULTATI + CARD ===================== */
+.results{margin-top:1.25rem}
+.results-head{font-weight:700;margin:0 0 1rem}
+.results-breakdown{
+  margin:-.4rem 0 1rem;
+  color:var(--muted);
+  font-weight:600;
+}
+.totale{color:var(--brand);font-weight:900}
+
+.box{
+  background:linear-gradient(180deg,#fff,#fcfdff);
+  border:1px solid var(--line);
+  border-radius:14px;
+  box-shadow:var(--shadow);
+  padding:1rem;
+  margin-bottom:1rem;
+}
+.box-title{
+  margin:.25rem 0 1rem;
+  font-family:"Merriweather",serif;
+  font-size:clamp(1.15rem,2.6vw,1.5rem);
+  letter-spacing:.2px;
+  color:#0a1140;
+  position:relative;
+  text-shadow:0 1px 0 rgba(10,17,64,.25);
+}
+.box-title::after{
+  content:"";
+  display:block;
+  width:64px;
+  height:3px;
+  border-radius:3px;
+  background:linear-gradient(90deg,var(--accent),transparent 80%);
+  margin-top:.45rem;
+  opacity:.9;
+}
+
+.box-grid{
+  display:grid;
+  grid-template-columns:minmax(220px,320px) 1fr;
+  gap:1rem;
+  align-items:start;
+}
+
+/* Legend */
+.legend-col{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.9rem;
+  box-shadow:0 8px 20px rgba(2,6,23,.04);
+}
+.legend-header h3{
+  margin:0;
+  font-family:"Merriweather",serif;
+  color:var(--brand);
+  font-size:1rem;
+}
+.legend-subtle{font-weight:600;color:var(--muted);font-size:.92rem;margin-left:.35rem}
+.legend-note{margin:.4rem 0 0;color:var(--muted);font-size:.92rem}
+.legend-wrap ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.legend-wrap li{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.55rem;border-radius:.6rem;cursor:pointer;
+  transition:background .12s ease,transform .06s ease;
+}
+.legend-wrap li:hover{background:rgba(0,51,153,.04);transform:translateY(-2px)}
+.legend-swatch{width:14px;height:14px;border-radius:3px;display:inline-block;margin-right:.6rem}
+.legend-left{display:inline-flex;gap:8px;align-items:center}
+.legend-label{font-weight:700;color:var(--ink)}
+.legend-value{font-weight:800;color:var(--brand);font-variant-numeric:tabular-nums}
+.legend-value small{display:none !important}
+
+/* Chart */
+.chart-col{display:flex;flex-direction:column;gap:.8rem}
+.canvas-wrap{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:.75rem;
+  box-shadow:0 8px 20px rgba(2,6,23,.04);
+  width:100%;
+  max-width:var(--chart-max-width, 420px);
+  margin-left:auto;margin-right:auto;
+}
+.canvas-wrap canvas{
+  width:100% !important;
+  height:auto !important;
+}
+.explanation{
+  margin-top:.6rem;color:var(--muted);
+  background:#f7fafc;border:1px dashed var(--line);
+  border-radius:.6rem;padding:.6rem .7rem;font-size:.95rem;
+}
+
+.region-amount{
+  margin:0 0 .75rem;
+  color:var(--ink);
+  font-weight:700;
+}
+.region-amount strong{
+  color:var(--brand);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width:920px){
+  .box-grid{grid-template-columns:1fr}
+}
+@media (max-width:520px){
+  .input-row{flex-direction:column;align-items:stretch}
+  .btn{width:100%}
+}
+
+
+/* === Desktop: H1 + sottotitolo posizionati come il form (colonna 760px) === */
+@media (min-width: 992px) {
+  :root{
+    --intro-col: 760px;          /* larghezza della colonna contenuti */
+    --card-pad-desktop: 2rem;    /* padding orizzontale della card del form */
+  }
+
+  /* Titolo e sottotitolo con la stessa "base" del form */
+  .page-title,
+  .subtitle,
+  .results-head {
+    width: 100%;
+    max-width: calc(var(--intro-col) + (var(--card-pad-desktop) * 2));
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--card-pad-desktop);
+    padding-right: var(--card-pad-desktop);
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  /* Rifinitura spazi */
+  .page-title { margin-top: 1.25rem; }
+  .subtitle   { margin-bottom: .75rem; }
+  
+
+  /* Card del form: padding coerente e colonna interna a 760px */
+  .calc-form {
+    padding-left: var(--card-pad-desktop);
+    padding-right: var(--card-pad-desktop);
+  }
+  .calc-form .label,
+  .calc-form .input-row,
+  .calc-form .help {
+    max-width: var(--intro-col);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Riga input + bottone allineata alla colonna (non centrata) */
+  .input-row { justify-content: flex-start; }
+}
+
+/* Desktop: riduci la larghezza del box (form calcolatrice) */
+@media (min-width: 992px) {
+  :root { --form-card-max: 860px; } /* modifica questo valore per più/meno largo */
+
+  .calc-form{
+    max-width: var(--form-card-max);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* Desktop: riduci i box risultati (Italia + UE) e centrarli */
+@media (min-width: 992px) {
+  :root {
+    --results-card-max: 860px;     /* cambia per più/meno largo */
+    --results-legend-max: 280px;   /* larghezza max colonna legenda */
+    --chart-max-width: 420px;      /* già usato in .canvas-wrap */
+  }
+
+  .box {
+    max-width: var(--results-card-max);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .box-grid {
+    grid-template-columns: minmax(200px, var(--results-legend-max)) 1fr;
+  }
+
+  .canvas-wrap {
+    max-width: var(--chart-max-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

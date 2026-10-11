@@ -89,7 +89,7 @@ if (!function_exists('fp_e')) {
 
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styleIndex.css" />
-  <link rel="stylesheet" href="../AboutUs.css" />
+  <link rel="stylesheet" href="../AboutUs.css?v=<?php echo filemtime(__DIR__ . '/../AboutUs.css'); ?>" />
 
   <style>
     .founder-profile {
@@ -122,19 +122,6 @@ if (!function_exists('fp_e')) {
       border-radius: 28px;
       background: #fff;
       box-shadow: 0 18px 45px rgba(15, 23, 42, .08);
-    }
-
-    .profile-photo-wrap {
-      display: flex;
-      justify-content: center;
-    }
-
-    .profile-photo {
-      width: min(100%, 280px);
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 24px;
-      box-shadow: 0 16px 35px rgba(15, 23, 42, .14);
     }
 
     .profile-eyebrow {
@@ -287,7 +274,7 @@ if (!function_exists('fp_e')) {
 
       <section class="profile-hero" aria-label="Alessandro Marangoni">
         <div class="profile-photo-wrap">
-          <img src="../imm/people/Alessandro.jpg" alt="Alessandro Marangoni" class="profile-photo">
+          <img src="../imm/people/Alessandro.jpg" alt="Alessandro Marangoni" class="profile-photo" style="--profile-photo-position:50% 10%">
         </div>
 
         <div class="profile-copy">

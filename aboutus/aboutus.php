@@ -45,6 +45,7 @@ $ABU_I18N = array(
 
     'profile_cta' => 'Vai alla scheda',
     'profile_soon' => 'Scheda in preparazione',
+    'portrait_alt' => 'Ritratto di',
     'area_label' => 'Area',
 
     'role_1'     => 'Direttore Editoriale',
@@ -60,8 +61,6 @@ $ABU_I18N = array(
     'area_research' => 'Ricerca e documentazione',
 
     'collab_h2'  => 'Abbiamo collaborato con:',
-    'pause_logos' => 'Pausa scorrimento',
-    'resume_logos' => 'Riprendi scorrimento',
   ),
 
   // =========================
@@ -94,6 +93,7 @@ $ABU_I18N = array(
 
     'profile_cta' => 'View profile',
     'profile_soon' => 'Profile coming soon',
+    'portrait_alt' => 'Portrait of',
     'area_label' => 'Area',
 
     'role_1'     => 'Editorial Director',
@@ -109,8 +109,6 @@ $ABU_I18N = array(
     'area_research' => 'Research and documentation',
 
     'collab_h2'  => 'We collaborated with:',
-    'pause_logos' => 'Pause scrolling',
-    'resume_logos' => 'Resume scrolling',
   ),
 );
 
@@ -198,12 +196,16 @@ $ABU_FOUNDERS = array(
 $ABU_COORDINATION = array(
   array(
     'name' => 'Ludovico Prünster',
+    'image' => 'imm/people/Ludovico.jpg',
+    'image_position' => '50% 15%',
     'role_key' => 'role_coord_1',
     'area_key' => 'area_research',
     'profile' => '/aboutus/team/ludovico-prunster.php',
   ),
   array(
     'name' => 'Alessandro Marangoni',
+    'image' => 'imm/people/Alessandro.jpg',
+    'image_position' => '50% 10%',
     'role_key' => 'role_coord_2',
     'area_key' => 'area_data',
     'profile' => '/aboutus/team/alessandro-marangoni.php',
@@ -213,6 +215,8 @@ $ABU_COORDINATION = array(
 $ABU_EDITORIAL = array(
   array(
     'name' => 'Ottilia Ogliari',
+    'image' => 'imm/people/ottilia.jpg',
+    'image_position' => '50% 35%',
     'role_key' => 'role_reda',
     'area_key' => 'area_articles',
     'profile' => '/aboutus/team/ottilia-ogliari.php',
@@ -225,6 +229,8 @@ $ABU_EDITORIAL = array(
   ),
   array(
     'name' => 'Lorenzo Oliva',
+    'image' => 'imm/people/lorenzo.jpg',
+    'image_position' => '50% 25%',
     'role_key' => 'role_reda',
     'area_key' => 'area_articles',
     'profile' => '/aboutus/team/lorenzo-oliva.php',
@@ -244,7 +250,7 @@ $ABU_PARTNERS = array(
   array('name' => 'rethink_uni', 'image' => 'logo_rethink.png', 'width' => 871, 'height' => 463, 'href' => 'https://www.instagram.com/rethink_uni/'),
   array('name' => 'Gioventù Federalista Europea', 'image' => 'logo-gfe.webp', 'width' => 512, 'height' => 234, 'href' => 'https://giovanifederalisti.eu/'),
   array('name' => 'Trasporta Milano', 'image' => 'logo-tm.jpg', 'width' => 2000, 'height' => 2000, 'href' => 'https://www.instagram.com/trasportamilano/'),
-  array('name' => 'Controverso (CVN)', 'image' => 'logo-cvn.png', 'width' => 1280, 'height' => 1229, 'href' => ''),
+  array('name' => 'Controverso Network', 'image' => 'logo-cvn.png', 'width' => 1280, 'height' => 1229, 'href' => 'https://www.instagram.com/controverso.network/'),
 );
 ?>
 <!doctype html>
@@ -258,8 +264,8 @@ $ABU_PARTNERS = array(
 
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styleIndex.css" />
-  <link rel="stylesheet" href="AboutUs.css" />
-  <script defer src="partner-carousel.js"></script>
+  <link rel="stylesheet" href="AboutUs.css?v=<?php echo filemtime(__DIR__ . '/AboutUs.css'); ?>" />
+  <script defer src="team-portraits.js?v=<?php echo filemtime(__DIR__ . '/team-portraits.js'); ?>"></script>
 </head>
 <body>
   <?php include $_SERVER['DOCUMENT_ROOT'] . '/partials/header.php'; ?>
@@ -322,7 +328,14 @@ $ABU_PARTNERS = array(
           <?php foreach ($ABU_COORDINATION as $member): ?>
             <?php $hasProfile = abu_profile_exists($member['profile']); ?>
             <article class="editorial-card editorial-card-featured <?php echo $hasProfile ? 'has-profile' : 'no-profile'; ?>">
+              <?php if (isset($member['image'])): ?>
+                <div class="member-initial member-avatar" style="--avatar-position:<?php echo htmlspecialchars($member['image_position'], ENT_QUOTES, 'UTF-8'); ?>">
+                  <span aria-hidden="true"><?php echo htmlspecialchars(abu_initial($member['name']), ENT_QUOTES, 'UTF-8'); ?></span>
+                  <img class="member-avatar-photo" src="<?php echo htmlspecialchars($member['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo abu_e('portrait_alt'); ?> <?php echo htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8'); ?>" data-fallback-label="<?php echo htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8'); ?>" width="44" height="44" loading="lazy" decoding="async">
+                </div>
+              <?php else: ?>
               <div class="member-initial" aria-hidden="true"><?php echo htmlspecialchars(abu_initial($member['name']), ENT_QUOTES, 'UTF-8'); ?></div>
+              <?php endif; ?>
               <div class="editorial-card-body">
                 <h4><?php echo htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8'); ?></h4>
                 <p class="editorial-role"><?php echo abu_e($member['role_key']); ?></p>
@@ -350,7 +363,14 @@ $ABU_PARTNERS = array(
           <?php foreach ($ABU_EDITORIAL as $member): ?>
             <?php $hasProfile = abu_profile_exists($member['profile']); ?>
             <article class="editorial-card editorial-card-compact <?php echo $hasProfile ? 'has-profile' : 'no-profile'; ?>">
+              <?php if (isset($member['image'])): ?>
+                <div class="member-initial member-avatar" style="--avatar-position:<?php echo htmlspecialchars($member['image_position'], ENT_QUOTES, 'UTF-8'); ?>">
+                  <span aria-hidden="true"><?php echo htmlspecialchars(abu_initial($member['name']), ENT_QUOTES, 'UTF-8'); ?></span>
+                  <img class="member-avatar-photo" src="<?php echo htmlspecialchars($member['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo abu_e('portrait_alt'); ?> <?php echo htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8'); ?>" data-fallback-label="<?php echo htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8'); ?>" width="44" height="44" loading="lazy" decoding="async">
+                </div>
+              <?php else: ?>
               <div class="member-initial" aria-hidden="true"><?php echo htmlspecialchars(abu_initial($member['name']), ENT_QUOTES, 'UTF-8'); ?></div>
+              <?php endif; ?>
               <div class="editorial-card-body">
                 <h4><?php echo htmlspecialchars($member['name'], ENT_QUOTES, 'UTF-8'); ?></h4>
                 <p class="editorial-role"><?php echo abu_e($member['role_key']); ?></p>
@@ -371,25 +391,22 @@ $ABU_PARTNERS = array(
       <header class="page-head collab-head">
         <h2 id="collab-title"><?php echo abu_e('collab_h2'); ?></h2>
       </header>
-      <div class="partner-carousel" data-partner-carousel>
-        <div class="partner-viewport" id="partner-viewport" aria-live="off">
-          <div class="partner-track">
-            <ul class="partner-group">
-              <?php foreach ($ABU_PARTNERS as $partner): ?>
-                <li class="partner-item">
-                  <?php if ($partner['href'] !== ''): ?>
-                    <a class="partner-logo" href="<?php echo htmlspecialchars($partner['href'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer">
-                  <?php else: ?>
-                    <span class="partner-logo">
-                  <?php endif; ?>
-                    <img src="imm/logo/<?php echo htmlspecialchars($partner['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($partner['name'], ENT_QUOTES, 'UTF-8'); ?>" width="<?php echo (int)$partner['width']; ?>" height="<?php echo (int)$partner['height']; ?>" loading="lazy" decoding="async">
-                  <?php if ($partner['href'] !== ''): ?></a><?php else: ?></span><?php endif; ?>
-                </li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
+      <div class="partner-logos">
+        <div class="partner-viewport" role="region" aria-labelledby="collab-title" tabindex="0">
+          <ul class="partner-group">
+            <?php foreach ($ABU_PARTNERS as $partner): ?>
+              <li class="partner-item">
+                <?php if ($partner['href'] !== ''): ?>
+                  <a class="partner-logo" href="<?php echo htmlspecialchars($partner['href'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo htmlspecialchars($partner['name'], ENT_QUOTES, 'UTF-8'); ?>">
+                <?php else: ?>
+                  <span class="partner-logo">
+                <?php endif; ?>
+                  <img src="imm/logo/<?php echo htmlspecialchars($partner['image'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($partner['name'], ENT_QUOTES, 'UTF-8'); ?>" width="<?php echo (int)$partner['width']; ?>" height="<?php echo (int)$partner['height']; ?>" loading="lazy" decoding="async">
+                <?php if ($partner['href'] !== ''): ?></a><?php else: ?></span><?php endif; ?>
+              </li>
+            <?php endforeach; ?>
+          </ul>
         </div>
-        <button class="partner-toggle" type="button" aria-controls="partner-viewport" aria-pressed="false" data-pause-label="<?php echo abu_e('pause_logos'); ?>" data-resume-label="<?php echo abu_e('resume_logos'); ?>" hidden><?php echo abu_e('pause_logos'); ?></button>
       </div>
     </section>
   </main>

@@ -401,6 +401,26 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
   font-size: 1.05rem;
 }
 
+/* Reuse the existing 44px initials container without changing card geometry. */
+.member-avatar{
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.member-avatar .member-avatar-photo{
+  position:absolute;
+  inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:var(--avatar-position, 50% 50%);
+  border-radius:inherit;
+}
+
+.member-avatar .member-avatar-photo[hidden]{display:none}
+
 .editorial-card-body{
   min-width: 0;
 }
@@ -466,10 +486,10 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
   }
 }
 
-/* Partner gallery: stationary by default; JS enables the continuous strip. */
-.partner-carousel{
-  --partner-width:200px;
-  --partner-height:128px;
+/* Static partner row; narrow screens retain native horizontal scrolling. */
+.partner-logos{
+  --partner-width:184px;
+  --partner-height:112px;
   --partner-gap:24px;
   margin:1.5rem auto 0;
   width:100%;
@@ -477,30 +497,30 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
 }
 
 .partner-viewport{
+  overflow-x:auto;
+  overflow-y:hidden;
   padding-block:12px;
   border-block:1px solid var(--line);
+  scrollbar-width:none;
 }
+.partner-viewport::-webkit-scrollbar{display:none}
 
 .partner-group{
   display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+  width:max-content;
+  flex-wrap:nowrap;
   align-items:center;
   gap:var(--partner-gap);
   list-style:none;
-  padding:0;
+  padding:0 var(--partner-gap) 0 0;
   margin:0;
 }
-
-.partner-group[aria-hidden="true"]{display:none}
 
 .partner-item{
   flex:0 0 var(--partner-width);
   width:var(--partner-width);
-  max-width:100%;
   height:var(--partner-height);
 }
-
 .partner-logo{
   display:flex;
   align-items:center;
@@ -512,7 +532,6 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
   background:var(--card);
   text-decoration:none;
 }
-
 .partner-logo img{
   display:block;
   width:100%;
@@ -521,69 +540,19 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
   border-radius:0;
   box-shadow:none;
 }
-
 .partner-logo:focus-visible,
-.partner-toggle:focus-visible{
+.partner-viewport:focus-visible{
   outline:2px solid var(--brand);
   outline-offset:3px;
 }
 
-.partner-toggle{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:44px;
-  margin-top:.75rem;
-  padding:.5rem 1rem;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:var(--card);
-  color:var(--brand);
-  font:inherit;
-  font-size:.85rem;
-  font-weight:600;
-  cursor:pointer;
-}
-
-.partner-toggle:hover{border-color:var(--brand)}
-.partner-toggle[hidden]{display:none}
-
-.partner-carousel.is-animated:not(.has-focus) .partner-viewport{overflow:hidden}
-
-.partner-carousel.is-animated:not(.has-focus) .partner-track{
-  display:flex;
-  width:max-content;
-  animation-name:partner-scroll;
-  animation-duration:48s;
-  animation-timing-function:linear;
-  animation-iteration-count:infinite;
-}
-
-.partner-carousel.is-animated:not(.has-focus) .partner-group{
-  display:flex;
-  flex:none;
-  flex-wrap:nowrap;
-  padding-right:var(--partner-gap);
-}
-
-.partner-carousel.is-paused .partner-track{animation-play-state:paused}
-
-@media (hover:hover){
-  .partner-carousel:hover .partner-track{animation-play-state:paused}
-}
-
-@keyframes partner-scroll{
-  to{transform:translateX(-50%)}
-}
-
 @media (max-width:640px){
-  .partner-carousel{
-    --partner-width:132px;
-    --partner-height:104px;
+  .partner-logos{
+    --partner-width:128px;
+    --partner-height:88px;
     --partner-gap:16px;
   }
   .partner-logo{padding:10px 12px}
-  .partner-carousel.is-animated:not(.has-focus) .partner-track{animation-duration:36s}
 }
 
 /* Keep the existing footer columns inside the About Us mobile viewport. */
@@ -591,23 +560,33 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
   .about-container ~ .site-footer .footer-grid{grid-template-columns:1fr}
 }
 
-/* CSS safeguard as well as the JS preference listener. */
-@media (prefers-reduced-motion:reduce){
-  .partner-carousel.is-animated:not(.has-focus) .partner-track{
-    display:block;
-    width:100%;
-    animation:none;
-    transform:none;
-  }
-  .partner-carousel.is-animated:not(.has-focus) .partner-group{
-    flex-wrap:wrap;
-    padding-right:0;
-  }
-  .partner-carousel.is-animated:not(.has-focus) .partner-group[aria-hidden="true"]{display:none}
-  .partner-toggle{display:none}
+/* Shared individual-profile portrait sizing; main team cards use other classes. */
+.profile-photo-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:min(100%, 280px);
+  min-width:0;
+  aspect-ratio:1 / 1;
+  margin-inline:auto;
 }
 
-/* No supplied Tommaso portrait: a named fallback, never another person's photo. */
+.profile-photo{
+  display:block;
+  width:100%;
+  height:100%;
+  aspect-ratio:1 / 1;
+  object-fit:cover;
+  object-position:var(--profile-photo-position, 50% 50%);
+  border-radius:24px;
+  box-shadow:0 16px 35px rgba(15, 23, 42, .14);
+}
+
+@media (max-width:780px){
+  .profile-photo-wrap{width:min(100%, 240px)}
+}
+
+/* No supplied Tommaso portrait: retain the existing named fallback. */
 .profile-photo.profile-photo-placeholder{
   display:grid;
   place-items:center;

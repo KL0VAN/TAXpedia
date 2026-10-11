@@ -40,11 +40,11 @@ $IMP_I18N = array(
     'stat_5_label' => 'Risorse educative',
     'stat_5_desc'  => 'Materiali didattici e lezioni del programma EU Youth Tax Literacy Program.',
 
-    'stat_6_label' => 'Lingue disponibili',
-    'stat_6_desc'  => 'Contenuti e pagine principali disponibili in italiano e inglese.',
+    'stat_6_label' => 'Pagine visitate',
+    'stat_6_desc'  => 'Pagine del sito visualizzate dagli utenti.',
 
-    'stat_7_label' => 'Utenti raggiunti',
-    'stat_7_desc'  => 'Utenti del sito e followers dei profili social.',
+    'stat_7_label' => 'Visualizzazioni',
+    'stat_7_desc'  => 'Visualizzazioni dei contenuti sui nostri profili social.',
 
     'stat_8_label' => 'Partner',
     'stat_8_desc'  => 'Istituti, associazioni, enti e organizzazioni coinvolte.',
@@ -64,7 +64,7 @@ $IMP_I18N = array(
     'area_4_title' => 'Partecipazione democratica',
     'area_4_text'  => 'Crediamo che capire come vengono raccolte e spese le risorse pubbliche aiuti i cittadini a partecipare in modo più consapevole al dibattito democratico.',
 
-    'last_update' => 'Ultimo aggiornamento: 25 settembre 2026',
+    'last_update' => 'Ultimo aggiornamento: 12 ottobre 2026',
   ),
 
   // =========================
@@ -92,11 +92,11 @@ $IMP_I18N = array(
     'stat_5_label' => 'Educational resources',
     'stat_5_desc'  => 'Learning materials and lessons from the EU Youth Tax Literacy Program.',
 
-    'stat_6_label' => 'Available languages',
-    'stat_6_desc'  => 'Main content and pages available in Italian and English.',
+    'stat_6_label' => 'Page views',
+    'stat_6_desc'  => 'Website pages viewed by users.',
 
-    'stat_7_label' => 'Users reached',
-    'stat_7_desc'  => 'Website users and social media reach.',
+    'stat_7_label' => 'Views',
+    'stat_7_desc'  => 'Views of content on our social media profiles.',
 
     'stat_8_label' => 'Partners',
     'stat_8_desc'  => 'Schools, associations, institutions and organizations involved.',
@@ -116,7 +116,7 @@ $IMP_I18N = array(
     'area_4_title' => 'Democratic participation',
     'area_4_text'  => 'We believe that understanding how public resources are collected and spent helps citizens participate more consciously in democratic debate.',
 
-    'last_update' => 'Last update: 25 september 2026',
+    'last_update' => 'Last update: 12 October 2026',
   ),
 );
 
@@ -125,10 +125,10 @@ $IMP_STATS = array(
   array('value' => '50',  'label' => 'stat_2_label', 'desc' => 'stat_2_desc'),
   array('value' => '30+', 'label' => 'stat_3_label', 'desc' => 'stat_3_desc'),
   array('value' => '9',   'label' => 'stat_4_label', 'desc' => 'stat_4_desc'),
-  array('value' => '10',  'label' => 'stat_5_label', 'desc' => 'stat_5_desc'),
-  array('value' => '2',   'label' => 'stat_6_label', 'desc' => 'stat_6_desc'),
-  array('value' => '3500+','label' => 'stat_7_label', 'desc' => 'stat_7_desc'),
-  array('value' => '3',   'label' => 'stat_8_label', 'desc' => 'stat_8_desc'),
+  array('value' => '6',   'label' => 'stat_5_label', 'desc' => 'stat_5_desc'),
+  array('value' => '10.000+', 'counter_target' => 10000, 'label' => 'stat_6_label', 'desc' => 'stat_6_desc'),
+  array('value' => '130.000+', 'counter_target' => 130000, 'label' => 'stat_7_label', 'desc' => 'stat_7_desc'),
+  array('value' => '5',   'label' => 'stat_8_label', 'desc' => 'stat_8_desc'),
 );
 
 $IMP_AREAS = array(
@@ -169,6 +169,7 @@ if (!function_exists('imp_e')) {
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styleIndex.css" />
   <link rel="stylesheet" href="AboutUs.css" />
+  <script src="impact-counters.js?v=<?php echo (int) filemtime(__DIR__ . '/impact-counters.js'); ?>" defer></script>
 
   <style>
     .impact-page {
@@ -256,6 +257,24 @@ if (!function_exists('imp_e')) {
       font-size: 2.35rem;
       font-weight: 800;
       line-height: 1;
+    }
+
+    .impact-counter {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* Keep a stable final value available to screen readers during counting. */
+    .impact-counter-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
     }
 
     .impact-card h3 {
@@ -377,7 +396,14 @@ if (!function_exists('imp_e')) {
       <div class="impact-grid">
         <?php foreach ($IMP_STATS as $stat): ?>
           <article class="impact-card">
-            <span class="impact-number"><?php echo htmlspecialchars($stat['value'], ENT_QUOTES, 'UTF-8'); ?></span>
+            <?php if (isset($stat['counter_target'])): ?>
+              <span class="impact-number impact-counter" data-counter-target="<?php echo (int) $stat['counter_target']; ?>">
+                <span class="impact-counter-value" aria-hidden="true"><?php echo htmlspecialchars($stat['value'], ENT_QUOTES, 'UTF-8'); ?></span>
+                <span class="impact-counter-label"><?php echo htmlspecialchars($stat['value'], ENT_QUOTES, 'UTF-8'); ?></span>
+              </span>
+            <?php else: ?>
+              <span class="impact-number"><?php echo htmlspecialchars($stat['value'], ENT_QUOTES, 'UTF-8'); ?></span>
+            <?php endif; ?>
             <h3><?php echo imp_e($stat['label']); ?></h3>
             <p><?php echo imp_e($stat['desc']); ?></p>
           </article>

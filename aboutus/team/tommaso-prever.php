@@ -183,7 +183,7 @@ $FP_AUTHOR_ARTICLES = fp_filter_author_articles($FP_ARTICLES, $FP_AUTHOR_SLUG, $
 
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styleIndex.css" />
-  <link rel="stylesheet" href="../AboutUs.css" />
+  <link rel="stylesheet" href="../AboutUs.css?v=<?php echo filemtime(__DIR__ . '/../AboutUs.css'); ?>" />
 
   <style>
     .founder-profile {
@@ -216,19 +216,6 @@ $FP_AUTHOR_ARTICLES = fp_filter_author_articles($FP_ARTICLES, $FP_AUTHOR_SLUG, $
       border-radius: 28px;
       background: #fff;
       box-shadow: 0 18px 45px rgba(15, 23, 42, .08);
-    }
-
-    .profile-photo-wrap {
-      display: flex;
-      justify-content: center;
-    }
-
-    .profile-photo {
-      width: min(100%, 280px);
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 24px;
-      box-shadow: 0 16px 35px rgba(15, 23, 42, .14);
     }
 
     .profile-eyebrow {

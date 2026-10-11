@@ -1,0 +1,140 @@
+/*
+  /js/lang.js
+  Gestione lingua globale (site_lang + compat tp_lang)
+
+  - Clona .tp-lang-switch dentro la navbar (header)
+  - Intercetta i click sulle pill IT/EN (sia originale che clone)
+  - Imposta cookie persistenti per 365 giorni
+  - Non blocca la navigazione se il controllo è un link <a href="...">
+*/
+
+(function () {
+  'use strict';
+
+  // Guard: evita doppie inizializzazioni (e disinnesca eventuali script legacy)
+  if (window.__TP_LANG_V2__) return;
+  window.__TP_LANG_V2__ = true;
+
+  var SUPPORTED = ['it', 'en'];
+  var DAYS = 365;
+
+  function normLang(v) {
+    v = (v || '').toString().toLowerCase().trim();
+    if (SUPPORTED.indexOf(v) !== -1) return v;
+    return '';
+  }
+
+  function setCookie(name, value, days) {
+    var maxAge = Math.floor((days || DAYS) * 24 * 60 * 60); // secondi
+    var c = name + '=' + encodeURIComponent(value) + '; Max-Age=' + maxAge + '; Path=/; SameSite=Lax';
+    if (location.protocol === 'https:') c += '; Secure';
+    document.cookie = c;
+  }
+
+  function setLangCookies(lang) {
+    lang = normLang(lang);
+    if (!lang) return;
+    setCookie('site_lang', lang, DAYS);
+    setCookie('tp_lang', lang, DAYS); // compatibilità legacy
+  }
+
+  function closestPill(node) {
+    // Supporto anche per browser senza Element.closest
+    while (node && node !== document) {
+      if (node.classList && node.classList.contains('tp-lang-pill')) return node;
+      node = node.parentNode;
+    }
+    return null;
+  }
+
+  function getLangFromHref(a) {
+    var href = a && a.getAttribute ? a.getAttribute('href') : '';
+    if (!href) return '';
+    try {
+      var u = new URL(href, location.origin);
+      return normLang(u.searchParams.get('lang'));
+    } catch (e) {
+      return '';
+    }
+  }
+
+  function getTargetLang(pill) {
+    if (!pill) return '';
+
+    // 1) prova da href (es: ?lang=en)
+    var l = getLangFromHref(pill);
+    if (l) return l;
+
+    // 2) prova da attributi (data-lang, lang, hreflang)
+    l = normLang(pill.getAttribute('data-lang')) ||
+        normLang(pill.getAttribute('lang')) ||
+        normLang(pill.getAttribute('hreflang'));
+    if (l) return l;
+
+    // 3) fallback dal testo ("IT" / "EN")
+    l = normLang((pill.textContent || '').trim());
+    return l;
+  }
+
+  function cloneLangSwitchIntoHeader() {
+    var src = document.querySelector('.tp-lang-switch');
+    if (!src) return;
+
+    var headerTarget = document.querySelector('.site-header .nav-wrap') || document.querySelector('.site-header');
+    if (!headerTarget) return;
+
+    // Evita duplicati se per qualche motivo lo script gira 2 volte
+    if (headerTarget.querySelector('.tp-lang-switch[data-tp-lang-clone="1"]')) return;
+
+    var clone = src.cloneNode(true);
+    clone.setAttribute('data-tp-lang-clone', '1');
+
+    // IMPORTANTISSIMO: niente ID duplicati sul clone
+    if (clone.removeAttribute) clone.removeAttribute('id');
+    var withId = clone.querySelectorAll ? clone.querySelectorAll('[id]') : [];
+    for (var i = 0; i < withId.length; i++) {
+      withId[i].removeAttribute('id');
+    }
+
+    // Inserisci il clone nella nav (idealmente accanto a logo/menu)
+    var mainNav = headerTarget.querySelector('.main-nav');
+    if (mainNav && mainNav.parentNode === headerTarget) {
+      // dopo il menu
+      if (mainNav.nextSibling) headerTarget.insertBefore(clone, mainNav.nextSibling);
+      else headerTarget.appendChild(clone);
+    } else {
+      headerTarget.appendChild(clone);
+    }
+  }
+
+  function onDomReady(fn) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  onDomReady(function () {
+    // 1) Clona i controlli lingua dentro l’header/navbar
+    cloneLangSwitchIntoHeader();
+
+    // 2) Click handler (originale + clone) via event delegation
+    document.addEventListener('click', function (ev) {
+      var pill = ev.target && ev.target.classList && ev.target.classList.contains('tp-lang-pill')
+        ? ev.target
+        : closestPill(ev.target);
+
+      if (!pill) return;
+
+      var lang = getTargetLang(pill);
+      if (!lang) return;
+
+      setLangCookies(lang);
+
+      // Non bloccare la navigazione se è un <a href="...">
+      var isLink = (pill.tagName && pill.tagName.toUpperCase() === 'A' && pill.getAttribute('href'));
+      if (!isLink) {
+        // Se non è un link navigabile, forza reload dopo aver settato i cookie
+        try { window.location.reload(); } catch (e) {}
+      }
+    }, false);
+  });
+})();
