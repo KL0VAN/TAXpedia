@@ -272,7 +272,7 @@ if (!function_exists('ponte_e')) {
         <figure style="text-align:center; margin:0 0 1rem;">
           <a href="https://democraseeds.wordpress.com/" target="_blank" rel="noopener noreferrer">
             <img
-              src="../imm/logo_democraseeds.jpg"
+              src="/aboutus/imm/logo/logo_democraseeds.jpg"
               alt="<?php echo ponte_e('partner_alt'); ?>"
               width="160"
               height="160"

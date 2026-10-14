@@ -53,7 +53,7 @@ $ITLP_I18N = array(
     'DEBT-description' => 'Cosa sono il debito pubblico e il deficit, come si formano e perché sono importanti per l’economia di uno Stato.',
     'DEBT-feature' => ' Base',
 
-    'STATE-BUDGET-title' => 'Bilancio dello Stato',
+    'STATE-BUDGET-title' => 'Il bilancio dello Stato',
     'STATE-BUDGET-description' => 'Come è strutturato il bilancio dello Stato, da dove provengono le entrate e come vengono programmate le spese.',
     'STATE-BUDGET-feature' => ' Base',
 
@@ -205,7 +205,7 @@ if (!function_exists('itlp_e')) {
       <?php echo itlp_e('program-lede'); ?>
     </p>
 
-    <p><strong><?php echo itlp_e('update'); ?></strong> <time datetime="2026-09-25"> 25/09/2026</time></p>
+    <p><strong><?php echo itlp_e('update'); ?></strong> <time datetime="2026-10-12"> 12/10/2026</time></p>
   </header>
 
   <hr style="margin:2rem 0;" />
@@ -280,7 +280,7 @@ if (!function_exists('itlp_e')) {
         <span><strong><?php echo itlp_e('feature1'); ?></strong><?php echo itlp_e('DEBT-feature'); ?></span> · <span><strong><?php echo itlp_e('feature3'); ?></strong> IT</span>
       </p>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
-        <a class="btn btn-secondary"><?php echo itlp_e('soon'); ?></a>
+        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_Debito_Pubblico.pdf" download><?php echo itlp_e('download_pdf'); ?></a>
       </div>
     </li>
 
@@ -294,7 +294,7 @@ if (!function_exists('itlp_e')) {
         <span><strong><?php echo itlp_e('feature1'); ?></strong><?php echo itlp_e('STATE-BUDGET-feature'); ?></span> · <span><strong><?php echo itlp_e('feature3'); ?></strong> IT</span>
       </p>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
-        <a class="btn btn-secondary"><?php echo itlp_e('soon'); ?></a>
+        <a class="btn btn-secondary" href="/tools/downloads/TAXpedia_Bilancio_Stato.pdf" download><?php echo itlp_e('download_pdf'); ?></a>
       </div>
     </li>
 

@@ -193,7 +193,7 @@ if (!function_exists('ponte_e')) {
         <p class="article-collab__text"><?php echo ponte_e('collab'); ?></p>
         <figure class="article-collab__figure">
           <a class="article-collab__link" href="https://www.instagram.com/rethink_uni/" target="_blank" rel="noopener noreferrer">
-            <img class="article-collab__logo" src="../imm/logo_rethink.png" alt="Logo rethink_uni" loading="lazy">
+            <img class="article-collab__logo" src="/aboutus/imm/logo/logo_rethink.png" alt="Logo rethink_uni" loading="lazy">
           </a>
         </figure>
       </section>

@@ -26,6 +26,12 @@
 
 /* 1 colonna su mobile stretto */
 @media (max-width: 600px){
+  .about-container > .about-us > .cta-row{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+  }
   .team-grid{
     grid-template-columns:1fr;
   }

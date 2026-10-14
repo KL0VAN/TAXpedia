@@ -203,7 +203,7 @@ if (!function_exists('cr_e')) {
       <p align="center"><?php echo cr_e('collab'); ?></p>
       <figure align="center">
         <a href="https://democraseeds.wordpress.com/" target="_blank" align="center">
-          <img src="imm/logo_democraseeds.jpg"
+          <img src="/aboutus/imm/logo/logo_democraseeds.jpg"
             alt="" align="center"
             width="160" height="160" loading="lazy" >
         </a>
