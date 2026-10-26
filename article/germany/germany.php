@@ -136,99 +136,17 @@ $COUNTRY_ARTICLE_COUNTRY_IT = 'Germania';
 $COUNTRY_ARTICLE_COUNTRY_EN = 'Germany';
 $COUNTRY_CODE = 'DE';
 $COUNTRY_ARTICLE_LIMIT = 4;
-$COUNTRY_ARTICLE_DATA_PATH = __DIR__ . '/../../article/article_data.php';
-$COUNTRY_ARTICLES = array();
-
-if (is_file($COUNTRY_ARTICLE_DATA_PATH)) {
-  $COUNTRY_LOADED_ARTICLES = require $COUNTRY_ARTICLE_DATA_PATH;
-  if (is_array($COUNTRY_LOADED_ARTICLES)) {
-    $COUNTRY_ARTICLES = $COUNTRY_LOADED_ARTICLES;
-  }
-}
+require_once __DIR__ . '/../article_helpers.php';
 
 if (!function_exists('country_article_lang_value')) {
   function country_article_lang_value($article, $base_key, $lang) {
-    $suffix = ($lang === 'en') ? 'en' : 'it';
-    $localized_key = $base_key . '_' . $suffix;
-
-    if (isset($article[$localized_key]) && $article[$localized_key] !== '') {
-      return $article[$localized_key];
-    }
-
-    $fallback_key = $base_key . '_it';
-    if (isset($article[$fallback_key])) {
-      return $article[$fallback_key];
-    }
-
-    return '';
+    return tp_article_text($article, $base_key, $lang);
   }
 }
 
-if (!function_exists('country_filter_country_articles')) {
-  function country_filter_country_articles($articles, $country_code, $country_it, $country_en, $limit) {
-    $filtered = array();
-    $accepted_countries = array(
-      strtolower(trim($country_it)),
-      strtolower(trim($country_en)),
-    );
-
-    foreach ($articles as $article) {
-      if (!is_array($article)) continue;
-      if (isset($article['in_archive']) && !$article['in_archive']) continue;
-
-      $matches_country = false;
-      $article_countries = isset($article['countries']) && is_array($article['countries'])
-        ? array_filter(array_map(function($code) {
-            return strtoupper(trim((string) $code));
-          }, $article['countries']))
-        : array();
-
-      if (!empty($article_countries)) {
-        $matches_country = in_array(strtoupper($country_code), $article_countries, true);
-      } else {
-        $article_country_it = isset($article['country_it'])
-          ? strtolower(trim((string) $article['country_it']))
-          : '';
-        $article_country_en = isset($article['country_en'])
-          ? strtolower(trim((string) $article['country_en']))
-          : '';
-
-        $matches_country =
-          in_array($article_country_it, $accepted_countries, true) ||
-          in_array($article_country_en, $accepted_countries, true);
-      }
-
-      if ($matches_country) {
-        $filtered[] = $article;
-      }
-    }
-
-    usort($filtered, function($a, $b) {
-      $a_order = isset($a['archive_order']) ? (int) $a['archive_order'] : 999999;
-      $b_order = isset($b['archive_order']) ? (int) $b['archive_order'] : 999999;
-
-      if ($a_order === $b_order) {
-        $a_date = isset($a['date_iso']) ? $a['date_iso'] : '';
-        $b_date = isset($b['date_iso']) ? $b['date_iso'] : '';
-        return strcmp($b_date, $a_date);
-      }
-
-      return $a_order <=> $b_order;
-    });
-
-    if ($limit > 0) {
-      return array_slice($filtered, 0, $limit);
-    }
-
-    return $filtered;
-  }
-}
-
-$COUNTRY_FILTERED_ARTICLES = country_filter_country_articles(
-  $COUNTRY_ARTICLES,
-  $COUNTRY_CODE,
-  $COUNTRY_ARTICLE_COUNTRY_IT,
-  $COUNTRY_ARTICLE_COUNTRY_EN,
+$COUNTRY_FILTERED_ARTICLES = array_slice(
+  tp_article_select(tp_article_registry(), ['country'=>$COUNTRY_CODE], $COUNTRY_LANG),
+  0,
   $COUNTRY_ARTICLE_LIMIT
 );
 ?>
@@ -712,7 +630,7 @@ $COUNTRY_FILTERED_ARTICLES = country_filter_country_articles(
         </div>
       <?php endif; ?>
 
-      <a class="country-all-articles" href="/article/articoli.php?lang=<?php echo rawurlencode($COUNTRY_LANG); ?>&amp;country=<?php echo rawurlencode($COUNTRY_LANG === 'en' ? $COUNTRY_ARTICLE_COUNTRY_EN : $COUNTRY_ARTICLE_COUNTRY_IT); ?>">
+      <a class="country-all-articles" href="/article/articoli.php?lang=<?php echo rawurlencode($COUNTRY_LANG); ?>&amp;country=<?php echo rawurlencode($COUNTRY_CODE); ?>">
         <?php echo country_e('articles_all'); ?> →
       </a>
     </section>

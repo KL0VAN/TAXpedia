@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../i18n/i18n.php';
 
-$na_cards = require __DIR__ . '/../article/article_data.php';
+require_once __DIR__ . '/../article/article_helpers.php';
+$na_cards = tp_article_public_cards(null, tp_lang());
 $na_lang = tp_lang();
 $na_is_en = ($na_lang === 'en');
 

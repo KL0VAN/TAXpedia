@@ -286,6 +286,63 @@
   }
   .btn-outline:hover{background:rgba(0,51,153,.06)}
   
+/* Shared action treatment, scoped to Country Profiles and archive controls. */
+.dash-page .btn,
+.posts-archive-page :is(.posts-filter-actions, .posts-pagination) .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  min-height: 44px;
+  max-width: 100%;
+  padding: .7rem 1.05rem;
+  border-radius: .9rem;
+  font-family: inherit;
+  font-size: .95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.dash-page .btn-outline:hover,
+.posts-archive-page :is(.posts-filter-actions, .posts-pagination) .btn-outline:hover {
+  color: #fff;
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.dash-page .btn-outline:active,
+.posts-archive-page :is(.posts-filter-actions, .posts-pagination) .btn-outline:active {
+  color: #fff;
+  background: #00266f;
+  border-color: #00266f;
+}
+.dash-page .btn-primary:hover,
+.posts-archive-page .posts-filter-actions .btn-primary:hover {
+  background: #f2c200;
+  border-color: #e6b800;
+  filter: none;
+}
+.dash-page .btn-primary:active,
+.posts-archive-page .posts-filter-actions .btn-primary:active {
+  background: #e6b800;
+  filter: none;
+}
+.dash-page .btn:focus-visible,
+.posts-archive-page :is(.posts-filter-actions, .posts-pagination) .btn:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dash-page .btn,
+  .posts-archive-page :is(.posts-filter-actions, .posts-pagination) .btn {
+    transition: none;
+    transform: none;
+  }
+}
+
   /* ===================== SEZIONI SU SFONDO CHIARO (leggibilità) ===================== */
   .value{padding:72px 0;background:#fff}
   .section-head{text-align:center;margin-bottom:1.2rem}

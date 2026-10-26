@@ -9,6 +9,7 @@ $GLOBALS['TP_SUPPORTED_LANGS'] = array('it', 'en');
 
 if (!function_exists('tp_normalize_lang')) {
   function tp_normalize_lang($lang, $supported, $default) {
+    if (!is_string($lang)) return $default;
     $lang = strtolower(trim((string)$lang));
     return in_array($lang, $supported, true) ? $lang : $default;
   }

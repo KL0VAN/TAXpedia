@@ -1,35 +1,20 @@
 <?php
 require_once __DIR__ . '/../i18n/i18n.php';
-
-$tp_cards = require __DIR__ . '/article_data.php';
-
-$archive_cards = array_values(array_filter($tp_cards, static function (array $card): bool {
-  return !empty($card['in_archive']);
-}));
-
-usort($archive_cards, static function (array $a, array $b): int {
-  return ($a['archive_order'] ?? 9999) <=> ($b['archive_order'] ?? 9999);
-});
+require_once __DIR__ . '/article_helpers.php';
 
 $tp_lang = tp_lang();
 $is_en = ($tp_lang === 'en');
-
-$__t = function (string $it, string $en) use ($is_en): string {
-  return $is_en ? $en : $it;
-};
-
-$__h = function (string $s): string {
-  return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
-};
-
-$js_i18n = [
-  'locale' => $is_en ? 'en' : 'it',
-  'allTags' => $__t('Tutti i tag', 'All tags'),
-  'noTag' => $__t('Senza tag', 'No tag'),
-  'allCountries' => $__t('Tutti i paesi', 'All countries'),
-  'noCountry' => $__t('Senza paese', 'No country'),
-  'countTpl' => $__t('{shown} di {total} contenuti visibili', '{shown} of {total} visible items'),
-];
+$__t = static function (string $it, string $en) use ($is_en): string { return $is_en ? $en : $it; };
+$__h = 'tp_article_h';
+$filters = tp_article_filters($_GET);
+$results = tp_article_select(tp_article_registry(), $filters, $tp_lang);
+$pagination = tp_article_page($results, $filters['page']);
+$archive_cards = $pagination['cards'];
+$page_links = array_unique(array_merge([1], range(max(1, $pagination['page'] - 2), min($pagination['pages'], $pagination['page'] + 2)), [$pagination['pages']]));
+$country_options = tp_article_countries();
+uasort($country_options, static function (array $a, array $b) use ($tp_lang): int {
+  return strcmp(tp_article_normalize($a['name_' . $tp_lang]), tp_article_normalize($b['name_' . $tp_lang]));
+});
 ?>
 <!doctype html>
 <html lang="<?php echo $__h($tp_lang); ?>">
@@ -46,7 +31,7 @@ $js_i18n = [
 </head>
 
 <body class="posts-archive-page">
-  <?php include $_SERVER['DOCUMENT_ROOT'] . '/partials/header.php'; ?>
+  <?php include __DIR__ . '/../partials/header.php'; ?>
 
   <main class="container" id="main">
     <div class="container">
@@ -60,54 +45,70 @@ $js_i18n = [
         </p>
       </div>
 
-      <div class="posts-controls" role="region" aria-label="<?php echo $__h($__t('Filtri articoli', 'Article filters')); ?>">
+      <form class="posts-controls" method="get" action="/article/articoli.php" role="search" aria-label="<?php echo $__h($__t('Filtri articoli', 'Article filters')); ?>">
+        <input type="hidden" name="lang" value="<?php echo $__h($tp_lang); ?>">
         <div class="posts-controls-row">
           <div class="posts-search">
-            <label class="sr-only" for="postSearch"><?php echo $__h($__t('Cerca un articolo', 'Search for an article')); ?></label>
-            <input
-              id="postSearch"
-              type="search"
-              placeholder="<?php echo $__h($__t('Cerca per titolo o descrizione...', 'Search by title or description...')); ?>"
-              autocomplete="off"
-            />
-            <button type="button" id="clearSearch" class="search-clear" aria-label="<?php echo $__h($__t('Svuota ricerca', 'Clear search')); ?>" hidden>×</button>
+            <label for="postSearch"><?php echo $__h($__t('Cerca', 'Search')); ?></label>
+            <input id="postSearch" name="q" type="search" maxlength="500" value="<?php echo $__h($filters['q']); ?>" placeholder="<?php echo $__h($__t('Titolo o descrizione...', 'Title or description...')); ?>">
           </div>
-
           <div class="posts-select">
-            <label class="sr-only" for="tagSelect"><?php echo $__h($__t('Filtra per tag', 'Filter by tag')); ?></label>
-            <select id="tagSelect" aria-label="<?php echo $__h($__t('Filtra per tag', 'Filter by tag')); ?>">
-              <option value=""><?php echo $__h($__t('Tutti i tag', 'All tags')); ?></option>
+            <label for="countrySelect"><?php echo $__h($__t('Paese', 'Country')); ?></label>
+            <select id="countrySelect" name="country">
+              <option value=""><?php echo $__h($__t('Tutti i paesi', 'All countries')); ?></option>
+              <option value="EU"<?php echo $filters['country'] === 'EU' ? ' selected' : ''; ?>><?php echo $__h($__t('Europa / Unione europea', 'Europe / European Union')); ?></option>
+              <?php foreach ($country_options as $code => $country_option): ?>
+              <option value="<?php echo $__h($code); ?>"<?php echo $filters['country'] === $code ? ' selected' : ''; ?>><?php echo $__h($country_option['name_' . $tp_lang]); ?></option>
+              <?php endforeach; ?>
             </select>
           </div>
-
           <div class="posts-select">
-            <label class="sr-only" for="countrySelect"><?php echo $__h($__t('Filtra per paese', 'Filter by country')); ?></label>
-            <select id="countrySelect" aria-label="<?php echo $__h($__t('Filtra per paese', 'Filter by country')); ?>">
-              <option value=""><?php echo $__h($__t('Tutti i paesi', 'All countries')); ?></option>
+            <label for="topicSelect"><?php echo $__h($__t('Argomento', 'Topic')); ?></label>
+            <select id="topicSelect" name="topic">
+              <option value=""><?php echo $__h($__t('Tutti gli argomenti', 'All topics')); ?></option>
+              <?php foreach (tp_article_topics() as $topic_id => $labels): ?>
+              <option value="<?php echo $__h($topic_id); ?>"<?php echo $filters['topic'] === $topic_id ? ' selected' : ''; ?>><?php echo $__h($labels[$tp_lang]); ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="posts-select">
+            <label for="tagSelect"><?php echo $__h($__t('Tipo di contenuto', 'Content type')); ?></label>
+            <select id="tagSelect" name="type">
+              <option value=""><?php echo $__h($__t('Tutti i tipi', 'All types')); ?></option>
+              <?php foreach (tp_article_types() as $type_id => $labels): ?>
+              <option value="<?php echo $__h($type_id); ?>"<?php echo $filters['type'] === $type_id ? ' selected' : ''; ?>><?php echo $__h($labels[$tp_lang]); ?></option>
+              <?php endforeach; ?>
             </select>
           </div>
         </div>
+        <div class="posts-filter-actions">
+          <button class="btn btn-primary" type="submit"><?php echo $__h($__t('Applica filtri', 'Apply filters')); ?></button>
+          <a class="btn btn-outline" href="<?php echo $__h(tp_article_archive_url([], $tp_lang)); ?>"><?php echo $__h($__t('Azzera filtri', 'Reset filters')); ?></a>
+          <span><?php echo $__h($__t('Più recenti prima', 'Newest first')); ?></span>
+        </div>
+        <p class="posts-count" id="postsCount" aria-live="polite"><?php echo $__h(sprintf($__t('%d di %d contenuti · Pagina %d di %d', '%d of %d items · Page %d of %d'), count($archive_cards), $pagination['total'], $pagination['page'], $pagination['pages'])); ?></p>
+      </form>
 
-        <p class="posts-count" id="postsCount" aria-live="polite"></p>
-      </div>
-
-      <p class="posts-empty" id="postsEmpty" hidden>
-        <?php echo $__h($__t('Nessun risultato. Prova a cambiare ricerca o filtri.', 'No results. Try changing your search or filters.')); ?>
-      </p>
+      <?php if (!$results): ?>
+      <p class="posts-empty" id="postsEmpty"><?php echo $__h($filters['invalid']
+        ? $__t('Filtro non valido. Azzera i filtri e riprova.', 'Invalid filter. Reset the filters and try again.')
+        : $__t('Nessun risultato. Prova a cambiare ricerca o filtri.', 'No results. Try changing your search or filters.')); ?></p>
+      <?php endif; ?>
 
       <div class="posts-grid">
         <?php foreach ($archive_cards as $card):
-          $country = $is_en ? ($card['country_en'] ?? '') : ($card['country_it'] ?? '');
-          $tag = $is_en ? ($card['tag_en'] ?? '') : ($card['tag_it'] ?? '');
-          $date = $is_en ? ($card['date_en'] ?? '') : ($card['date_it'] ?? '');
-          $title = $is_en ? ($card['title_en'] ?? '') : ($card['title_it'] ?? '');
-          $excerpt = $is_en ? ($card['excerpt_en'] ?? '') : ($card['excerpt_it'] ?? '');
-          $aria = $is_en ? ($card['aria_en'] ?? '') : ($card['aria_it'] ?? '');
+          $country = tp_article_text($card, 'country', $tp_lang);
+          $tag = tp_article_text($card, 'tag', $tp_lang);
+          $date = tp_article_text($card, 'date', $tp_lang);
+          $title = tp_article_text($card, 'title', $tp_lang);
+          $excerpt = tp_article_text($card, 'excerpt', $tp_lang);
+          $aria = tp_article_text($card, 'aria', $tp_lang);
+          if ($aria === '' || $aria === 'Apri' || $aria === 'Open') $aria = $__t('Apri: ', 'Open: ') . $title;
         ?>
         <a class="post-card post-card-link"
            href="<?php echo $__h((string) ($card['link'] ?? '#')); ?>"
            aria-label="<?php echo $__h((string) $aria); ?>">
-          <div class="post-thumb" style="--thumb:url('<?php echo $__h((string) ($card['thumb'] ?? '')); ?>')" aria-hidden="true"></div>
+          <div class="post-thumb" aria-hidden="true"><?php if ($card['thumb'] !== ''): ?><img src="<?php echo $__h($card['thumb']); ?>" alt="" width="640" height="420" loading="lazy" decoding="async"><?php endif; ?></div>
           <div class="post-body">
             <div class="post-top">
               <?php if ($country !== ''): ?>
@@ -125,10 +126,18 @@ $js_i18n = [
         </a>
         <?php endforeach; ?>
       </div>
+      <?php if ($pagination['pages'] > 1): ?>
+      <nav class="posts-pagination" aria-label="<?php echo $__h($__t('Pagine degli articoli', 'Article pages')); ?>">
+        <?php $previous_page = 0; foreach ($page_links as $page_number): ?>
+        <?php if ($page_number > $previous_page + 1): ?><span aria-hidden="true">…</span><?php endif; ?>
+        <a class="btn btn-outline" href="<?php echo $__h(tp_article_archive_url($filters, $tp_lang, $page_number)); ?>" aria-label="<?php echo $__h($__t('Pagina ', 'Page ') . $page_number); ?>"<?php echo $page_number === $pagination['page'] ? ' aria-current="page"' : ''; ?>><?php echo $page_number; ?></a>
+        <?php $previous_page = $page_number; endforeach; ?>
+      </nav>
+      <?php endif; ?>
     </div>
   </main>
 
-  <?php include $_SERVER['DOCUMENT_ROOT'] . '/partials/footer.php'; ?>
+  <?php include __DIR__ . '/../partials/footer.php'; ?>
 
   <script type="text/javascript">
   var sc_project=13170178;
@@ -138,146 +147,7 @@ $js_i18n = [
   <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
   <noscript><div class="statcounter"><a title="hit counter" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13170178/0/f093464a/1/" alt="hit counter" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
-<script>
-(function () {
-  const I18N = <?php echo json_encode($js_i18n, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES); ?>;
 
-  const grid = document.querySelector('.posts-grid');
-  if (!grid) return;
-
-  const searchInput = document.getElementById('postSearch');
-  const clearBtn = document.getElementById('clearSearch');
-  const tagSelect = document.getElementById('tagSelect');
-  const countrySelect = document.getElementById('countrySelect');
-  const countEl = document.getElementById('postsCount');
-  const emptyEl = document.getElementById('postsEmpty');
-
-  const cards = Array.from(grid.querySelectorAll('a.post-card-link'));
-
-  const normalize = (s) => {
-    if (!s) return '';
-    try {
-      return s
-        .toString()
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .trim();
-    } catch (e) {
-      return s.toString().toLowerCase().trim();
-    }
-  };
-
-  const textOf = (card, sel) => card.querySelector(sel)?.textContent?.trim() || '';
-
-  cards.forEach((card) => {
-    const title = textOf(card, '.post-title');
-    const excerpt = textOf(card, '.post-excerpt');
-    const tag = textOf(card, '.post-tag');
-    const country = textOf(card, '.post-country');
-
-    card._meta = {
-      title,
-      excerpt,
-      tag,
-      country,
-      nTitle: normalize(title),
-      nExcerpt: normalize(excerpt),
-      nTag: normalize(tag),
-      nCountry: normalize(country),
-    };
-  });
-
-  const buildOptions = (selectEl, map, allLabel, noneLabel, hasMissing) => {
-    if (!selectEl) return;
-
-    selectEl.innerHTML = '';
-    selectEl.add(new Option(allLabel, ''));
-
-    if (hasMissing) selectEl.add(new Option(noneLabel, '__none'));
-
-    Array.from(map.entries())
-      .sort((a, b) => a[1].localeCompare(b[1], I18N.locale, { sensitivity: 'base' }))
-      .forEach(([key, label]) => selectEl.add(new Option(label, key)));
-  };
-
-  const tagMap = new Map();
-  const countryMap = new Map();
-  let hasMissingTag = false;
-  let hasMissingCountry = false;
-
-  cards.forEach((c) => {
-    if (c._meta.nTag) tagMap.set(c._meta.nTag, c._meta.tag);
-    else hasMissingTag = true;
-
-    if (c._meta.nCountry) countryMap.set(c._meta.nCountry, c._meta.country);
-    else hasMissingCountry = true;
-  });
-
-  buildOptions(tagSelect, tagMap, I18N.allTags, I18N.noTag, hasMissingTag);
-  buildOptions(countrySelect, countryMap, I18N.allCountries, I18N.noCountry, hasMissingCountry);
-
-  const applyFilters = () => {
-    const q = normalize(searchInput?.value || '');
-    const hasQ = q.length > 0;
-
-    const tagKey = tagSelect?.value || '';
-    const countryKey = countrySelect?.value || '';
-
-    let shown = 0;
-
-    cards.forEach((card) => {
-      const m = card._meta;
-
-      const matchText = !hasQ || m.nTitle.includes(q) || m.nExcerpt.includes(q);
-
-      const matchTag =
-        !tagKey ||
-        (tagKey === '__none' ? !m.nTag : m.nTag === tagKey);
-
-      const matchCountry =
-        !countryKey ||
-        (countryKey === '__none' ? !m.nCountry : m.nCountry === countryKey);
-
-      const ok = matchText && matchTag && matchCountry;
-
-      card.style.display = ok ? '' : 'none';
-      if (ok) shown += 1;
-    });
-
-    const total = cards.length;
-
-    if (countEl) {
-      countEl.textContent = (I18N.countTpl || '')
-        .replace('{shown}', String(shown))
-        .replace('{total}', String(total));
-    }
-
-    if (emptyEl) emptyEl.hidden = shown !== 0;
-    if (clearBtn) clearBtn.hidden = !hasQ;
-  };
-
-  const debounce = (fn, ms) => {
-    let t;
-    return function (...args) {
-      clearTimeout(t);
-      t = setTimeout(() => fn.apply(this, args), ms);
-    };
-  };
-
-  applyFilters();
-
-  searchInput?.addEventListener('input', debounce(applyFilters, 60));
-  clearBtn?.addEventListener('click', () => {
-    searchInput.value = '';
-    searchInput.focus();
-    applyFilters();
-  });
-
-  tagSelect?.addEventListener('change', applyFilters);
-  countrySelect?.addEventListener('change', applyFilters);
-})();
-</script>
 
 </body>
 </html>

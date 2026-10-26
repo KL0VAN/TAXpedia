@@ -19,7 +19,9 @@ See [AGENTS.md](AGENTS.md) for standards and safety rules, [PLAN.md](PLAN.md) fo
 
 About Us logos live in `aboutus/imm/logo/`; portraits live in `aboutus/imm/people/`.
 The two article-owned logo copies remain in `article/italia/imm/` to preserve existing article URLs.
-`aboutus/imm/map.png` is retained. `1.TESTER/` is currently empty; Git cannot record an empty directory.
+`aboutus/imm/map.png` is retained. Public Country Profiles live in `dashboard/`; `1.TESTER/` is reserved for experiments and is empty after the verified migration. Git cannot record an empty directory.
+
+See [dashboard/README.md](dashboard/README.md) for routes, article filters and release checks.
 
 ## File structure
 

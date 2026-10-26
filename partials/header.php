@@ -4,6 +4,7 @@ require_once __DIR__ . '/../i18n/i18n.php';
 $tp_main_nav = array(
   array('href' => '/index.php', 'label' => e('nav_home')),
   array('href' => '/calculator/menu.php', 'label' => e('nav_calculator')),
+  array('href' => '/dashboard/index.php', 'label' => e('nav_countries')),
   array('href' => '/article/articoli.php', 'label' => e('nav_article')),
   array('href' => '/glossary/glossario.php', 'label' => e('nav_glossary')),
   array('href' => '/tools/education.php', 'label' => e('nav_lessons')),

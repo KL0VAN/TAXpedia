@@ -32,9 +32,23 @@ Esempio: `nuovo_articolo.php`.
 - ogni articolo deve avere blocco `it` e blocco `en`
 - non pubblicare se manca una delle due lingue.
 
-6. Card homepage:
-- usa il flag `in_homepage` nella entry dati
-- usa `home_order` per ordinamento homepage.
+6. Pubblicazione, filtri e homepage:
+- `article/article_data.php` rimane l'unico registro; non modificare manualmente le 27 schede Paese.
+- `id`: identificatore unico e stabile, indipendente dal titolo e dalla rinomina del file.
+- `date_iso`: data di pubblicazione valida `YYYY-MM-DD`; `date_it` (`DD/MM/YYYY`) e `date_en` (`MM/DD/YYYY`) devono rappresentare la stessa data. Non usare segnaposto o date del filesystem.
+- `content_type`: `article`, `sector` oppure `tool`. Calcolatori e glossario sono `tool`.
+- `countries`: array di codici ISO maiuscoli, ad esempio `array('IT')` o `array('EE', 'LV', 'LT')`; usa solo associazioni editorialmente giustificate.
+- `scope`: `country`, `multi-country`, `eu` o `general`. `scope=eu` non associa automaticamente un articolo a tutti i Paesi.
+- `topics`: array di identificatori presenti in `tp_article_topics()` in `article/article_helpers.php`. I tag Articolo/Settore/Novit? restano etichette di tipo, non argomenti.
+- `status`: `published` oppure `draft`; solo `published` con `in_archive=true`, data valida e destinazione locale esistente è idoneo alle liste pubbliche.
+- `languages`: lingue effettivamente verificate, normalmente `array('it', 'en')`; mantenere lo standard bilingue.
+- `authors`: slug autore esistenti, quando applicabile.
+- `link` e `thumb`: URL locali con `/`, nome ed estensione esatti; evitare percorsi Windows.
+- la homepage mostra automaticamente i cinque contenuti idonei pi? recenti; `in_homepage` e `home_order` restano campi storici di compatibilit? e non ne controllano la selezione.
+- le schede Paese mostrano al massimo quattro articoli/settori, ordinati per data, con associazione esplicita al codice del Paese; escludono strumenti e bozze.
+- l'archivio usa filtri GET e 12 schede per pagina; esempi: `/article/articoli.php?country=IT&topic=infrastructure&lang=it`, oppure `country=EU` per contenuti di ambito europeo.
+- registrare metadati validi è sufficiente per includere il nuovo contenuto nei filtri pertinenti. Non aggiungere liste parallele.
+- prima della pubblicazione verificare file, traduzioni, immagini, data, unicit? ID e classificazione; non registrare template o esempi.
 
 ## Template Ufficiale
 
@@ -52,13 +66,13 @@ Template unico da copiare:
 6. Aggiungi una sola entry in `article/article_data.php` con:
 - `link` assoluto e `thumb` assoluto, `title_it/en`, `excerpt_it/en`, `aria_it/en`
 - `in_archive` e `archive_order`
-- `in_homepage` e `home_order` (solo se deve apparire in homepage).
+- i metadati di pubblicazione e classificazione descritti al punto 6; la homepage si aggiorna automaticamente.
 7. Test finale rapido:
 - apri pagina con `?lang=it`
 - apri pagina con `?lang=en`
 - verifica titolo, H2, testo, immagine
 - verifica card archivio -> pagina corretta.
-- verifica homepage coerente (se `in_homepage=true`).
+- verifica i filtri Paese/argomento e la homepage automatica; controlla che `draft` non compaia nelle liste pubbliche.
 
 ## Cosa Non Toccare
 

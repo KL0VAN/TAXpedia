@@ -107,15 +107,8 @@ $FP_IS_EN = ($FP_LANG === 'en');
 
 $FP_AUTHOR_SLUG = 'francesco-calabrese-vallino';
 $FP_AUTHOR_ARTICLE_LIMIT = 6;
-$FP_ARTICLE_DATA_PATH = __DIR__ . '/../../article/article_data.php';
-$FP_ARTICLES = array();
-
-if (is_file($FP_ARTICLE_DATA_PATH)) {
-  $FP_LOADED_ARTICLES = require $FP_ARTICLE_DATA_PATH;
-  if (is_array($FP_LOADED_ARTICLES)) {
-    $FP_ARTICLES = $FP_LOADED_ARTICLES;
-  }
-}
+require_once __DIR__ . '/../../article/article_helpers.php';
+$FP_ARTICLES = tp_article_public_cards(null, $FP_LANG);
 
 if (!function_exists('fp_article_lang_value')) {
   function fp_article_lang_value($article, $base_key, $lang) {

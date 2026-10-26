@@ -4,6 +4,7 @@ return array(
   'nav_home' => 'Home',
   'nav_calculator' => 'Calcolatore',
   'nav_about' => 'Chi siamo',
+  'nav_countries' => 'Schede dei Paesi',
   'nav_article' => 'I nostri articoli',
   'nav_comparison' => 'Confronto',
   'nav_glossary' => 'Glossario',
