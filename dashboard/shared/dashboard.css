@@ -1,3 +1,5 @@
+@import url("/style/eu-profile-placeholder.css");
+
 /* Country profiles. Shared styles only. Shared TAXpedia palette and typography come from styleIndex.css. */
 .dash-page {
   width: min(100% - 2.5rem, 1040px);
@@ -8,35 +10,6 @@
 .dash-page h1, .dash-page h2, .dash-page h3 { color: var(--brand); }
 .dash-menu-heading { margin: 0 0 1.8rem; text-align: center; }
 .dash-menu-heading p { color: var(--muted); margin: .65rem 0 1rem; }
-.dash-eu-preview {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 1.25rem;
-  align-items: start;
-  margin: 0 0 1.8rem;
-  padding: 1.25rem;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: #f8fafc;
-}
-.dash-eu-preview-mark {
-  display: grid;
-  place-items: center;
-  width: 72px;
-  height: 72px;
-  border-radius: 8px;
-  background: var(--brand);
-  color: #fff;
-  font-size: 1.35rem;
-  font-weight: 800;
-}
-.dash-eu-preview h2 { margin: 0 0 .65rem; font-size: 1.5rem; }
-.dash-eu-preview p { margin: 0; color: var(--muted); line-height: 1.65; }
-.dash-eu-preview .dash-eu-preview-status { margin-top: .75rem; color: var(--brand); font-size: .8rem; font-weight: 700; }
-@media (max-width: 600px) {
-  .dash-eu-preview { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
-  .dash-eu-preview-mark { width: 64px; height: 48px; }
-}
 .dash-country-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; }
 .dash-nation-card {
   display: flex;

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * i18n LOCALE (IT/EN) - solo per questa pagina (calculator/menu.php)
  * - Usa il bootstrap i18n globale per risolvere lingua e fallback
@@ -113,6 +113,7 @@ if (!function_exists('tpm_e')) {
   <link rel="stylesheet" href="/styleIndex.css">
   <!-- IMPORTANTE: percorso assoluto + cache busting (Aruba spesso cache aggressiva) -->
   <link rel="stylesheet" href="/calculator/NazioniStyle.css?v=20260208">
+  <link rel="stylesheet" href="/style/eu-profile-placeholder.css?v=<?php echo (int) filemtime(__DIR__ . '/../style/eu-profile-placeholder.css'); ?>">
 </head>
 
 <body>
@@ -127,7 +128,8 @@ if (!function_exists('tpm_e')) {
     <div class="cta-row" style="text-align: center;">
       <a class="btn btn-primary" href="/tools/comparison.php"><?php echo tpm_e('btn_conf'); ?></a>
     </div>
-    <br>
+
+    <?php require __DIR__ . '/../partials/eu-profile-placeholder.php'; ?>
 
     <section aria-label="<?php echo tpm_e('aria_select'); ?>">
       <div class="country-grid">
