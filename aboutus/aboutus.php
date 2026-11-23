@@ -388,6 +388,8 @@ $ABU_PARTNERS = array(
       </section>
     </section>
 
+    <?php require_once __DIR__ . '/../partials/web-awards.php'; ?>
+
     <section class="about-page-section collaborations" aria-labelledby="collab-title">
       <header class="page-head collab-head">
         <h2 id="collab-title"><?php echo abu_e('collab_h2'); ?></h2>

@@ -211,9 +211,6 @@ $GLOBALS['TP_I18N'] = $page_i18n + $GLOBALS['TP_I18N'];
     </div>
   </section>
 
-  <!-- ===================== .EU WEB AWARDS ===================== -->
-  <?php require_once __DIR__ . '/partials/web-awards.php'; ?>
-
   <!-- ===================== I NOSTRI ARTICOLI ===================== -->
   <?php require_once __DIR__ . '/partials/new-article.php'; ?>
 

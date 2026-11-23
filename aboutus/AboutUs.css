@@ -450,6 +450,94 @@ main.container { flex: 1 0 auto; padding-top: 1.25rem; padding-bottom: 1.25rem; 
   background: rgba(0, 0, 0, .025);
 }
 
+/* Permanent recognition: official finalist artwork, separate from partners. */
+.awards-recognition{
+  padding-block:1.75rem;
+  border-block:1px solid var(--line);
+}
+.awards-recognition__head{
+  margin:0 0 1.5rem;
+  text-align:center;
+}
+.awards-recognition__head h2{
+  margin:0;
+  color:var(--brand);
+}
+.awards-recognition__head::after{
+  content:"";
+  display:block;
+  width:56px;
+  height:3px;
+  margin:.8rem auto 0;
+  background:var(--accent);
+}
+.awards-recognition__grid{
+  display:grid;
+  grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr);
+  gap:1.25rem;
+  align-items:stretch;
+}
+.awards-recognition__artwork{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  padding:clamp(1.25rem, 3vw, 2rem);
+  border:1px solid var(--brand);
+  border-radius:10px;
+  background:var(--brand);
+}
+.awards-recognition__artwork img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:440px;
+}
+.awards-recognition__copy{
+  min-width:0;
+  padding:1.25rem;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:#f8fafc;
+}
+.awards-recognition__copy h3{
+  margin:0 0 .75rem;
+  color:var(--brand);
+  font-size:clamp(1.2rem, 2vw, 1.6rem);
+  line-height:1.35;
+}
+.awards-recognition__copy p{
+  margin:0 0 .75rem;
+  line-height:1.6;
+}
+.awards-recognition__team-result{
+  color:var(--muted);
+  font-style:italic;
+}
+.awards-recognition__link{
+  display:inline-flex;
+  min-height:44px;
+  align-items:center;
+  gap:.4rem;
+  max-width:100%;
+  color:var(--brand);
+  font-weight:700;
+  line-height:1.5;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.awards-recognition__link:hover{color:#00256f}
+.awards-recognition__link:focus-visible{
+  outline:3px solid var(--brand);
+  outline-offset:4px;
+  border-radius:2px;
+}
+@media (max-width:760px){
+  .awards-recognition__grid{grid-template-columns:minmax(0, 1fr)}
+  .awards-recognition__artwork{padding:1.75rem}
+  .awards-recognition__artwork img{max-width:380px}
+}
+
 .collaborations{
   text-align: center;
 }
