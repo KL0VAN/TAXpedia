@@ -10,6 +10,14 @@ require __DIR__ . '/shared/page-top.php';
       <p><?php echo dash_h(dash_t('Scegli un Paese per consultare la sua scheda e accedere al calcolatore nazionale.', 'Choose a country to explore its profile and access the national calculator.')); ?></p>
       <a class="dash-button dash-button-primary btn btn-primary" href="<?php echo dash_h(dash_url('/tools/comparison.php')); ?>"><?php echo dash_h(dash_t('Confronta i Paesi', 'Compare countries')); ?></a>
     </header>
+    <section class="dash-eu-preview" aria-labelledby="eu-profile-title">
+      <div class="dash-eu-preview-mark" aria-hidden="true"><?php echo dash_h(dash_t('UE', 'EU')); ?></div>
+      <div>
+        <h2 id="eu-profile-title"><?php echo dash_h(dash_t('Scheda Europa', 'European Profile')); ?></h2>
+        <p><?php echo dash_h(dash_t('Una panoramica dedicata all’Unione europea è in preparazione. Questa sezione raccoglierà contenuti introduttivi, confronti tra i 27 Stati membri e informazioni sul contesto economico e di finanza pubblica europea.', 'A dedicated European Union overview is in preparation. This section will gather introductory content, comparisons between the 27 member states, and information about the broader European economic and public-finance context.')); ?></p>
+        <p class="dash-eu-preview-status"><?php echo dash_h(dash_t('Contenuto in preparazione', 'Content in preparation')); ?></p>
+      </div>
+    </section>
     <section aria-label="<?php echo dash_h(dash_t('Seleziona un Paese', 'Select a country')); ?>">
       <div class="dash-country-grid">
         <?php foreach ($DASH_DATA['countries'] as $country): ?>

@@ -84,3 +84,4 @@
     </small>
   </div>
 </footer>
+<script defer src="/js/site-stats.js?v=<?php echo (int) filemtime(__DIR__ . '/../js/site-stats.js'); ?>"></script>

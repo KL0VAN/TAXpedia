@@ -1,20 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://taxpedia.eu/</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://taxpedia.eu/aboutus/aboutus.php</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
-    <loc>https://taxpedia.eu/aboutus/aboutus.php</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://taxpedia.eu/aboutus/disclaimer.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/europa-sotto-casa.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/impact.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/privacy.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/alessandro-marangoni.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/francesca-ricciuti.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/francesco-calabrese-vallino.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/ludovico-prunster.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/luka-ribic.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/ottilia-ogliari.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/riccardo-cervillio.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/team/tommaso-prever.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/aboutus/work-with-us.php</loc>
   </url>
   <url>
     <loc>https://taxpedia.eu/article/articoli.php</loc>
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/article/belgium/belgium.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/article/europe/coesione.php</loc>
     <lastmod>2026-04-08</lastmod>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/europe/european-union/eu-economic-growth.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/europe/european-union/populism-and-economic-growth-in-europe.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/europe/european-union/the-cost-of-a-divided-europe.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/europe/infrastructure/rail-baltica.php</loc>
   </url>
   <url>
     <loc>https://taxpedia.eu/article/europe/mercato_unico.php</loc>
@@ -45,6 +95,12 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/article/france/france.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/germany/germany.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/article/italia/altro.php</loc>
     <lastmod>2026-04-08</lastmod>
   </url>
@@ -65,8 +121,20 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/article/italia/gioco-azzardo.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/article/italia/giustizia.php</loc>
     <lastmod>2026-04-08</lastmod>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/italia/giustizia/sovraffollamento-carcerario.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/italia/industria/il-caso-ilva.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/italia/infrastrutture/il-biglietto-non-basta.php</loc>
   </url>
   <url>
     <loc>https://taxpedia.eu/article/italia/infrastrutture/olimpiadi_2026.php</loc>
@@ -85,8 +153,14 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/article/italia/istruzione/ricerca.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/article/italia/istruzione_ricerca.php</loc>
     <lastmod>2026-04-08</lastmod>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/italia/italy.php</loc>
   </url>
   <url>
     <loc>https://taxpedia.eu/article/italia/politiche_economiche.php</loc>
@@ -113,6 +187,12 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/article/italia/voto_fuorisede.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/article/netherlands/netherlands.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/calculator/austria/austria.php</loc>
     <lastmod>2026-04-08</lastmod>
   </url>
@@ -129,12 +209,21 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/calculator/cyprus/cyprus.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/calculator/czech/czech.php</loc>
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
     <loc>https://taxpedia.eu/calculator/denmark/denmark.php</loc>
     <lastmod>2026-04-08</lastmod>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/calculator/estonia/estonia.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/calculator/finland/finland.php</loc>
   </url>
   <url>
     <loc>https://taxpedia.eu/calculator/france/france.php</loc>
@@ -161,8 +250,17 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/calculator/latvia/latvia.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/calculator/lithuania/lithuania.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/calculator/luxembourg/luxembourg.php</loc>
     <lastmod>2026-04-08</lastmod>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/calculator/malta/malta.php</loc>
   </url>
   <url>
     <loc>https://taxpedia.eu/calculator/menu.php</loc>
@@ -185,6 +283,9 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/calculator/slovakia/slovakia.php</loc>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/calculator/slovenia/slovenia.php</loc>
     <lastmod>2026-04-08</lastmod>
   </url>
@@ -197,15 +298,103 @@
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
+    <loc>https://taxpedia.eu/dashboard/countries/austria/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/belgium/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/bulgaria/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/croatia/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/cyprus/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/czech/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/denmark/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/estonia/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/finland/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/france/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/germany/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/greece/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/hungary/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/ireland/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/italia/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/latvia/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/lithuania/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/luxembourg/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/malta/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/netherlands/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/poland/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/portugal/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/romania/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/slovakia/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/slovenia/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/spain/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/countries/sweden/index.php</loc>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/dashboard/index.php</loc>
+    <lastmod>2026-11-23</lastmod>
+  </url>
+  <url>
     <loc>https://taxpedia.eu/glossary/glossario.php</loc>
     <lastmod>2026-04-08</lastmod>
+  </url>
+  <url>
+    <loc>https://taxpedia.eu/</loc>
+    <lastmod>2026-11-23</lastmod>
   </url>
   <url>
     <loc>https://taxpedia.eu/tools/comparison.php</loc>
     <lastmod>2026-04-08</lastmod>
   </url>
   <url>
-    <loc>https://taxpedia.eu/tools/program.php</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://taxpedia.eu/tools/education.php</loc>
   </url>
 </urlset>
