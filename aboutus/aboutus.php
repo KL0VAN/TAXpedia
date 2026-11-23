@@ -251,6 +251,7 @@ $ABU_PARTNERS = array(
   array('name' => 'Gioventù Federalista Europea', 'image' => 'logo-gfe.webp', 'width' => 512, 'height' => 234, 'href' => 'https://giovanifederalisti.eu/'),
   array('name' => 'Trasporta Milano', 'image' => 'logo-tm.jpg', 'width' => 2000, 'height' => 2000, 'href' => 'https://www.instagram.com/trasportamilano/'),
   array('name' => 'Controverso Network', 'image' => 'logo-cvn.png', 'width' => 1280, 'height' => 1229, 'href' => 'https://www.instagram.com/controverso.network/'),
+  array('name' => 'Orizzonte Giuridico', 'image' => 'logo-orizzonte.png', 'width' => 2000, 'height' => 2000, 'href' => 'https://www.orizzontegiuridico.com/'),
 );
 ?>
 <!doctype html>

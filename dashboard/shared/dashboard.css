@@ -59,6 +59,24 @@
 .dash-tax { margin-top: 3.75rem; padding: clamp(1.35rem, 4vw, 2.4rem); border-radius: 22px; background: var(--accent); }
 .dash-tax-type { margin: .85rem 0; font-weight: 800; }
 .dash-tax-source { margin-bottom: 0; font-size: .82rem; }
+.dash-tax-rates { margin-top: 1.25rem; }
+.dash-tax-table-wrap { max-width: 100%; overflow-x: auto; border-radius: 14px; background: #fff; }
+.dash-tax-table-wrap:focus-visible, .dash-tax-regions summary:focus-visible { outline: 3px solid var(--brand); outline-offset: 4px; }
+.dash-tax-table { width: 100%; border-collapse: collapse; font-size: .92rem; line-height: 1.5; font-variant-numeric: tabular-nums; }
+.dash-tax-table caption { padding: 1rem; color: var(--ink); font-weight: 700; text-align: left; }
+.dash-tax-table th, .dash-tax-table td { padding: .8rem 1rem; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+.dash-tax-table thead th { color: var(--muted); background: #f5f7fc; font-weight: 700; }
+.dash-tax-table tbody th { font-weight: 600; }
+.dash-tax-table td { color: var(--brand); font-weight: 800; white-space: nowrap; }
+.dash-tax-note { margin: .9rem 0 0; font-size: .85rem; line-height: 1.6; }
+.dash-tax-regions { margin-top: 1rem; }
+.dash-tax-regions summary { width: fit-content; padding-block: .5rem; color: var(--ink); font-weight: 700; cursor: pointer; }
+.dash-tax-regions .dash-tax-table-wrap { margin-top: .75rem; }
+.dash-tax-region-table { min-width: 620px; }
+@media (max-width: 460px) {
+  .dash-tax-table:not(.dash-tax-region-table) th, .dash-tax-table:not(.dash-tax-region-table) td { padding: .7rem .65rem; }
+  .dash-tax-table { font-size: .85rem; }
+}
 .dash-articles { margin-top: 3.75rem; }
 .dash-article-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1.25rem; }
 .dash-article-card { display: flex; flex-direction: column; gap: .7rem; padding: 1.15rem; border: 1px solid var(--line); border-radius: 18px; background: #fafafa; }

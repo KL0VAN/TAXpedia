@@ -33,6 +33,29 @@ open `/tools/comparison.php?a=<CODE>`. Country data, definitions, reference
 periods, source URLs and unavailable-value handling are preserved. No fiscal
 formula or figure was changed or independently verified by the migration.
 
+### Rates shown in the income-tax section
+
+`shared/tax-data.php` reads the existing calculator JavaScript on the server;
+`shared/tax-rates.php` renders the result inside the existing yellow section.
+No calculator code is executed or modified and no tax-rate registry is copied.
+Editing a supported literal configuration is reflected on the next request.
+
+The adapter supports `TAX_BRACKETS` with `upper/rate` or `min/max/rate`, and
+the territorial `REGIONAL_BRACKETS` / `REGIONAL_RATES` used by Croatia and Italy.
+Germany's variable marginal ranges are derived from the coefficients and scale
+in its existing polynomial formulas, before rounding; the display marks them
+as approximate. Unsupported data/formula syntax yields an unavailable state
+instead of fabricated values. JavaScript expressions are never evaluated.
+
+The table labels these as calculator-model parameters, in EUR as used by the
+calculators, and distinguishes marginal rates from the effective overall tax
+burden. Existing simplified coefficients and differences from the country
+classification remain unchanged and are explained where applicable. This
+feature does not certify current statutory rates or their reference year.
+Regional rates remain separate from Italy's national rates. The tables and
+native details disclosure also work without JavaScript; wide territorial
+tables have a labelled, keyboard-focusable horizontal scroll region.
+
 The five existing profiles under `article/` retain their routes, layouts and
 tax content; only their article selection and filtered archive links changed.
 They are not redirects or dependencies of these new profiles.

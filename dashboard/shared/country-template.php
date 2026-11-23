@@ -58,6 +58,7 @@ require __DIR__ . '/page-top.php';
       <h2 id="tax-title"><?php echo dash_h(dash_t('La tassazione sul reddito', 'Personal income taxation')); ?></h2>
       <p class="dash-tax-type"><?php echo dash_h($dashboardTitle . ' · ' . dash_metric_value($taxMetric, $country)); ?></p>
       <p><?php echo dash_h($taxMeta['definition_' . $DASH_LANG] ?? dash_t('Contenuti in arrivo.', 'Content coming soon.')); ?></p>
+      <?php require __DIR__ . '/tax-rates.php'; ?>
       <?php if (!empty($taxMeta['source_url'])): ?>
         <p class="dash-tax-source"><a href="<?php echo dash_h($taxMeta['source_url']); ?>" target="_blank" rel="noopener noreferrer"><?php echo dash_h(dash_t('Fonte della classificazione', 'Classification source')); ?></a> · <?php echo dash_h($taxMeta['checked_on'] ?? ''); ?></p>
       <?php endif; ?>

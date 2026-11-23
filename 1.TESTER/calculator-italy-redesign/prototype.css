@@ -1,0 +1,99 @@
+/* Isolated Italian presentation prototype. Production styles are not changed. */
+body.italy-redesign-prototype { background: #fff; }
+.italy-redesign-prototype .prototype-page { max-width: 1280px; padding: 1.5rem 1.5rem 3rem; }
+.prototype-page .prototype-notice { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem; padding-bottom: 1rem; color: var(--muted); font-size: .82rem; }
+.prototype-notice a { color: var(--brand); padding: .35rem .65rem; border: 1px solid var(--line); border-radius: 6px; font-weight: 700; text-decoration: none; }
+.prototype-notice a:hover { border-color: var(--brand); background: #f3f6fa; }
+.prototype-page .prototype-intro { display: grid; grid-template-columns: minmax(0, 1fr) 370px; gap: 3rem; align-items: center; margin-bottom: 1.25rem; }
+.prototype-page .page-title, .prototype-page .subtitle { max-width: none; padding: 0; margin: 0; text-align: left; }
+.prototype-page .page-title { color: var(--brand); font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.25; }
+.prototype-page .subtitle { margin-top: 1rem; color: var(--muted); max-width: 58ch; }
+.prototype-page .box, .prototype-page .calc-form, .prototype-page .canvas-wrap { max-width: none; box-shadow: none; background: #fff; border-radius: 10px; }
+.prototype-page #slide-1 { border: 1px solid var(--line); padding: 1.25rem; margin: 0; }
+.prototype-page .calc-form { border: 0; padding: 0; }
+.prototype-page .input-row { flex-direction: row; align-items: center; gap: .6rem; }
+.prototype-page .input-row input { flex: 1 1 140px; min-width: 0; width: auto; padding: .75rem; border-radius: 6px; font-size: 1rem; }
+.prototype-page .label { display: block; margin-bottom: .4rem; font-size: .9rem; }
+.prototype-page .btn { min-height: 44px; padding: .7rem 1rem; border-radius: 6px; box-shadow: none; font: 700 .95rem/1.4 Inter, system-ui, sans-serif; text-decoration: none; }
+.prototype-page #btn-calcola { color: #fff; background: var(--brand); border-color: var(--brand); }
+.prototype-page #btn-calcola:hover { background: #002775; filter: none; }
+.prototype-page .prototype-region-row { display: block; margin-top: .9rem; }
+.prototype-page .prototype-region-row select { width: 100%; min-height: 44px; padding: .65rem; border: 1px solid #cbd5e1; border-radius: 6px; color: var(--ink); background: #fff; font: inherit; }
+.prototype-page .help, .prototype-page #slide-1 .tp-muted { font-size: .8rem; line-height: 1.5; }
+.prototype-page .prototype-map { margin: 1rem 0 1.75rem; border: 1px solid var(--line); border-radius: 8px; }
+.prototype-map > summary { padding: .85rem 1rem; cursor: pointer; color: var(--brand); font-size: .9rem; font-weight: 700; }
+.prototype-page #slide-2 { margin: 0; padding: 1rem; border: 0; }
+.prototype-page .tp-map-scope { --region-hover: #4b79b2; --region-active: #003399; }
+.prototype-page .tp-map-scope .map-card { box-shadow: none; border: 0; }
+.prototype-page .tp-map-scope .map-tooltip { position: static; opacity: 1; transform: none; min-height: 1.5rem; padding: .5rem; margin: 0; border: 0; border-radius: 0; box-shadow: none; background: #fff; color: var(--brand); text-align: center; white-space: normal; }
+.prototype-page #slide-3 { margin: 0; padding: 0; border: 0; }
+.italy-redesign-prototype:not(.prototype-has-results) #slide-3 { display: none; }
+.prototype-page .prototype-original-hint { display: none; }
+.prototype-page .results-head { max-width: none; margin: 0 0 .75rem; padding: 0; text-align: left; }
+.prototype-page h2.results-head { font-size: clamp(1.45rem, 2.4vw, 2rem); color: var(--brand); line-height: 1.4; }
+.prototype-page p.results-head { color: var(--muted); font-size: .9rem; }
+.prototype-page .prototype-context { margin: 1rem 0 1.25rem; padding: 1rem 1.1rem; border-left: 3px solid var(--brand); background: #f5f7fa; color: var(--muted); font-size: .88rem; }
+.prototype-context p { margin: 0; }
+.prototype-context .prototype-rounding { margin-top: .5rem; font-size: .8rem; }
+.prototype-page .prototype-stale { padding: .75rem; background: #fff7dc; border: 1px solid #d7bd6c; }
+.prototype-page #risultati > section.box { margin: 1.5rem 0; padding: 1.35rem; border: 1px solid var(--line); }
+.prototype-page .box-title { color: var(--brand); font-size: 1.35rem; line-height: 1.4; }
+.prototype-page .box-title::after { display: none; }
+.prototype-page .region-amount { margin: .5rem 0 1.1rem; color: var(--muted); font-size: .88rem; }
+.prototype-page .proto-chart-layout { display: grid; grid-template-columns: minmax(290px, 1.15fr) minmax(250px, 1fr) minmax(220px, .85fr); gap: 1.35rem; align-items: start; }
+.prototype-page .legend-col { padding: 0; border: 0; background: transparent; border-radius: 0; box-shadow: none; min-width: 0; }
+.prototype-page .proto-legend-heading { margin: 0 0 .65rem; color: var(--muted); font: 700 .82rem/1.4 Inter, system-ui, sans-serif; }
+.prototype-page .proto-legend { padding: 0; margin: 0; list-style: none; }
+.prototype-page .proto-legend li { margin: 0; padding: 0; }
+.prototype-page .proto-legend-button { display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: .65rem; width: 100%; min-height: 48px; padding: .55rem .6rem; border: 1px solid transparent; border-bottom-color: #edf0f4; border-radius: 5px; text-align: left; color: var(--ink); background: #fff; font: 500 .85rem/1.4 Inter, system-ui, sans-serif; cursor: pointer; }
+.prototype-page .proto-legend-button:hover { background: #f5f7fa; }
+.prototype-page .proto-legend-button[aria-pressed="true"] { border-color: #b5c8df; background: #edf3fa; }
+.prototype-page .proto-swatch { width: 9px; height: 9px; background: var(--category-color); border: 1px solid rgba(15,23,42,.15); border-radius: 2px; }
+.prototype-page .proto-legend-value { display: flex; flex-direction: column; gap: .1rem; text-align: right; white-space: nowrap; }
+.prototype-page .proto-legend-amount { font-weight: 700; }
+.prototype-page .proto-legend-percent { color: var(--muted); font-size: .76rem; }
+.prototype-page .chart-col { position: sticky; top: 100px; min-width: 0; }
+.prototype-page .canvas-wrap { position: relative; width: 100%; max-width: 310px; height: 310px; margin: 0 auto; padding: 0; border: 0; }
+/* Required to override the source page's fixed-size !important canvas rules. */
+.italy-redesign-prototype .prototype-page .canvas-wrap canvas { width: 100% !important; height: 100% !important; }
+.prototype-page .proto-donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; gap: .25rem; width: 58%; text-align: center; pointer-events: none; }
+.prototype-page .proto-center-label { color: var(--muted); font-size: .76rem; line-height: 1.4; }
+.prototype-page .proto-center-amount { color: var(--brand); font-size: clamp(1.05rem, 1.5vw, 1.5rem); font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.prototype-page .proto-center-context { color: var(--muted); font-size: .71rem; line-height: 1.3; }
+.prototype-page .proto-chart-hint { margin: .6rem auto 0; color: var(--muted); font-size: .75rem; max-width: 34ch; text-align: center; }
+.prototype-page .proto-detail { position: sticky; top: 100px; min-width: 0; min-height: 285px; padding: 1.1rem; border: 1px solid #e2e8f0; border-top: 3px solid var(--category-color, var(--brand)); border-radius: 6px; background: #f8fafc; }
+.prototype-page .proto-detail-eyebrow { margin: 0 0 .8rem; color: var(--muted); font-size: .76rem; font-weight: 700; }
+.prototype-page .proto-detail-title { min-height: 3.2em; margin: 0 0 .7rem; color: var(--brand); font: 700 1.1rem/1.5 Inter, system-ui, sans-serif; overflow-wrap: anywhere; }
+.prototype-page .proto-detail-amount { display: block; margin-bottom: .2rem; color: var(--brand); font-size: 1.55rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.prototype-page .proto-detail-share { margin: 0 0 1rem; color: var(--muted); font-size: .8rem; }
+.prototype-page .proto-detail-excerpt { min-height: 5.8em; margin: 0 0 .9rem; color: var(--muted); font-size: .84rem; line-height: 1.6; }
+.prototype-page .proto-detail-link { display: inline-flex; align-items: center; min-height: 44px; padding: .5rem .7rem; border: 1px solid var(--brand); border-radius: 5px; color: var(--brand); background: #fff; font-size: .82rem; font-weight: 700; text-decoration: none; }
+.prototype-page .proto-detail-link:hover { background: var(--brand); color: #fff; }
+.prototype-page .cta-row { margin: 1.5rem 0; }
+.prototype-page .cta-row .btn-primary { background: var(--accent); color: var(--ink); border-color: #e6b800; }
+.prototype-page :is(button, a, summary, select, input, canvas):focus-visible { outline: 3px solid var(--brand); outline-offset: 3px; }
+.prototype-page [hidden] { display: none; }
+@media (max-width: 1100px) {
+  .prototype-page .proto-chart-layout { grid-template-columns: minmax(280px, 1fr) minmax(250px, 1fr); }
+  .prototype-page .legend-col { grid-column: 1; grid-row: 1 / span 2; }
+  .prototype-page .chart-col { grid-column: 2; grid-row: 1; position: static; }
+  .prototype-page .proto-detail { grid-column: 2; grid-row: 2; position: static; }
+  .prototype-page .prototype-intro { gap: 1.5rem; grid-template-columns: minmax(0, 1fr) 340px; }
+}
+@media (max-width: 700px) {
+  .italy-redesign-prototype .prototype-page { padding: 1rem 1rem 2rem; }
+  .prototype-page .prototype-intro, .prototype-page .proto-chart-layout { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .prototype-page .page-title { font-size: 1.9rem; }
+  .prototype-page .legend-col { grid-column: 1; grid-row: 2; }
+  .prototype-page .chart-col { grid-column: 1; grid-row: 1; }
+  .prototype-page .proto-detail { grid-column: 1; grid-row: 3; min-height: 0; }
+  .prototype-page #risultati > section.box { padding: 1rem; }
+  .prototype-page .canvas-wrap { width: min(100%, 300px); height: auto; aspect-ratio: 1; }
+  .prototype-page .proto-center-amount { font-size: 1.35rem; }
+  .prototype-page .proto-detail-title, .prototype-page .proto-detail-excerpt { min-height: 0; }
+  .prototype-page .proto-legend-button { min-height: 48px; }
+  .prototype-page .input-row .btn { width: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prototype-page *, .prototype-page *::before, .prototype-page *::after { scroll-behavior: auto; transition: none; animation: none; }
+}
